@@ -58,12 +58,12 @@ void setup() {
 }
 
 void check_radio() {
-  //radio.writeAckPayload(0, &ackResponce0, sizeof(ackResponce0) );
+  radio.writeAckPayload(0, &ackResponce0, sizeof(ackResponce0) );
   radio.writeAckPayload(1, &ackResponce1, sizeof(ackResponce1) );
-  //radio.writeAckPayload(2, &ackResponce2, sizeof(ackResponce2) );
-  //radio.writeAckPayload(3, &ackResponce3, sizeof(ackResponce3) );
-  //radio.writeAckPayload(4, &ackResponce4, sizeof(ackResponce4) );
-  //radio.writeAckPayload(5, &ackResponce5, sizeof(ackResponce5) );
+  radio.writeAckPayload(2, &ackResponce2, sizeof(ackResponce2) );
+  radio.writeAckPayload(3, &ackResponce3, sizeof(ackResponce3) );
+  radio.writeAckPayload(4, &ackResponce4, sizeof(ackResponce4) );
+  radio.writeAckPayload(5, &ackResponce5, sizeof(ackResponce5) );
   
   if (radio.available(&availablePipeNum)) {
     radio.read( &messageIncoming, sizeof(messageIncoming) );  // по адресу записывает принятые данные;

@@ -13,7 +13,7 @@ const uint64_t pipe3 = 0xDEADBEEF03LL;
 const uint64_t pipe4 = 0xDEADBEEF04LL;
 const uint64_t pipe5 = 0xDEADBEEF05LL;
 
-static int messageToBase = 101;
+static int messageToBase = 201;
 static uint32_t answerFromBase;
 
 RF24 radio(CE_PIN, CSN_PIN);
@@ -39,7 +39,7 @@ void setup() {
   radio.enableDynamicAck(); //for ALL pipes?
 
   radio.stopListening();// ?
-  radio.openWritingPipe(pipe1);
+  radio.openWritingPipe(pipe2);
 }
 
 void loop()
