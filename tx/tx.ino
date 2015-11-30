@@ -45,7 +45,7 @@ void setup() {
 void loop()
 {
   radio.stopListening();//?
-  radio.write( &messageToBase, sizeof(messageToBase) , 1);
+  radio.write( &messageToBase, sizeof(messageToBase) , 0);
 
   Serial.print("Im Sensor. Send to Base: ");
   Serial.print(messageToBase);

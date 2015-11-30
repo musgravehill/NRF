@@ -15,12 +15,12 @@ const uint64_t pipe5 = 0xDEADBEEF05LL;
 
 static uint32_t messageIncoming;
 
-static uint8_t ackResponce0 = 200;
-static uint8_t ackResponce1 = 201;
-static uint8_t ackResponce2 = 202;
-static uint8_t ackResponce3 = 203;
-static uint8_t ackResponce4 = 204;
-static uint8_t ackResponce5 = 205;
+//static uint8_t ackResponce0 = 200;
+//static uint8_t ackResponce1 = 201;
+//static uint8_t ackResponce2 = 202;
+//static uint8_t ackResponce3 = 203;
+//static uint8_t ackResponce4 = 204;
+//static uint8_t ackResponce5 = 205;
 
 static uint8_t availablePipeNum;
 
@@ -57,16 +57,20 @@ void setup() {
   //attachInterrupt(0, check_radio, LOW); //send acknoledgement FAIL(
 }
 
-void check_radio() {  
+void check_radio() {
   //radio.writeAckPayload(0, &ackResponce0, sizeof(ackResponce0) ); pipe0 is SYSTEM_pipe, no reading
-  radio.writeAckPayload(1, &ackResponce1, sizeof(ackResponce1) );
-  radio.writeAckPayload(2, &ackResponce2, sizeof(ackResponce2) );
-  radio.writeAckPayload(3, &ackResponce3, sizeof(ackResponce3) );
-  radio.writeAckPayload(4, &ackResponce4, sizeof(ackResponce4) );
-  radio.writeAckPayload(5, &ackResponce5, sizeof(ackResponce5) );
+  //radio.writeAckPayload(1, &ackResponce1, sizeof(ackResponce1) );
+  //radio.writeAckPayload(2, &ackResponce2, sizeof(ackResponce2) );
+  //radio.writeAckPayload(3, &ackResponce3, sizeof(ackResponce3) );
+  //radio.writeAckPayload(4, &ackResponce4, sizeof(ackResponce4) );
+  //radio.writeAckPayload(5, &ackResponce5, sizeof(ackResponce5) );
 
   if (radio.available(&availablePipeNum)) {
     radio.read( &messageIncoming, sizeof(messageIncoming) );  // по адресу записывает принятые данные;
+
+    //responce = pipeNum, from Im receive data
+    radio.writeAckPayload(availablePipeNum, &availablePipeNum, sizeof(availablePipeNum) );
+
     //radio.stopListening();
     //radio.startListening();
     Serial.print("Im Base with IRQ and AckPayload. FromPipe sensor: ");
