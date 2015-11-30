@@ -13,7 +13,7 @@ const uint64_t pipe3 = 0xDEADBEEF03LL;
 const uint64_t pipe4 = 0xDEADBEEF04LL;
 const uint64_t pipe5 = 0xDEADBEEF05LL;
 
-static int messageToBase = 205;
+static int messageToBase = 11111;
 static uint32_t answerFromBase;
 
 RF24 radio(CE_PIN, CSN_PIN);
@@ -39,13 +39,13 @@ void setup() {
   radio.enableDynamicAck(); //for ALL pipes?
 
   radio.stopListening();// ?
-  radio.openWritingPipe(pipe3); //pipe0 is SYSTEM_pipe, no reading
+  radio.openWritingPipe(pipe1); //pipe0 is SYSTEM_pipe, no reading
 }
 
 void loop()
 {
   radio.stopListening();//?
-  radio.write( &messageToBase, sizeof(messageToBase) , 0);
+  radio.write( &messageToBase, sizeof(messageToBase));
 
   Serial.print("Im Sensor. Send to Base: ");
   Serial.print(messageToBase);

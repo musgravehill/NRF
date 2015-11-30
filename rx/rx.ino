@@ -48,10 +48,10 @@ void setup() {
 
   //radio.openReadingPipe(0, pipe0); pipe0 is SYSTEM_pipe, no reading
   radio.openReadingPipe(1, pipe1);
-  radio.openReadingPipe(2, pipe2);
-  radio.openReadingPipe(3, pipe3);
-  radio.openReadingPipe(4, pipe4);
-  radio.openReadingPipe(5, pipe5);
+  //radio.openReadingPipe(2, pipe2);
+  //radio.openReadingPipe(3, pipe3);
+  //radio.openReadingPipe(4, pipe4);
+  //radio.openReadingPipe(5, pipe5);
   radio.startListening();
 
   //attachInterrupt(0, check_radio, LOW); //send acknoledgement FAIL(
@@ -63,13 +63,15 @@ void check_radio() {
   //radio.writeAckPayload(2, &ackResponce2, sizeof(ackResponce2) );
   //radio.writeAckPayload(3, &ackResponce3, sizeof(ackResponce3) );
   //radio.writeAckPayload(4, &ackResponce4, sizeof(ackResponce4) );
-  //radio.writeAckPayload(5, &ackResponce5, sizeof(ackResponce5) );
-
+  //radio.writeAckPayload(5, &ackResponce5, sizeof(ackResponce5) ); 
+  const byte resp = 22;
+  radio.writeAckPayload(1, &resp, sizeof(resp) );
   if (radio.available(&availablePipeNum)) {
     radio.read( &messageIncoming, sizeof(messageIncoming) );  // по адресу записывает принятые данные;
 
     //responce = pipeNum, from Im receive data
-    radio.writeAckPayload((int)availablePipeNum, &availablePipeNum, sizeof(availablePipeNum) );
+    //radio.writeAckPayload((int)availablePipeNum, &availablePipeNum, sizeof(availablePipeNum) );
+
 
     //radio.stopListening();
     //radio.startListening();
