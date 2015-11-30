@@ -6,7 +6,7 @@
 #define CE_PIN 9
 #define CSN_PIN 10
 
-const uint64_t pipe0 = 0xDEADBEEF00LL;
+const uint64_t pipe0 = 0xDEADBEEF00LL; // pipe0 is SYSTEM_pipe, no reading
 const uint64_t pipe1 = 0xDEADBEEF01LL;
 const uint64_t pipe2 = 0xDEADBEEF02LL;
 const uint64_t pipe3 = 0xDEADBEEF03LL;
@@ -46,27 +46,29 @@ void setup() {
   radio.enableAckPayload(); //only for 0,1 pipes
   radio.enableDynamicAck(); //for ALL pipes?
 
-  //radio.openReadingPipe(0, pipe0);
+  //radio.openReadingPipe(0, pipe0); pipe0 is SYSTEM_pipe, no reading
   radio.openReadingPipe(1, pipe1);
-  //radio.openReadingPipe(2, pipe2);
-  //radio.openReadingPipe(3, pipe3);
-  //radio.openReadingPipe(4, pipe4);
-  //radio.openReadingPipe(5, pipe5);
+  radio.openReadingPipe(2, pipe2);
+  radio.openReadingPipe(3, pipe3);
+  radio.openReadingPipe(4, pipe4);
+  radio.openReadingPipe(5, pipe5);
   radio.startListening();
 
   //attachInterrupt(0, check_radio, LOW); //send acknoledgement FAIL(
 }
 
-void check_radio() {
-  radio.writeAckPayload(0, &ackResponce0, sizeof(ackResponce0) );
+void check_radio() {  
+  //radio.writeAckPayload(0, &ackResponce0, sizeof(ackResponce0) ); pipe0 is SYSTEM_pipe, no reading
   radio.writeAckPayload(1, &ackResponce1, sizeof(ackResponce1) );
   radio.writeAckPayload(2, &ackResponce2, sizeof(ackResponce2) );
   radio.writeAckPayload(3, &ackResponce3, sizeof(ackResponce3) );
   radio.writeAckPayload(4, &ackResponce4, sizeof(ackResponce4) );
   radio.writeAckPayload(5, &ackResponce5, sizeof(ackResponce5) );
-  
+
   if (radio.available(&availablePipeNum)) {
     radio.read( &messageIncoming, sizeof(messageIncoming) );  // по адресу записывает принятые данные;
+    //radio.stopListening();
+    //radio.startListening();
     Serial.print("Im Base with IRQ and AckPayload. FromPipe sensor: ");
     Serial.print(availablePipeNum);
     Serial.print(" Message: ");

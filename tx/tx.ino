@@ -6,14 +6,14 @@
 #define CE_PIN 9
 #define CSN_PIN 10
 
-const uint64_t pipe0 = 0xDEADBEEF00LL;
+const uint64_t pipe0 = 0xDEADBEEF00LL;  //pipe0 is SYSTEM_pipe, no reading
 const uint64_t pipe1 = 0xDEADBEEF01LL;
 const uint64_t pipe2 = 0xDEADBEEF02LL;
 const uint64_t pipe3 = 0xDEADBEEF03LL;
 const uint64_t pipe4 = 0xDEADBEEF04LL;
 const uint64_t pipe5 = 0xDEADBEEF05LL;
 
-static int messageToBase = 201;
+static int messageToBase = 205;
 static uint32_t answerFromBase;
 
 RF24 radio(CE_PIN, CSN_PIN);
@@ -39,23 +39,23 @@ void setup() {
   radio.enableDynamicAck(); //for ALL pipes?
 
   radio.stopListening();// ?
-  radio.openWritingPipe(pipe2);
+  radio.openWritingPipe(pipe5); //pipe0 is SYSTEM_pipe, no reading
 }
 
 void loop()
 {
   radio.stopListening();//?
-  radio.write( &messageToBase, sizeof(messageToBase) );
-  
+  radio.write( &messageToBase, sizeof(messageToBase) , 1);
+
   Serial.print("Im Sensor. Send to Base: ");
   Serial.print(messageToBase);
   Serial.print("\r\n");
-  
+
   if ( radio.isAckPayloadAvailable() ) {
     radio.read(&answerFromBase, sizeof(answerFromBase)); //приемник принял и ответил
-    
+
     Serial.print("___Received answer from Base: ");
-    Serial.print(answerFromBase);
+    Serial.print(answerFromBase, DEC);
     Serial.print("\r\n");
   }
   delay(1000);
