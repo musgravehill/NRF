@@ -69,7 +69,7 @@ void check_radio() {
     radio.read( &messageIncoming, sizeof(messageIncoming) );  // по адресу записывает принятые данные;
 
     //responce = pipeNum, from Im receive data
-    radio.writeAckPayload(availablePipeNum, &availablePipeNum, sizeof(availablePipeNum) );
+    radio.writeAckPayload((int)availablePipeNum, &availablePipeNum, sizeof(availablePipeNum) );
 
     //radio.stopListening();
     //radio.startListening();

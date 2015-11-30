@@ -6,7 +6,7 @@
 #define CE_PIN 9
 #define CSN_PIN 10
 
-const uint64_t pipe0 = 0xDEADBEEF00LL;  //pipe0 is SYSTEM_pipe, no reading
+const uint64_t pipe0 = 0xDEADBEEF00LL;  //pipe0 is SYSTEM_pipe, no reading, no writing
 const uint64_t pipe1 = 0xDEADBEEF01LL;
 const uint64_t pipe2 = 0xDEADBEEF02LL;
 const uint64_t pipe3 = 0xDEADBEEF03LL;
@@ -39,7 +39,7 @@ void setup() {
   radio.enableDynamicAck(); //for ALL pipes?
 
   radio.stopListening();// ?
-  radio.openWritingPipe(pipe5); //pipe0 is SYSTEM_pipe, no reading
+  radio.openWritingPipe(pipe3); //pipe0 is SYSTEM_pipe, no reading
 }
 
 void loop()
@@ -55,7 +55,7 @@ void loop()
     radio.read(&answerFromBase, sizeof(answerFromBase)); //приемник принял и ответил
 
     Serial.print("___Received answer from Base: ");
-    Serial.print(answerFromBase, DEC);
+    Serial.print(answerFromBase);
     Serial.print("\r\n");
   }
   delay(1000);
