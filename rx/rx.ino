@@ -44,7 +44,7 @@ void setup() {
 
   radio.setAutoAck(true);//allow RX send answer(acknoledgement) to TX (for ALL pipes?)
   radio.enableAckPayload(); //only for 0,1 pipes
-  radio.enableDynamicAck(); //for ALL pipes?
+  //radio.enableDynamicAck(); //for ALL pipes?
 
   //radio.openReadingPipe(0, pipe0); pipe0 is SYSTEM_pipe, no reading
   radio.openReadingPipe(1, pipe1);
