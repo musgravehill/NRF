@@ -6,7 +6,7 @@
 #define CE_PIN 9
 #define CSN_PIN 10
 
-const uint8_t imSensorNum = 3; //1..5
+const uint8_t imSensorNum = 1; //1..5
 
 //'static' - no need
 const uint64_t pipes[6] = {
