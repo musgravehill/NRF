@@ -84,8 +84,9 @@ void loop(void)
   }
 
   radio.stopListening();
-  digitalWrite(sdCS, 0); //enable
   digitalWrite(nrfCS, 1); //disable
+  digitalWrite(sdCS, 0); //enable
+  
 
   if (!SD.begin(4)) {
     Serial.println("initialization failed!");
