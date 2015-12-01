@@ -6,23 +6,15 @@
 #define CE_PIN 9
 #define CSN_PIN 10
 
-const uint64_t pipe0 = 0xDEADBEEF00LL; // pipe0 is SYSTEM_pipe, no reading
-const uint64_t pipe1 = 0xDEADBEEF01LL;
-const uint64_t pipe2 = 0xDEADBEEF02LL;
-const uint64_t pipe3 = 0xDEADBEEF03LL;
-const uint64_t pipe4 = 0xDEADBEEF04LL;
-const uint64_t pipe5 = 0xDEADBEEF05LL;
-
-static uint32_t messageIncoming;
-
-//static uint8_t ackResponce0 = 200;
-//static uint8_t ackResponce1 = 201;
-//static uint8_t ackResponce2 = 202;
-//static uint8_t ackResponce3 = 203;
-//static uint8_t ackResponce4 = 204;
-//static uint8_t ackResponce5 = 205;
-
-static uint8_t availablePipeNum;
+//'static' - no need
+const uint64_t pipes[6] = {
+  0xDEADBEEF00LL,  //pipe0 is SYSTEM_pipe, avoid openReadingPipe(0, );
+  0xDEADBEEF01LL,
+  0xDEADBEEF02LL,
+  0xDEADBEEF03LL,
+  0xDEADBEEF04LL,
+  0xDEADBEEF05LL
+};
 
 RF24 radio(CE_PIN, CSN_PIN);
 
@@ -38,43 +30,41 @@ void setup() {
   radio.setDataRate(RF24_1MBPS);
   radio.setPALevel(RF24_PA_MIN);
   radio.setCRCLength(RF24_CRC_8);
+  
+  /* 
+  ===writeAckPayload===enableDynamicPayloads=== 
+  !  Only three of these can be pending at any time as there are only 3 FIFO buffers.
+  !  Dynamic payloads must be enabled.
+  !  write an ack payload as soon as startListening() is called
+  */
 
   radio.enableDynamicPayloads();//for ALL pipes, dynamic size of payload
-  //radio.setPayloadSize(32); //uint_32t 32 bytes
+  //radio.setPayloadSize(32); //32 bytes? Can corrupt "writeAckPayload"?
 
   radio.setAutoAck(true);//allow RX send answer(acknoledgement) to TX (for ALL pipes?)
-  radio.enableAckPayload(); //only for 0,1 pipes
-  //radio.enableDynamicAck(); //for ALL pipes?
+  radio.enableAckPayload(); //only for 0,1 pipes? 
+  //radio.enableDynamicAck(); //for ALL pipes? Чтобы можно было вкл\выкл получение ACK?
 
-  //radio.openReadingPipe(0, pipe0); pipe0 is SYSTEM_pipe, no reading
-  radio.openReadingPipe(1, pipe1);
-  //radio.openReadingPipe(2, pipe2);
-  //radio.openReadingPipe(3, pipe3);
-  //radio.openReadingPipe(4, pipe4);
-  //radio.openReadingPipe(5, pipe5);
+  //radio.openReadingPipe(0, pipe0); 0 is SYSTEM, no reading
+  radio.openReadingPipe(1, pipes[1]);
+  radio.openReadingPipe(2, pipes[2]);
+  radio.openReadingPipe(3, pipes[3]);
+  radio.openReadingPipe(4, pipes[4]);
+  radio.openReadingPipe(5, pipes[5]);
   radio.startListening();
 
-  //attachInterrupt(0, check_radio, LOW); //send acknoledgement FAIL(
+  //attachInterrupt(0, check_radio, LOW); //send acknoledgement FAIL
 }
 
-void check_radio() {
-  //radio.writeAckPayload(0, &ackResponce0, sizeof(ackResponce0) ); pipe0 is SYSTEM_pipe, no reading
-  //radio.writeAckPayload(1, &ackResponce1, sizeof(ackResponce1) );
-  //radio.writeAckPayload(2, &ackResponce2, sizeof(ackResponce2) );
-  //radio.writeAckPayload(3, &ackResponce3, sizeof(ackResponce3) );
-  //radio.writeAckPayload(4, &ackResponce4, sizeof(ackResponce4) );
-  //radio.writeAckPayload(5, &ackResponce5, sizeof(ackResponce5) ); 
-  const byte resp = 22;
-  radio.writeAckPayload(1, &resp, sizeof(resp) );
-  if (radio.available(&availablePipeNum)) {
-    radio.read( &messageIncoming, sizeof(messageIncoming) );  // по адресу записывает принятые данные;
-
-    //responce = pipeNum, from Im receive data
-    //radio.writeAckPayload((int)availablePipeNum, &availablePipeNum, sizeof(availablePipeNum) );
-
-
+void radioListen() {   
+  uint8_t currPipeNum;
+  if (radio.available(&currPipeNum)) {
+    radio.writeAckPayload(currPipeNum, &currPipeNum, sizeof(currPipeNum) );
+    radio.read( &messageIncoming, sizeof(messageIncoming) ); 
+    
     //radio.stopListening();
     //radio.startListening();
+    
     Serial.print("Im Base with IRQ and AckPayload. FromPipe sensor: ");
     Serial.print(availablePipeNum);
     Serial.print(" Message: ");
@@ -89,5 +79,5 @@ void check_radio() {
 }
 
 void loop() {
-  check_radio();
+  radioListen();
 }
