@@ -62,7 +62,7 @@ void setup() {
   radio.openReadingPipe(5, pipes[5]);
   radio.startListening();
 
-  //attachInterrupt(0, check_radio, LOW); //send acknoledgement FAIL
+  attachInterrupt(0, radioListen, LOW); //d2  //send acknoledgement FAIL
 }
 
 void radioListen() {
@@ -101,7 +101,7 @@ void radioListen() {
 }
 
 void loop() {
-  radioListen();
+  //radioListen();
 }
 
 
