@@ -69,7 +69,12 @@ void radioListen() {
 
   if (radio.available(&currPipeNum)) {
     radio.writeAckPayload(currPipeNum, &currPipeNum, sizeof(currPipeNum) );
-    radio.read(&messageFromSensor, sizeof(messageFromSensor)); 
+    if(radio.getDynamicPayloadSize() > 1){ //размер полученного сообщения
+      radio.read(&messageFromSensor, sizeof(messageFromSensor));
+    }
+    else{
+      // Corrupt payload has been flushed
+    }
 
     //radio.stopListening(); //не надо! СТОП только если хочешь write
     //radio.startListening();//не надо! СТАРТ один раз, когда объявил трубы
@@ -96,4 +101,5 @@ void radioListen() {
 void loop() {
   radioListen();
 }
+
 
