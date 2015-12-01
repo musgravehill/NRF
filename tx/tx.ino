@@ -49,13 +49,13 @@ void loop()
   uint16_t messageToBase_batteryVoltage = random(0, 65535); //2^16 - 1 
   uint16_t messageToBase_temperature = random(0, 65535); //2^16 - 1 
   uint16_t messageToBase_humidity = random(0, 65535); //2^16 - 1 
-  
+
   uint16_t messageToBase[3] = { 
     messageToBase_batteryVoltage,
     messageToBase_temperature,
     messageToBase_humidity
   };
-  
+
   uint8_t answerFromBase; //2^8 - 1   [0,255]
 
   //Stop listening for incoming messages, and switch to transmit mode. 
@@ -63,19 +63,30 @@ void loop()
   radio.stopListening(); 
   radio.write( &messageToBase, sizeof(messageToBase));
 
-  Serial.print("Im Sensor. Send to Base: ");
-  Serial.print(messageToBase);
   Serial.print("\r\n");
+  Serial.print("Im Sensor# ");
+  Serial.print(imSensorNum);
+  Serial.print("\r\n");  
+  Serial.print("V ");
+  Serial.print(messageToBase[0]);
+  Serial.print("\r\n");
+  Serial.print("t ");
+  Serial.print(messageToBase[1]);
+  Serial.print("\r\n");
+  Serial.print("h ");
+  Serial.print(messageToBase[2]);
+  Serial.print("\r\n"); 
 
   if ( radio.isAckPayloadAvailable() ) {
     radio.read(&answerFromBase, sizeof(answerFromBase)); //приемник принял и ответил
 
     Serial.print("___Received answer from Base: ");
-    Serial.print(answerFromBase);
-    Serial.print("\r\n");
+    Serial.print(answerFromBase, DEC);  
+    Serial.print("\r\n");  
   }
   delay(1000);
 }
+
 
 
 
