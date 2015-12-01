@@ -17,7 +17,7 @@ const uint64_t pipes[6] = {
 };
 
 uint8_t currPipeNum;
-uint16_t messageFromSensor[3] = { 
+uint16_t messageFromSensor[3] = {
   0, //v
   0, //t
   0  //h
@@ -29,7 +29,7 @@ void setup() {
   delay(2000);
   Serial.begin(9600);
   delay(100);
-  Serial.println("Im Base with IRQ and AckPayload");  
+  Serial.println("Im Base with IRQ and AckPayload");
 
   radio.begin();
   delay(100);
@@ -41,17 +41,17 @@ void setup() {
   radio.setPALevel(RF24_PA_MIN);
   radio.setCRCLength(RF24_CRC_8);
 
-  /* 
-   ===writeAckPayload===enableDynamicPayloads=== 
-   !  Only three of these can be pending at any time as there are only 3 FIFO buffers.
-   !  Dynamic payloads must be enabled.
-   !  write an ack payload as soon as startListening() is called
-   */
+  /*
+    ===writeAckPayload===enableDynamicPayloads===
+    !  Only three of these can be pending at any time as there are only 3 FIFO buffers.
+    !  Dynamic payloads must be enabled.
+    !  write an ack payload as soon as startListening() is called
+  */
   radio.enableDynamicPayloads();//for ALL pipes
   //radio.setPayloadSize(32); //32 bytes? Can corrupt "writeAckPayload"?
 
   radio.setAutoAck(true);//allow RX send answer(acknoledgement) to TX (for ALL pipes?)
-  radio.enableAckPayload(); //only for 0,1 pipes? 
+  radio.enableAckPayload(); //only for 0,1 pipes?
   //radio.enableDynamicAck(); //for ALL pipes? Чтобы можно было вкл\выкл получение ACK?
 
   //radio.openReadingPipe(0, pipe0); 0 is SYSTEM, no reading
@@ -65,32 +65,34 @@ void setup() {
   //attachInterrupt(0, check_radio, LOW); //send acknoledgement FAIL
 }
 
-void radioListen() {   
+void radioListen() {
 
   if (radio.available(&currPipeNum)) {
     radio.writeAckPayload(currPipeNum, &currPipeNum, sizeof(currPipeNum) );
-    if(radio.getDynamicPayloadSize() > 1){ //размер полученного сообщения
+    if (radio.getDynamicPayloadSize() > 1) { //размер полученного сообщения
       radio.read(&messageFromSensor, sizeof(messageFromSensor));
+
+      Serial.print("Sensor# ");
+      Serial.print(currPipeNum);
+      Serial.print("\r\n");
+      Serial.print("V= ");
+      Serial.print(messageFromSensor[0]);
+      Serial.print("\r\n");
+      Serial.print("t= ");
+      Serial.print(messageFromSensor[1]);
+      Serial.print("\r\n");
+      Serial.print("h= ");
+      Serial.print(messageFromSensor[2]);
+      Serial.print("\r\n");
+      Serial.print("\r\n");
     }
-    else{
+    else {
       // Corrupt payload has been flushed
     }
 
     //radio.stopListening(); //не надо! СТОП только если хочешь write
     //radio.startListening();//не надо! СТАРТ один раз, когда объявил трубы
-    Serial.print("Sensor# ");
-    Serial.print(currPipeNum);
-    Serial.print("\r\n");
-    Serial.print("V= ");
-    Serial.print(messageFromSensor[0]);
-    Serial.print("\r\n");
-    Serial.print("t= ");
-    Serial.print(messageFromSensor[1]);
-    Serial.print("\r\n");
-    Serial.print("h= ");
-    Serial.print(messageFromSensor[2]);
-    Serial.print("\r\n");     
-    Serial.print("\r\n");
+
   }
   //bool tx, fail, rx;
   //radio.whatHappened(tx, fail, rx); // What happened?
