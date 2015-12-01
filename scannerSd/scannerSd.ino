@@ -42,6 +42,12 @@ void setup(void) {
   radio.startListening();
 
   radio.printDetails();  // Вот эта строка напечатает нам что-то, если все правильно соединили.
+
+  if (radio.isPVariant()) {
+    Serial.println("Im real NRF");
+  } else {
+    Serial.println("Im FAKE NRF");
+  }
   delay(5000);              // И посмотрим на это пять секунд.
 
   radio.stopListening();
@@ -65,9 +71,6 @@ void loop(void)
 
   digitalWrite(sdCS, 1); //disable
   digitalWrite(nrfCS, 0); //enable
-  radio.startListening();
-
-
 
   memset(values, 0, sizeof(values));
   int rep_counter = num_reps;
@@ -86,7 +89,7 @@ void loop(void)
   radio.stopListening();
   digitalWrite(nrfCS, 1); //disable
   digitalWrite(sdCS, 0); //enable
-  
+
 
   if (!SD.begin(4)) {
     Serial.println("initialization failed!");
@@ -104,10 +107,11 @@ void loop(void)
     int i = 0;
     while ( i < num_channels ) {
       printf("%x", min(0xf, values[i] & 0xf));
-      myFile.println(min(0xf, values[i] & 0xf));
+      myFile.print(min(0xf, values[i] & 0xf));
+      myFile.print("\r\n");
       ++i;
     }
-    
+
     // close the file:
     myFile.close();
 
