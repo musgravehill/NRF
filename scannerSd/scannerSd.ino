@@ -1,6 +1,16 @@
+/** SD card attached to SPI bus as follows:
+ ** MOSI - pin 11
+ ** MISO - pin 12
+ ** CLK - pin 13
+ ** CS - pin 4
+*/
+
 #include <SPI.h>
 #include "nRF24L01.h"
 #include "RF24.h"
+#include <SD.h>
+
+File myFile;
 
 RF24 radio(9, 10); // Для Уно
 //RF24 radio(9,53);// Для Меги
@@ -52,6 +62,13 @@ const int num_reps = 100;
 
 void loop(void)
 {
+
+  digitalWrite(sdCS, 1); //disable
+  digitalWrite(nrfCS, 0); //enable
+  radio.startListening();
+
+
+
   memset(values, 0, sizeof(values));
   int rep_counter = num_reps;
   while (rep_counter--) {
@@ -65,11 +82,40 @@ void loop(void)
         ++values[i];
     }
   }
-  int i = 0;
-  while ( i < num_channels ) {
-    printf("%x", min(0xf, values[i] & 0xf));
-    ++i;
+
+  radio.stopListening();
+  digitalWrite(sdCS, 0); //enable
+  digitalWrite(nrfCS, 1); //disable
+
+  if (!SD.begin(4)) {
+    Serial.println("initialization failed!");
+    return;
   }
+  Serial.println("initialization SD done.");
+
+  // open the file. note that only one file can be open at a time,
+  // so you have to close this one before opening another.
+  myFile = SD.open("test.txt", FILE_WRITE);
+
+  // if the file opened okay, write to it:
+  if (myFile) {
+
+    int i = 0;
+    while ( i < num_channels ) {
+      printf("%x", min(0xf, values[i] & 0xf));
+      myFile.println(min(0xf, values[i] & 0xf));
+      ++i;
+    }
+    
+    // close the file:
+    myFile.close();
+
+  } else {
+    Serial.println("error opening test.txt");
+  }
+
+
+
   printf("\n\r");
 }
 int serial_putc( char c, FILE * ) {
