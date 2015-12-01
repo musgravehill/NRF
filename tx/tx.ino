@@ -23,6 +23,11 @@ RF24 radio(CE_PIN, CSN_PIN);
 void setup() {
   delay(2000);
   Serial.begin(9600);
+  delay(100);
+  Serial.print("Im Sensor# ");
+  Serial.print(imSensorNum);
+  Serial.print("\r\n");  
+  
   radio.begin();
   delay(100);
   radio.powerUp();
@@ -62,18 +67,14 @@ void loop()
   //Do this before calling write().
   radio.stopListening(); 
   radio.write( &messageToBase, sizeof(messageToBase));
-
-  Serial.print("\r\n");
-  Serial.print("Im Sensor# ");
-  Serial.print(imSensorNum);
-  Serial.print("\r\n");  
-  Serial.print("V ");
+  
+  Serial.print("V= ");
   Serial.print(messageToBase[0]);
   Serial.print("\r\n");
-  Serial.print("t ");
+  Serial.print("t= ");
   Serial.print(messageToBase[1]);
   Serial.print("\r\n");
-  Serial.print("h ");
+  Serial.print("h= ");
   Serial.print(messageToBase[2]);
   Serial.print("\r\n"); 
 

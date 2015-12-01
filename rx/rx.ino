@@ -16,11 +16,21 @@ const uint64_t pipes[6] = {
   0xDEADBEEF05LL
 };
 
+uint8_t currPipeNum;
+uint16_t messageFromSensor[3] = { 
+  0, //v
+  0, //t
+  0  //h
+};
+
 RF24 radio(CE_PIN, CSN_PIN);
 
 void setup() {
   delay(2000);
   Serial.begin(9600);
+  delay(100);
+  Serial.println("Im Base with IRQ and AckPayload");  
+
   radio.begin();
   delay(100);
   radio.powerUp();
@@ -30,13 +40,13 @@ void setup() {
   radio.setDataRate(RF24_1MBPS);
   radio.setPALevel(RF24_PA_MIN);
   radio.setCRCLength(RF24_CRC_8);
-  
+
   /* 
-  ===writeAckPayload===enableDynamicPayloads=== 
-  !  Only three of these can be pending at any time as there are only 3 FIFO buffers.
-  !  Dynamic payloads must be enabled.
-  !  write an ack payload as soon as startListening() is called
-  */
+   ===writeAckPayload===enableDynamicPayloads=== 
+   !  Only three of these can be pending at any time as there are only 3 FIFO buffers.
+   !  Dynamic payloads must be enabled.
+   !  write an ack payload as soon as startListening() is called
+   */
 
   radio.enableDynamicPayloads();//for ALL pipes, dynamic size of payload
   //radio.setPayloadSize(32); //32 bytes? Can corrupt "writeAckPayload"?
@@ -57,21 +67,27 @@ void setup() {
 }
 
 void radioListen() {   
-  uint8_t currPipeNum;
+
   if (radio.available(&currPipeNum)) {
     radio.writeAckPayload(currPipeNum, &currPipeNum, sizeof(currPipeNum) );
-    radio.read( &messageIncoming, sizeof(messageIncoming) ); 
-    
+    radio.read(&messageFromSensor, sizeof(messageFromSensor)); 
+
     //radio.stopListening();
     //radio.startListening();
-    
-    Serial.print("Im Base with IRQ and AckPayload. FromPipe sensor: ");
-    Serial.print(availablePipeNum);
-    Serial.print(" Message: ");
-    Serial.print(messageIncoming);
+    Serial.print("Sensor# ");
+    Serial.print(currPipeNum);
+    Serial.print("\r\n");
+    Serial.print("V= ");
+    Serial.print(messageFromSensor[0]);
+    Serial.print("\r\n");
+    Serial.print("t= ");
+    Serial.print(messageFromSensor[1]);
+    Serial.print("\r\n");
+    Serial.print("h= ");
+    Serial.print(messageFromSensor[2]);
+    Serial.print("\r\n");     
     Serial.print("\r\n");
   }
-
   //bool tx, fail, rx;
   //radio.whatHappened(tx, fail, rx); // What happened?
   //if ( rx || radio.available()) {
@@ -81,3 +97,4 @@ void radioListen() {
 void loop() {
   radioListen();
 }
+
