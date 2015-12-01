@@ -72,8 +72,8 @@ void radioListen() {
     radio.writeAckPayload(currPipeNum, &currPipeNum, sizeof(currPipeNum) );
     radio.read(&messageFromSensor, sizeof(messageFromSensor)); 
 
-    //radio.stopListening();
-    //radio.startListening();
+    //radio.stopListening(); //не надо! СТОП только если хочешь write
+    //radio.startListening();//не надо! СТАРТ один раз, когда объявил трубы
     Serial.print("Sensor# ");
     Serial.print(currPipeNum);
     Serial.print("\r\n");
