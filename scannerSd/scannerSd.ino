@@ -69,8 +69,8 @@ const int num_reps = 100;
 void loop(void)
 {
 
-  digitalWrite(sdCS, 1); //disable
-  digitalWrite(nrfCS, 0); //enable
+  digitalWrite(sdCS, 0); //disable
+  digitalWrite(nrfCS, 1); //enable
 
   memset(values, 0, sizeof(values));
   int rep_counter = num_reps;
@@ -87,8 +87,8 @@ void loop(void)
   }
 
   radio.stopListening();
-  digitalWrite(nrfCS, 1); //disable
-  digitalWrite(sdCS, 0); //enable
+  digitalWrite(nrfCS, 0); //disable
+  digitalWrite(sdCS, 1); //enable
 
 
   if (!SD.begin(4)) {
