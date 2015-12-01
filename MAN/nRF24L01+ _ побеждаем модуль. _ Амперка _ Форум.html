@@ -1,0 +1,3320 @@
+<!DOCTYPE html>
+<!-- saved from url=(0138)http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/ -->
+<html id="XenForo" lang="ru-RU" dir="LTR" class="Public LoggedOut NoSidebar  Responsive hasJs NoTouch HasDragDrop" xmlns:fb="http://www.facebook.com/2008/fbml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+	
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	
+		<!--<base href="http://forum.amperka.ru/">--><base href=".">
+		<script>
+			var _b = document.getElementsByTagName('base')[0], _bH = "http://forum.amperka.ru/";
+			if (_b && _b.href != _bH) _b.href = _bH;
+		</script>
+	
+
+	<title>nRF24L01+ : побеждаем модуль. | Амперка / Форум</title>
+	
+	
+	<link rel="stylesheet" href="./nRF24L01+ _ побеждаем модуль. _ Амперка _ Форум_files/css.php">
+	<link rel="stylesheet" href="./nRF24L01+ _ побеждаем модуль. _ Амперка _ Форум_files/css(1).php">
+	
+	
+
+	
+		<script src="./nRF24L01+ _ побеждаем модуль. _ Амперка _ Форум_files/jquery-1.11.0.min.js"></script>	
+		
+	<script src="./nRF24L01+ _ побеждаем модуль. _ Амперка _ Форум_files/xenforo.js"></script>
+
+<script src="./nRF24L01+ _ побеждаем модуль. _ Амперка _ Форум_files/zloader.js"></script>
+
+
+	
+
+
+	
+	
+		<link href="./nRF24L01+ _ побеждаем модуль. _ Амперка _ Форум_files/font-awesome.min.css" rel="stylesheet">
+	
+
+	
+	<link href="./nRF24L01+ _ побеждаем модуль. _ Амперка _ Форум_files/css" rel="stylesheet" type="text/css">
+	<link rel="apple-touch-icon" href="./nRF24L01+ _ побеждаем модуль. _ Амперка _ Форум_files/logo.png">
+	<link rel="alternate" type="application/rss+xml" title="RSS-лента для Амперка / Форум" href="http://forum.amperka.ru/forums/-/index.rss">
+	
+	<link rel="next" href="http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/page-2">
+	<link rel="canonical" href="./nRF24L01+ _ побеждаем модуль. _ Амперка _ Форум_files/nRF24L01+ _ побеждаем модуль. _ Амперка _ Форум.html">
+	<meta name="description" content="UPD. Как топикстартер этой темы, заявляю:
+
+Если вы собрали нечто на этом модуле, убедились что соединения правильные, а оно не работает:
+1. Не надо...">
+
+
+
+</head>
+
+<body class="node18 node1 SelectQuotable">
+
+
+<div id="toolbar-wrapper">
+    <nav id="toolbar">
+	
+        
+		
+
+<div id="loginBar">
+	<div class="pageWidth">
+		<div class="pageContent">	
+			<h3 id="loginBarHandle">
+				<label for="LoginControl"><a href="http://forum.amperka.ru/login/" class="concealed noOutline">Войти или зарегистрироваться</a></label>
+			</h3>
+			
+			<span class="helper"></span>
+
+			
+		<form action="http://forum.amperka.ru/login/login" method="post" class="xenForm " id="login" style="display:none">
+
+	
+
+	<div class="ctrlWrapper">
+		<dl class="ctrlUnit">
+			<dt><label for="LoginControl">Ваше имя или e-mail:</label></dt>
+			<dd><input type="text" name="login" id="LoginControl" class="textCtrl" tabindex="101"></dd>
+		</dl>
+	
+	
+		<dl class="ctrlUnit">
+			<dt>
+				<label for="ctrl_password">У Вас уже есть учётная запись?</label>
+			</dt>
+			<dd>
+				<ul>
+					<li><label for="ctrl_not_registered"><input type="radio" name="register" value="1" id="ctrl_not_registered" tabindex="105">
+						Нет, зарегистрироваться сейчас.</label></li>
+					<li><label for="ctrl_registered"><input type="radio" name="register" value="0" id="ctrl_registered" tabindex="105" checked="checked" class="Disabler">
+						Да, мой пароль:</label></li>
+					<li id="ctrl_registered_Disabler">
+						<input type="password" name="password" class="textCtrl" id="ctrl_password" tabindex="102">
+						<div class="lostPassword"><a href="http://forum.amperka.ru/lost-password/" class="OverlayTrigger OverlayCloser" tabindex="106">Забыли пароль?</a></div>
+					</li>
+				</ul>
+			</dd>
+		</dl>
+	
+		
+		<dl class="ctrlUnit submitUnit">
+			<dt></dt>
+			<dd>
+				<input type="submit" class="button primary" value="Вход" tabindex="104" data-loginphrase="Вход" data-signupphrase="Регистрация">
+				<label for="ctrl_remember" class="rememberPassword"><input type="checkbox" name="remember" value="1" id="ctrl_remember" tabindex="103"> Запомнить меня</label>
+			</dd>
+		</dl>
+	</div>
+
+	<input type="hidden" name="cookie_check" value="1">
+	<input type="hidden" name="redirect" value="/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/">
+	<input type="hidden" name="_xfToken" value="">
+
+</form></div>
+	</div>
+</div>
+	
+	
+
+<div id="searchBar">
+	
+	<span id="QuickSearchPlaceholder" title="Поиск">Поиск</span>
+	<fieldset id="QuickSearch">
+		<form action="http://forum.amperka.ru/search/search" method="post" class="formPopup">
+			
+			<div class="primaryControls">
+				<!-- block: primaryControls -->
+				<input type="search" name="keywords" value="" class="textCtrl" placeholder="Поиск..." title="Введите параметры поиска и нажмите ввод" id="QuickSearchQuery">				
+				<!-- end block: primaryControls -->
+			</div>
+			
+			<div class="secondaryControls">
+				<div class="controlsWrapper">
+				
+					<!-- block: secondaryControls -->
+					<dl class="ctrlUnit">
+						<dt></dt>
+						<dd><ul>
+							<li><label><input type="checkbox" name="title_only" value="1" id="search_bar_title_only" class="AutoChecker" data-uncheck="#search_bar_thread"> Искать только в заголовках</label></li>
+						</ul></dd>
+					</dl>
+				
+					<dl class="ctrlUnit">
+						<dt><label for="searchBar_users">Сообщения пользователя:</label></dt>
+						<dd>
+							<input type="text" name="users" value="" class="textCtrl AutoComplete" id="searchBar_users" autocomplete="off">
+							<p class="explain">Имена участников (разделяйте запятой).</p>
+						</dd>
+					</dl>
+				
+					<dl class="ctrlUnit">
+						<dt><label for="searchBar_date">Новее чем:</label></dt>
+						<dd><input type="text" data-orig-type="date" name="date" value="" class="textCtrl date" id="searchBar_date"></dd>
+					</dl>
+					
+					
+					<dl class="ctrlUnit">
+						<dt></dt>
+						<dd><ul>
+								
+									<li><label title="Искать только в " nrf24l01+="" :="" побеждаем="" модуль.""=""><input type="checkbox" name="type[post][thread_id]" value="3205" id="search_bar_thread" class="AutoChecker" data-uncheck="#search_bar_title_only, #search_bar_nodes"> Искать только в этой теме</label></li>
+								
+									<li><label title="Искать только в " Проводная="" и="" беспроводная="" связь""=""><input type="checkbox" name="nodes[]" value="18" id="search_bar_nodes" class="Disabler AutoChecker" checked="checked" data-uncheck="#search_bar_thread"> Искать только в этом разделе</label>
+	<ul id="search_bar_nodes_Disabler">
+		<li><label><input type="checkbox" name="type[post][group_discussion]" value="1" id="search_bar_group_discussion" class="AutoChecker" data-uncheck="#search_bar_thread"> Отображать результаты в виде тем</label></li>
+	</ul></li>
+								
+						</ul></dd>
+					</dl>
+					
+				</div>
+				<!-- end block: secondaryControls -->
+				
+				<dl class="ctrlUnit submitUnit">
+					<dt></dt>
+					<dd>
+						<input type="submit" value="Поиск" class="button primary Tooltip">
+						<div class="Popup" id="commonSearches">
+							<a rel="Menu" class="button NoPopupGadget Tooltip PopupControl" data-tipclass="flipped"><span class="arrowWidget"></span></a>
+							
+						</div>
+						<a href="http://forum.amperka.ru/search/" class="button moreOptions Tooltip">Больше...</a>
+					</dd>
+				</dl>
+				
+			</div>
+			
+			<input type="hidden" name="_xfToken" value="">
+		</form>		
+	</fieldset>
+	
+</div>
+    </nav>
+</div>
+
+<div id="headerMover">
+	<div id="headerProxy"></div>
+
+<div id="content" class="thread_view">
+	<div class="pageWidth">
+		<div class="pageContent">
+			<!-- main content area -->
+			
+			
+			
+			
+						
+						
+						
+						
+						<div class="breadBoxTop ">
+							
+							
+
+<nav>
+	
+		
+			
+				
+			
+		
+			
+				
+			
+		
+	
+
+	<fieldset class="breadcrumb" style="">
+		<a href="http://forum.amperka.ru/misc/quick-navigation-menu?selected=node-18" class="OverlayTrigger jumpMenuTrigger" data-cacheoverlay="true" title="Открыть быструю навигацию"><!--Перейти к...--></a>
+			
+		<div class="boardTitle"><strong>Амперка / Форум</strong></div>
+		
+		<span class="crumbs">
+			
+			
+			
+				<span class="crust selectedTabCrumb" itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
+					<a href="http://forum.amperka.ru/" class="crumb" rel="up" itemprop="url"><span itemprop="title">Форум</span></a>
+					<span class="arrow"><span>&gt;</span></span>
+				</span>
+			
+			
+			
+				
+					<span class="crust" itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
+						<a href="http://forum.amperka.ru/#ehlektronika.1" class="crumb" rel="up" itemprop="url"><span itemprop="title">Электроника</span></a>
+						<span class="arrow"><span>&gt;</span></span>
+					</span>
+				
+					<span class="crust" itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
+						<a href="http://forum.amperka.ru/forums/%D0%9F%D1%80%D0%BE%D0%B2%D0%BE%D0%B4%D0%BD%D0%B0%D1%8F-%D0%B8-%D0%B1%D0%B5%D1%81%D0%BF%D1%80%D0%BE%D0%B2%D0%BE%D0%B4%D0%BD%D0%B0%D1%8F-%D1%81%D0%B2%D1%8F%D0%B7%D1%8C.18/" class="crumb" rel="up" itemprop="url"><span itemprop="title">Проводная и беспроводная связь</span></a>
+						<span class="arrow"><span>&gt;</span></span>
+					</span>
+				
+			
+		</span>
+	</fieldset>
+</nav>
+						</div>
+						
+						
+						
+					
+						<!--[if lt IE 8]>
+							<p class="importantMessage">Вы используете устаревший браузер. Этот и другие сайты могут отображаться в нём некорректно.<br />Необходимо обновить браузер или попробовать использовать <a href="https://www.google.com/chrome/browser/" target="_blank">другой</a>.</p>
+						<![endif]-->
+
+						
+						
+
+						
+						
+						
+						
+												
+							<!-- h1 title, description -->
+							<div class="titleBar">
+								
+								<h1>nRF24L01+ : побеждаем модуль.</h1>
+								
+								<p id="pageDescription" class="muted ">
+	Тема в разделе "<a href="http://forum.amperka.ru/forums/%D0%9F%D1%80%D0%BE%D0%B2%D0%BE%D0%B4%D0%BD%D0%B0%D1%8F-%D0%B8-%D0%B1%D0%B5%D1%81%D0%BF%D1%80%D0%BE%D0%B2%D0%BE%D0%B4%D0%BD%D0%B0%D1%8F-%D1%81%D0%B2%D1%8F%D0%B7%D1%8C.18/">Проводная и беспроводная связь</a>", создана пользователем <a href="http://forum.amperka.ru/members/%D0%98%D0%B3%D0%BE%D1%80%D1%8C%D0%9A.2107/" class="username" dir="auto">ИгорьК</a>, <a href="./nRF24L01+ _ побеждаем модуль. _ Амперка _ Форум_files/nRF24L01+ _ побеждаем модуль. _ Амперка _ Форум.html"><span class="DateTime" title="19 июн 2014 в 23:53">19 июн 2014</span></a>.
+</p>
+							</div>
+						
+						
+						
+						
+						
+						<!-- main template -->
+						
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+<div class="pageNavLinkGroup">
+	<div class="linkGroup SelectionCountContainer">
+		
+		
+	</div>
+
+	
+
+
+<div class="PageNav" data-page="1" data-range="2" data-start="2" data-end="6" data-last="26" data-sentinel="{{sentinel}}" data-baseurl="threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/page-{{sentinel}}">
+	
+	<span class="pageNavHeader">Страница 1 из 26</span>
+	
+	<nav>
+		
+		
+		<a href="./nRF24L01+ _ побеждаем модуль. _ Амперка _ Форум_files/nRF24L01+ _ побеждаем модуль. _ Амперка _ Форум.html" class="currentPage " rel="start">1</a>
+		
+		
+			<a class="PageNavPrev hidden" style="">←</a> <span class="scrollable"><span class="items">
+		
+		
+		
+			<a href="http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/page-2" class="">2</a>
+		
+			<a href="http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/page-3" class="">3</a>
+		
+			<a href="http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/page-4" class="">4</a>
+		
+			<a href="http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/page-5" class="">5</a>
+		
+			<a href="http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/page-6" class="">6</a>
+		
+		
+		
+			</span></span> <a class="PageNavNext " style="">→</a>
+		
+		
+		<a href="http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/page-26" class="">26</a>
+		
+		
+			<a href="http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/page-2" class="text">Вперёд &gt;</a>
+			
+		
+	</nav>	
+	
+	
+</div>
+
+</div>
+
+
+
+
+
+<form action="http://forum.amperka.ru/inline-mod/post/switch" method="post" class="InlineModForm section" data-cookiename="posts" data-controls="#InlineModControls" data-imodoptions="#ModerationSelect option">
+
+	<ol class="messageList" id="messageList">
+		
+			
+				
+
+
+<li id="post-25265" class="message   " data-author="ИгорьК">
+
+	
+
+<div class="messageUserInfo" itemscope="itemscope" itemtype="http://data-vocabulary.org/Person">	
+<div class="messageUserBlock ">
+	
+		<div class="avatarHolder">
+			<span class="helper"></span>
+			<a href="http://forum.amperka.ru/members/%D0%98%D0%B3%D0%BE%D1%80%D1%8C%D0%9A.2107/" class="avatar Av2107m" data-avatarhtml="true"><img src="http://www.gravatar.com/avatar/ea9164685e6d4753c78c17436f3da91d?s=96&d=http%3A%2F%2Fforum.amperka.ru%2Fstyles%2Fdefault%2Fxenforo%2Favatarz%2Favatar_male_m.png" width="96" height="96" alt="ИгорьК"></a>
+			
+			<!-- slot: message_user_info_avatar -->
+		</div>
+	
+
+
+	
+		<h3 class="userText">
+			<a href="http://forum.amperka.ru/members/%D0%98%D0%B3%D0%BE%D1%80%D1%8C%D0%9A.2107/" class="username" dir="auto" itemprop="name">ИгорьК</a>
+			<em class="userTitle" itemprop="title">Победитель модулей</em>
+			
+			<!-- slot: message_user_info_text -->
+		</h3>
+	
+		
+	
+		
+
+
+	<span class="arrow"><span></span></span>
+</div>
+</div>
+
+	<div class="messageInfo primaryContent">
+		
+		
+		
+		
+		
+		<div class="messageContent">		
+			<article>
+				<blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+					
+					<b>UPD. <span style="color: #660000">Как топикстартер этой темы, заявляю:<br>
+<br>
+Если вы собрали нечто на этом модуле, убедились что соединения правильные, а оно не работает:<br>
+1. Не надо читать эту тему.<br>
+2. Запитайте модуль от отдельного источника 3.3 вольта мощностью не менее 300 ма - и будет вам счастье.<br>
+======================================<br>
+<br>
+3. Если счастья не случилось, тему придется читать.<br>
+Но читать начинайте не сначала, а вот <a href="http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/page-25#post-54029" class="internalLink">с этого сообщения</a>.<br>
+======================================</span></b><br>
+<br>
+<br>
+Три! Целых три недели потребовалось для того, чтобы снять этот ролик! На нем вот что.<br>
+Две Ардуинки с модулями nRF24L01+ сидят на шкафах и синхронно включают и выключают цветную ленту, лежащую на карнизах шкафов:<br>
+<div style="padding-left: 30px">- включена полностью;<br>
+- лампа настроения;<br>
+- ночная подсветка.​</div>Обе Ардуинки получают команды от третьей по воздуху через nRF24L01+. Работа идет в рамках <a href="http://forum.amperka.ru/threads/%D0%9F%D0%BE%D0%B4%D1%81%D0%B2%D0%B5%D1%82%D0%BA%D0%B0-%D0%BC%D0%B5%D0%B1%D0%B5%D0%BB%D0%B8-%D0%BD%D0%B0%D0%B1%D1%80%D0%BE%D1%81%D0%BE%D0%BA.2971/" class="internalLink">вот этого</a> проекта.  И хотя проект еще не закончен, мучения с nRF24L01+ уже требуют выговориться на ее тему.<br>
+А пока видео:<br>
+<p><iframe width="500" height="300" src="./nRF24L01+ _ побеждаем модуль. _ Амперка _ Форум_files/RYej5l1_HWY.html" frameborder="0" allowfullscreen=""></iframe></p>
+					<div class="messageTextEndMarker">&nbsp;</div>
+				</blockquote>
+			</article>
+			
+			
+		</div>
+		
+		
+		
+			<div class="editDate">
+			
+				Последнее редактирование: <abbr class="DateTime" data-time="1447149629" data-diff="259771" data-datestring="10 ноя 2015" data-timestring="14:00" title="10 ноя 2015 в 14:00">Вторник в 14:00</abbr>
+			
+			</div>
+		
+		
+		
+		
+		
+				
+		<div class="messageMeta ToggleTriggerAnchor">
+			
+			<div class="privateControls">
+				
+				<span class="item muted">
+					<span class="authorEnd"><a href="http://forum.amperka.ru/members/%D0%98%D0%B3%D0%BE%D1%80%D1%8C%D0%9A.2107/" class="username author" dir="auto">ИгорьК</a>,</span>
+					<a href="./nRF24L01+ _ побеждаем модуль. _ Амперка _ Форум_files/nRF24L01+ _ побеждаем модуль. _ Амперка _ Форум.html" title="Постоянная ссылка" class="datePermalink"><span class="DateTime" title="19 июн 2014 в 23:53">19 июн 2014</span></a>
+				</span>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</div>
+			
+			<div class="publicControls">
+				<a href="./nRF24L01+ _ побеждаем модуль. _ Амперка _ Форум_files/nRF24L01+ _ побеждаем модуль. _ Амперка _ Форум.html" title="Постоянная ссылка" class="item muted postNumber hashPermalink OverlayTrigger" data-href="posts/25265/permalink">#1</a>
+				
+				
+				
+				
+			</div>
+		</div>
+	
+		
+		<div id="likes-post-25265">
+	
+	<div class="likesSummary secondaryContent">
+		<span class="LikeText">
+			<a href="http://forum.amperka.ru/members/mestniy.7656/" class="username" dir="auto">Mestniy</a>, <a href="http://forum.amperka.ru/members/acos.3475/" class="username" dir="auto">acos</a>, <a href="http://forum.amperka.ru/members/megakoteyka.806/" class="username" dir="auto">Megakoteyka</a> и <a href="http://forum.amperka.ru/posts/25265/likes" class="OverlayTrigger">ещё 1-му</a> нравится это.
+		</span>
+	</div>
+</div>
+	</div>
+
+	
+	
+	
+	
+</li>
+			
+		
+			
+				
+
+
+<li id="post-25278" class="message   " data-author="ИгорьК">
+
+	
+
+<div class="messageUserInfo" itemscope="itemscope" itemtype="http://data-vocabulary.org/Person">	
+<div class="messageUserBlock ">
+	
+		<div class="avatarHolder">
+			<span class="helper"></span>
+			<a href="http://forum.amperka.ru/members/%D0%98%D0%B3%D0%BE%D1%80%D1%8C%D0%9A.2107/" class="avatar Av2107m" data-avatarhtml="true"><img src="http://www.gravatar.com/avatar/ea9164685e6d4753c78c17436f3da91d?s=96&d=http%3A%2F%2Fforum.amperka.ru%2Fstyles%2Fdefault%2Fxenforo%2Favatarz%2Favatar_male_m.png" width="96" height="96" alt="ИгорьК"></a>
+			
+			<!-- slot: message_user_info_avatar -->
+		</div>
+	
+
+
+	
+		<h3 class="userText">
+			<a href="http://forum.amperka.ru/members/%D0%98%D0%B3%D0%BE%D1%80%D1%8C%D0%9A.2107/" class="username" dir="auto" itemprop="name">ИгорьК</a>
+			<em class="userTitle" itemprop="title">Победитель модулей</em>
+			
+			<!-- slot: message_user_info_text -->
+		</h3>
+	
+		
+	
+		
+
+
+	<span class="arrow"><span></span></span>
+</div>
+</div>
+
+	<div class="messageInfo primaryContent">
+		
+		
+		
+		
+		
+		<div class="messageContent">		
+			<article>
+				<blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+					
+					Для самых нетерпеливых: чтобы заставить этот модуль работать четко (в предыдущем посте видно, что пара модулей параллельно безошибочно отрабатывает 12 команд подряд), пришлось сделать две вещи:<br>
+- припаять конденсатор 1-2 мкф между выводами <b>плюс</b> и <b>минус</b> nRF24L01+ прямо не его плату; Вот <a href="http://forum.amperka.ru/threads/%D0%98%D0%BD%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F-nrf24l01-2-4ghz.2210/#post-17592" class="internalLink">здесь сказано</a> почему это. Вообще, перед первой командой инициализацией модуля не мешает сделать паузу в пару секунд после подачи питания.<br>
+
+	
+	<img src="./nRF24L01+ _ побеждаем модуль. _ Амперка _ Форум_files/saved_resource" alt="plata02.jpg" class="bbCodeImage LbImage" style="">
+		
+<br>
+- сделать публичной <a href="http://goo.gl/4dJDxm" target="_blank" class="externalLink" rel="nofollow">функцию</a> RF24::flush_tx в <a href="https://github.com/maniacbug/RF24/" target="_blank" class="externalLink" rel="nofollow">библиотеке RF24</a> и "сливать" все что есть в передающем буфере перед отправкой нового сообщения.<br>
+Для тех кто менее спешит, в ближайшее время несколькими постами обобщу свой опыт работы.
+					<div class="messageTextEndMarker">&nbsp;</div>
+				</blockquote>
+			</article>
+			
+			
+		</div>
+		
+		
+		
+			<div class="editDate">
+			
+				Последнее редактирование: <span class="DateTime" title="18 авг 2014 в 18:08">18 авг 2014</span>
+			
+			</div>
+		
+		
+		
+		
+		
+				
+		<div class="messageMeta ToggleTriggerAnchor">
+			
+			<div class="privateControls">
+				
+				<span class="item muted">
+					<span class="authorEnd"><a href="http://forum.amperka.ru/members/%D0%98%D0%B3%D0%BE%D1%80%D1%8C%D0%9A.2107/" class="username author" dir="auto">ИгорьК</a>,</span>
+					<a href="http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/#post-25278" title="Постоянная ссылка" class="datePermalink"><span class="DateTime" title="20 июн 2014 в 10:01">20 июн 2014</span></a>
+				</span>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</div>
+			
+			<div class="publicControls">
+				<a href="http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/#post-25278" title="Постоянная ссылка" class="item muted postNumber hashPermalink OverlayTrigger" data-href="posts/25278/permalink">#2</a>
+				
+				
+				
+				
+			</div>
+		</div>
+	
+		
+		<div id="likes-post-25278">
+	
+	<div class="likesSummary secondaryContent">
+		<span class="LikeText">
+			<a href="http://forum.amperka.ru/members/altex.5145/" class="username" dir="auto">altex</a>, <a href="http://forum.amperka.ru/members/megakoteyka.806/" class="username" dir="auto">Megakoteyka</a> и <a href="http://forum.amperka.ru/members/%D0%9F%D1%83%D1%88%D0%BD%D0%BE%D0%B9-%D0%B7%D0%B2%D0%B5%D1%80.4003/" class="username" dir="auto">Пушной звер</a> нравится это.
+		</span>
+	</div>
+</div>
+	</div>
+
+	
+	
+	
+	
+</li>
+			
+		
+			
+				
+
+
+<li id="post-25281" class="message  staff " data-author="acos">
+
+	
+
+<div class="messageUserInfo" itemscope="itemscope" itemtype="http://data-vocabulary.org/Person">	
+<div class="messageUserBlock ">
+	
+		<div class="avatarHolder">
+			<span class="helper"></span>
+			<a href="http://forum.amperka.ru/members/acos.3475/" class="avatar Av3475m" data-avatarhtml="true"><img src="./nRF24L01+ _ побеждаем модуль. _ Амперка _ Форум_files/3475.jpg" width="96" height="96" alt="acos"></a>
+			
+			<!-- slot: message_user_info_avatar -->
+		</div>
+	
+
+
+	
+		<h3 class="userText">
+			<a href="http://forum.amperka.ru/members/acos.3475/" class="username" dir="auto" itemprop="name">acos</a>
+			<em class="userTitle" itemprop="title">Официальный гик</em>
+			<em class="userBanner bannerStaff wrapped" itemprop="title"><span class="before"></span><strong>Команда форума</strong><span class="after"></span></em>
+			<!-- slot: message_user_info_text -->
+		</h3>
+	
+		
+	
+		
+
+
+	<span class="arrow"><span></span></span>
+</div>
+</div>
+
+	<div class="messageInfo primaryContent">
+		
+		
+		
+		
+		
+		<div class="messageContent">		
+			<article>
+				<blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+					
+					Уау! Красотища!<br>
+А в чём была проблема, что пришлось добавлять конденсатор?
+					<div class="messageTextEndMarker">&nbsp;</div>
+				</blockquote>
+			</article>
+			
+			
+		</div>
+		
+		
+		
+		
+		
+		
+		
+				
+		<div class="messageMeta ToggleTriggerAnchor">
+			
+			<div class="privateControls">
+				
+				<span class="item muted">
+					<span class="authorEnd"><a href="http://forum.amperka.ru/members/acos.3475/" class="username author" dir="auto">acos</a>,</span>
+					<a href="http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/#post-25281" title="Постоянная ссылка" class="datePermalink"><span class="DateTime" title="20 июн 2014 в 10:29">20 июн 2014</span></a>
+				</span>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</div>
+			
+			<div class="publicControls">
+				<a href="http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/#post-25281" title="Постоянная ссылка" class="item muted postNumber hashPermalink OverlayTrigger" data-href="posts/25281/permalink">#3</a>
+				
+				
+				
+				
+			</div>
+		</div>
+	
+		
+		<div id="likes-post-25281"></div>
+	</div>
+
+	
+	
+	
+	
+</li>
+			
+		
+			
+				
+
+
+<li id="post-25284" class="message   " data-author="ИгорьК">
+
+	
+
+<div class="messageUserInfo" itemscope="itemscope" itemtype="http://data-vocabulary.org/Person">	
+<div class="messageUserBlock ">
+	
+		<div class="avatarHolder">
+			<span class="helper"></span>
+			<a href="http://forum.amperka.ru/members/%D0%98%D0%B3%D0%BE%D1%80%D1%8C%D0%9A.2107/" class="avatar Av2107m" data-avatarhtml="true"><img src="http://www.gravatar.com/avatar/ea9164685e6d4753c78c17436f3da91d?s=96&d=http%3A%2F%2Fforum.amperka.ru%2Fstyles%2Fdefault%2Fxenforo%2Favatarz%2Favatar_male_m.png" width="96" height="96" alt="ИгорьК"></a>
+			
+			<!-- slot: message_user_info_avatar -->
+		</div>
+	
+
+
+	
+		<h3 class="userText">
+			<a href="http://forum.amperka.ru/members/%D0%98%D0%B3%D0%BE%D1%80%D1%8C%D0%9A.2107/" class="username" dir="auto" itemprop="name">ИгорьК</a>
+			<em class="userTitle" itemprop="title">Победитель модулей</em>
+			
+			<!-- slot: message_user_info_text -->
+		</h3>
+	
+		
+	
+		
+
+
+	<span class="arrow"><span></span></span>
+</div>
+</div>
+
+	<div class="messageInfo primaryContent">
+		
+		
+		
+		
+		
+		<div class="messageContent">		
+			<article>
+				<blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+					
+					<div class="bbCodeBlock bbCodeQuote" data-author="acos">
+	<aside>
+		
+			<div class="attribution type">acos сказал(а):
+				
+					<a href="http://forum.amperka.ru/goto/post?id=25281#post-25281" class="AttributionLink">↑</a>
+				
+			</div>
+		
+		<blockquote class="quoteContainer"><div class="quote">Уау! Красотища!<br>
+А в чём была проблема, что пришлось добавлять конденсатор?</div><div class="quoteExpand">Нажмите, чтобы раскрыть...</div></blockquote>
+	</aside>
+</div>Проблема в том, что:<br>
+- в Ардуинке очень слабый ПО ФАКТУ питатель 3.3 вольта и он просаживается на отдельных платах при работе с модулем.<br>
+- на нем же, возникают сильные наводки: у меня на плате  три <b><span style="font-size: 18px"><a href="http://amperka.ru/collection/transistors/product/mosfet-transistor" target="_blank" class="externalLink" rel="nofollow">MOSFET</a> </span></b>транзистора, без конденсатора "убивают" модуль наповал.<br>
+Особенно проблема характерна для Меги (на фото), которая выступает на управляющей стороне.<br>
+Спаял два <b>абсолютно одинаковых</b> (приемных) шилда. Так вот, один шилд работал через пень - колода, а второй практически не работал. Глаза сломал - искал может не пропаял где-то или замкнул что-то.<br>
+При совместном включении вся система вела себя вообще странным образом. В общем, наложилось все сразу - проблемы железа (а это три модуля: передатчик и два приемника), библиотеки, и ошибки моего программирования.<br>
+Причем, при супернестабильной работе железа отлавливать ошибки в программировании и сложно и даже желание пропадает. Уже хотел бросить все.<br>
+На видео выше передатчик тупо с интервалом посылает в эфир четыре команды. Видели бы Вы как вела себя эта же система первое время...<br>
+Припаял конденсаторы. Стало лучше. Второй шилд заработал. Но все равно, система явно бредила... В общем, путем бесчисленных игр с трубами (pipe - термин модуля), размерами буферов и номерами каналов, удалось понять логику ошибок.<br>
+И как только "рассекретил" функцию очистки буфера передатчика - все заработало как часы.<br>
+=============================================================<br>
+Добавочка от 25.06.2014.<br>
+Перенес ардуинку, что работала на правом шкафу, не тот шкаф что прямо и на видео не подсвечивается. Там ленты в два раза больше.<br>
+И устройство отказалось работать. Два канала ленты еще тянет, а три - нет.<br>
+То есть при включенных трех каналах ленты устройство стартует, тестирует их - все зажигается. Но модуль отказывается подавать признаки жизни. Отключаю один канал ленты - все работает. Что буду делать... Буду делать отдельный блок транзисторов, выносить за пределы шилда.<br>
+<br>
+... и это - помогло. Модуль с Ардуиной и  блок транзисторов соединены кусочками шлейфов и находятся друг от друга на расстоянии около 10 см.
+					<div class="messageTextEndMarker">&nbsp;</div>
+				</blockquote>
+			</article>
+			
+			
+		</div>
+		
+		
+		
+			<div class="editDate">
+			
+				Последнее редактирование: <span class="DateTime" title="20 ноя 2014 в 19:36">20 ноя 2014</span>
+			
+			</div>
+		
+		
+		
+		
+		
+				
+		<div class="messageMeta ToggleTriggerAnchor">
+			
+			<div class="privateControls">
+				
+				<span class="item muted">
+					<span class="authorEnd"><a href="http://forum.amperka.ru/members/%D0%98%D0%B3%D0%BE%D1%80%D1%8C%D0%9A.2107/" class="username author" dir="auto">ИгорьК</a>,</span>
+					<a href="http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/#post-25284" title="Постоянная ссылка" class="datePermalink"><span class="DateTime" title="20 июн 2014 в 10:39">20 июн 2014</span></a>
+				</span>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</div>
+			
+			<div class="publicControls">
+				<a href="http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/#post-25284" title="Постоянная ссылка" class="item muted postNumber hashPermalink OverlayTrigger" data-href="posts/25284/permalink">#4</a>
+				
+				
+				
+				
+			</div>
+		</div>
+	
+		
+		<div id="likes-post-25284"></div>
+	</div>
+
+	
+	
+	
+	
+</li>
+			
+		
+			
+				
+
+
+<li id="post-25289" class="message   " data-author="ИгорьК">
+
+	
+
+<div class="messageUserInfo" itemscope="itemscope" itemtype="http://data-vocabulary.org/Person">	
+<div class="messageUserBlock ">
+	
+		<div class="avatarHolder">
+			<span class="helper"></span>
+			<a href="http://forum.amperka.ru/members/%D0%98%D0%B3%D0%BE%D1%80%D1%8C%D0%9A.2107/" class="avatar Av2107m" data-avatarhtml="true"><img src="http://www.gravatar.com/avatar/ea9164685e6d4753c78c17436f3da91d?s=96&d=http%3A%2F%2Fforum.amperka.ru%2Fstyles%2Fdefault%2Fxenforo%2Favatarz%2Favatar_male_m.png" width="96" height="96" alt="ИгорьК"></a>
+			
+			<!-- slot: message_user_info_avatar -->
+		</div>
+	
+
+
+	
+		<h3 class="userText">
+			<a href="http://forum.amperka.ru/members/%D0%98%D0%B3%D0%BE%D1%80%D1%8C%D0%9A.2107/" class="username" dir="auto" itemprop="name">ИгорьК</a>
+			<em class="userTitle" itemprop="title">Победитель модулей</em>
+			
+			<!-- slot: message_user_info_text -->
+		</h3>
+	
+		
+	
+		
+
+
+	<span class="arrow"><span></span></span>
+</div>
+</div>
+
+	<div class="messageInfo primaryContent">
+		
+		
+		
+		
+		
+		<div class="messageContent">		
+			<article>
+				<blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+					
+					Итак, начнем (уже припаяли конденсатор?):<br>
+- с соединения (все правильно соединили?),<br>
+- проверки работоспособности  (а модуль то работает?);<br>
+- нахождения правильного канала для связи, коих в модуле есть 127, по умолчанию модуль работает на 76(hex).<br>
+Соединяем так:<br>
+
+	
+	<img src="./nRF24L01+ _ побеждаем модуль. _ Амперка _ Форум_files/saved_resource(1)" alt="24L01Pinout-800.jpg" class="bbCodeImage LbImage" style="">
+		
+<br>
+
+	
+	<img src="./nRF24L01+ _ побеждаем модуль. _ Амперка _ Форум_files/saved_resource(2)" alt="12345.jpg" class="bbCodeImage LbImage" style="">
+		
+<br>
+А потом <a href="https://github.com/maniacbug/RF24/" target="_blank" class="externalLink" rel="nofollow">устанавливаем библиотеку</a> и загружаем <a href="http://maniacbug.github.io/RF24/scanner_8pde-example.html" target="_blank" class="externalLink" rel="nofollow">скетч, </a>который я чуть модифицировал, избавив от файла "printf.h" и добавив в начало функцию, которая изучает содержимое регистров модуля :<br>
+
+
+<div class="bbCodeBlock bbCodeCode">
+	<div class="type">Код (C):</div>
+	<div class="code"><span style="color: #339933;">#include &lt;SPI.h&gt;</span><br>
+<span style="color: #339933;">#include "nRF24L01.h"</span><br>
+<span style="color: #339933;">#include "RF24.h"</span><br>
+<br>
+RF24 radio<span style="color: #009900;">(</span><span style="color: #0000dd;">9</span><span style="color: #339933;">,</span><span style="color: #0000dd;">10</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">// Для Уно</span><br>
+<span style="color: #666666; font-style: italic;">//RF24 radio(9,53);// Для Меги</span><br>
+<span style="color: #993333;">const</span> <span style="color: #993333;">uint8_t</span> num_channels <span style="color: #339933;">=</span> <span style="color: #0000dd;">128</span><span style="color: #339933;">;</span><br>
+<span style="color: #993333;">uint8_t</span> values<span style="color: #009900;">[</span>num_channels<span style="color: #009900;">]</span><span style="color: #339933;">;</span><br>
+<span style="color: #993333;">void</span> setup<span style="color: #009900;">(</span><span style="color: #993333;">void</span><span style="color: #009900;">)</span><br>
+<span style="color: #009900;">{</span><br>
+&nbsp; Serial.<span style="color: #202020;">begin</span><span style="color: #009900;">(</span><span style="color: #0000dd;">57600</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span><br>
+&nbsp; printf_begin<span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span><br>
+&nbsp; radio.<span style="color: #202020;">begin</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span><br>
+&nbsp; radio.<span style="color: #202020;">setAutoAck</span><span style="color: #009900;">(</span><span style="color: #000000; font-weight: bold;">false</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span><br>
+&nbsp; radio.<span style="color: #202020;">startListening</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span><br>
+<br>
+&nbsp; radio.<span style="color: #202020;">printDetails</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span> &nbsp;<span style="color: #666666; font-style: italic;">// Вот эта строка напечатает нам что-то, если все правильно соединили.</span><br>
+&nbsp; delay<span style="color: #009900;">(</span><span style="color: #0000dd;">5000</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="color: #666666; font-style: italic;">// И посмотрим на это пять секунд.</span><br>
+<br>
+&nbsp; radio.<span style="color: #202020;">stopListening</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span><br>
+&nbsp; <span style="color: #993333;">int</span> i <span style="color: #339933;">=</span> <span style="color: #0000dd;">0</span><span style="color: #339933;">;</span> &nbsp; &nbsp;<span style="color: #666666; font-style: italic;">// А это напечатает нам заголовки всех 127 каналов</span><br>
+&nbsp; <span style="color: #b1b100;">while</span> <span style="color: #009900;">(</span> i <span style="color: #339933;">&lt;</span> num_channels <span style="color: #009900;">)</span> &nbsp;<span style="color: #009900;">{</span><br>
+&nbsp; &nbsp; <a target="_blank" rel="nofollow" href="http://www.opengroup.org/onlinepubs/009695399/functions/printf.html"><span style="color: #000066;">printf</span></a><span style="color: #009900;">(</span><span style="color: #ff0000;">"%x"</span><span style="color: #339933;">,</span>i<span style="color: #339933;">&gt;&gt;</span><span style="color: #0000dd;">4</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span><br>
+&nbsp; &nbsp; <span style="color: #339933;">++</span>i<span style="color: #339933;">;</span><br>
+&nbsp; <span style="color: #009900;">}</span><br>
+&nbsp; <a target="_blank" rel="nofollow" href="http://www.opengroup.org/onlinepubs/009695399/functions/printf.html"><span style="color: #000066;">printf</span></a><span style="color: #009900;">(</span><span style="color: #ff0000;">"<span style="color: #000099; font-weight: bold;">\n</span><span style="color: #000099; font-weight: bold;">\r</span>"</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span><br>
+&nbsp; i <span style="color: #339933;">=</span> <span style="color: #0000dd;">0</span><span style="color: #339933;">;</span><br>
+&nbsp; <span style="color: #b1b100;">while</span> <span style="color: #009900;">(</span> i <span style="color: #339933;">&lt;</span> num_channels <span style="color: #009900;">)</span> <span style="color: #009900;">{</span><br>
+&nbsp; &nbsp; <a target="_blank" rel="nofollow" href="http://www.opengroup.org/onlinepubs/009695399/functions/printf.html"><span style="color: #000066;">printf</span></a><span style="color: #009900;">(</span><span style="color: #ff0000;">"%x"</span><span style="color: #339933;">,</span>i<span style="color: #339933;">&amp;</span><span style="color: #208080;">0xf</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span><br>
+&nbsp; &nbsp; <span style="color: #339933;">++</span>i<span style="color: #339933;">;</span><br>
+&nbsp; <span style="color: #009900;">}</span><br>
+&nbsp; <a target="_blank" rel="nofollow" href="http://www.opengroup.org/onlinepubs/009695399/functions/printf.html"><span style="color: #000066;">printf</span></a><span style="color: #009900;">(</span><span style="color: #ff0000;">"<span style="color: #000099; font-weight: bold;">\n</span><span style="color: #000099; font-weight: bold;">\r</span>"</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span><br>
+<span style="color: #009900;">}</span><br>
+<span style="color: #993333;">const</span> <span style="color: #993333;">int</span> num_reps <span style="color: #339933;">=</span> <span style="color: #0000dd;">100</span><span style="color: #339933;">;</span><br>
+<br>
+<span style="color: #993333;">void</span> loop<span style="color: #009900;">(</span><span style="color: #993333;">void</span><span style="color: #009900;">)</span><br>
+<span style="color: #009900;">{</span><br>
+&nbsp; <a target="_blank" rel="nofollow" href="http://www.opengroup.org/onlinepubs/009695399/functions/memset.html"><span style="color: #000066;">memset</span></a><span style="color: #009900;">(</span>values<span style="color: #339933;">,</span><span style="color: #0000dd;">0</span><span style="color: #339933;">,</span><span style="color: #993333;">sizeof</span><span style="color: #009900;">(</span>values<span style="color: #009900;">)</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span><br>
+&nbsp; <span style="color: #993333;">int</span> rep_counter <span style="color: #339933;">=</span> num_reps<span style="color: #339933;">;</span><br>
+&nbsp; <span style="color: #b1b100;">while</span> <span style="color: #009900;">(</span>rep_counter<span style="color: #339933;">--</span><span style="color: #009900;">)</span> <span style="color: #009900;">{</span><br>
+&nbsp; &nbsp; <span style="color: #993333;">int</span> i <span style="color: #339933;">=</span> num_channels<span style="color: #339933;">;</span><br>
+&nbsp; &nbsp; <span style="color: #b1b100;">while</span> <span style="color: #009900;">(</span>i<span style="color: #339933;">--</span><span style="color: #009900;">)</span> <span style="color: #009900;">{</span><br>
+&nbsp; &nbsp; &nbsp; radio.<span style="color: #202020;">setChannel</span><span style="color: #009900;">(</span>i<span style="color: #009900;">)</span><span style="color: #339933;">;</span><br>
+&nbsp; &nbsp; &nbsp; radio.<span style="color: #202020;">startListening</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span><br>
+&nbsp; &nbsp; &nbsp; delayMicroseconds<span style="color: #009900;">(</span><span style="color: #0000dd;">128</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span><br>
+&nbsp; &nbsp; &nbsp; radio.<span style="color: #202020;">stopListening</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span><br>
+&nbsp; &nbsp; &nbsp; <span style="color: #b1b100;">if</span> <span style="color: #009900;">(</span> radio.<span style="color: #202020;">testCarrier</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span> <span style="color: #009900;">)</span><br>
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #339933;">++</span>values<span style="color: #009900;">[</span>I<span style="color: #009900;">]</span><span style="color: #339933;">;</span><br>
+&nbsp; &nbsp; <span style="color: #009900;">}</span><br>
+&nbsp; <span style="color: #009900;">}</span><br>
+&nbsp; <span style="color: #993333;">int</span> i <span style="color: #339933;">=</span> <span style="color: #0000dd;">0</span><span style="color: #339933;">;</span><br>
+&nbsp; <span style="color: #b1b100;">while</span> <span style="color: #009900;">(</span> i <span style="color: #339933;">&lt;</span> num_channels <span style="color: #009900;">)</span> <span style="color: #009900;">{</span><br>
+&nbsp; &nbsp; <a target="_blank" rel="nofollow" href="http://www.opengroup.org/onlinepubs/009695399/functions/printf.html"><span style="color: #000066;">printf</span></a><span style="color: #009900;">(</span><span style="color: #ff0000;">"%x"</span><span style="color: #339933;">,</span>min<span style="color: #009900;">(</span><span style="color: #208080;">0xf</span><span style="color: #339933;">,</span>values<span style="color: #009900;">[</span>I<span style="color: #009900;">]</span><span style="color: #339933;">&amp;</span><span style="color: #208080;">0xf</span><span style="color: #009900;">)</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span><br>
+&nbsp; &nbsp; <span style="color: #339933;">++</span>i<span style="color: #339933;">;</span><br>
+&nbsp; <span style="color: #009900;">}</span><br>
+&nbsp; <a target="_blank" rel="nofollow" href="http://www.opengroup.org/onlinepubs/009695399/functions/printf.html"><span style="color: #000066;">printf</span></a><span style="color: #009900;">(</span><span style="color: #ff0000;">"<span style="color: #000099; font-weight: bold;">\n</span><span style="color: #000099; font-weight: bold;">\r</span>"</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span><br>
+<span style="color: #009900;">}</span><br>
+<span style="color: #993333;">int</span> serial_putc<span style="color: #009900;">(</span> <span style="color: #993333;">char</span> c<span style="color: #339933;">,</span> FILE <span style="color: #339933;">*</span> <span style="color: #009900;">)</span> <span style="color: #009900;">{</span><br>
+&nbsp; Serial.<span style="color: #202020;">write</span><span style="color: #009900;">(</span> c <span style="color: #009900;">)</span><span style="color: #339933;">;</span><br>
+&nbsp; <span style="color: #b1b100;">return</span> c<span style="color: #339933;">;</span><br>
+<span style="color: #009900;">}</span><br>
+<br>
+<span style="color: #993333;">void</span> printf_begin<span style="color: #009900;">(</span><span style="color: #993333;">void</span><span style="color: #009900;">)</span> <span style="color: #009900;">{</span><br>
+&nbsp; fdevopen<span style="color: #009900;">(</span> <span style="color: #339933;">&amp;</span>serial_putc<span style="color: #339933;">,</span> <span style="color: #0000dd;">0</span> <span style="color: #009900;">)</span><span style="color: #339933;">;</span><br>
+<span style="color: #009900;">}</span><br>
+&nbsp;</div>
+</div>Таким образом, модуль отвечает на наши вопросы, а потом слушает эфир и расскажет нам о некоторых полезных вещах.
+					<div class="messageTextEndMarker">&nbsp;</div>
+				</blockquote>
+			</article>
+			
+			
+		</div>
+		
+		
+		
+			<div class="editDate">
+			
+				Последнее редактирование: <span class="DateTime" title="20 июн 2014 в 17:23">20 июн 2014</span>
+			
+			</div>
+		
+		
+		
+		
+		
+				
+		<div class="messageMeta ToggleTriggerAnchor">
+			
+			<div class="privateControls">
+				
+				<span class="item muted">
+					<span class="authorEnd"><a href="http://forum.amperka.ru/members/%D0%98%D0%B3%D0%BE%D1%80%D1%8C%D0%9A.2107/" class="username author" dir="auto">ИгорьК</a>,</span>
+					<a href="http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/#post-25289" title="Постоянная ссылка" class="datePermalink"><span class="DateTime" title="20 июн 2014 в 11:35">20 июн 2014</span></a>
+				</span>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</div>
+			
+			<div class="publicControls">
+				<a href="http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/#post-25289" title="Постоянная ссылка" class="item muted postNumber hashPermalink OverlayTrigger" data-href="posts/25289/permalink">#5</a>
+				
+				
+				
+				
+			</div>
+		</div>
+	
+		
+		<div id="likes-post-25289">
+	
+	<div class="likesSummary secondaryContent">
+		<span class="LikeText">
+			<a href="http://forum.amperka.ru/members/%D0%9A%D1%80%D0%B0%D0%BF%D0%B8%D0%B2%D0%B8%D0%BD.6821/" class="username" dir="auto">Крапивин</a>, <a href="http://forum.amperka.ru/members/petrovich.5549/" class="username" dir="auto">Petrovich</a>, <a href="http://forum.amperka.ru/members/altex.5145/" class="username" dir="auto">altex</a> и <a href="http://forum.amperka.ru/posts/25289/likes" class="OverlayTrigger">ещё 1-му</a> нравится это.
+		</span>
+	</div>
+</div>
+	</div>
+
+	
+	
+	
+	
+</li>
+			
+		
+			
+				
+
+
+<li id="post-25291" class="message   " data-author="ИгорьК">
+
+	
+
+<div class="messageUserInfo" itemscope="itemscope" itemtype="http://data-vocabulary.org/Person">	
+<div class="messageUserBlock ">
+	
+		<div class="avatarHolder">
+			<span class="helper"></span>
+			<a href="http://forum.amperka.ru/members/%D0%98%D0%B3%D0%BE%D1%80%D1%8C%D0%9A.2107/" class="avatar Av2107m" data-avatarhtml="true"><img src="http://www.gravatar.com/avatar/ea9164685e6d4753c78c17436f3da91d?s=96&d=http%3A%2F%2Fforum.amperka.ru%2Fstyles%2Fdefault%2Fxenforo%2Favatarz%2Favatar_male_m.png" width="96" height="96" alt="ИгорьК"></a>
+			
+			<!-- slot: message_user_info_avatar -->
+		</div>
+	
+
+
+	
+		<h3 class="userText">
+			<a href="http://forum.amperka.ru/members/%D0%98%D0%B3%D0%BE%D1%80%D1%8C%D0%9A.2107/" class="username" dir="auto" itemprop="name">ИгорьК</a>
+			<em class="userTitle" itemprop="title">Победитель модулей</em>
+			
+			<!-- slot: message_user_info_text -->
+		</h3>
+	
+		
+	
+		
+
+
+	<span class="arrow"><span></span></span>
+</div>
+</div>
+
+	<div class="messageInfo primaryContent">
+		
+		
+		
+		
+		
+		<div class="messageContent">		
+			<article>
+				<blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+					
+					<b>Первая полезная вещь</b> - статус платы, и, следовательно, успешность соединения с ней и ее работоспособности. В порту мы должны получить изображение типа этого:<br>
+
+	
+	<img src="./nRF24L01+ _ побеждаем модуль. _ Амперка _ Форум_files/saved_resource(3)" alt="0003.jpg" class="bbCodeImage LbImage" style="">
+		
+<br>
+Если не получили - паяльник и увеличительное стекло в руки - ищем ошибки соединения.
+					<div class="messageTextEndMarker">&nbsp;</div>
+				</blockquote>
+			</article>
+			
+			
+		</div>
+		
+		
+		
+			<div class="editDate">
+			
+				Последнее редактирование: <span class="DateTime" title="20 июн 2014 в 12:06">20 июн 2014</span>
+			
+			</div>
+		
+		
+		
+		
+		
+				
+		<div class="messageMeta ToggleTriggerAnchor">
+			
+			<div class="privateControls">
+				
+				<span class="item muted">
+					<span class="authorEnd"><a href="http://forum.amperka.ru/members/%D0%98%D0%B3%D0%BE%D1%80%D1%8C%D0%9A.2107/" class="username author" dir="auto">ИгорьК</a>,</span>
+					<a href="http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/#post-25291" title="Постоянная ссылка" class="datePermalink"><span class="DateTime" title="20 июн 2014 в 11:49">20 июн 2014</span></a>
+				</span>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</div>
+			
+			<div class="publicControls">
+				<a href="http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/#post-25291" title="Постоянная ссылка" class="item muted postNumber hashPermalink OverlayTrigger" data-href="posts/25291/permalink">#6</a>
+				
+				
+				
+				
+			</div>
+		</div>
+	
+		
+		<div id="likes-post-25291">
+	
+	<div class="likesSummary secondaryContent">
+		<span class="LikeText">
+			<a href="http://forum.amperka.ru/members/megakoteyka.806/" class="username" dir="auto">Megakoteyka</a> нравится это.
+		</span>
+	</div>
+</div>
+	</div>
+
+	
+	
+	
+	
+</li>
+			
+		
+			
+				
+
+
+<li id="post-25292" class="message   " data-author="ИгорьК">
+
+	
+
+<div class="messageUserInfo" itemscope="itemscope" itemtype="http://data-vocabulary.org/Person">	
+<div class="messageUserBlock ">
+	
+		<div class="avatarHolder">
+			<span class="helper"></span>
+			<a href="http://forum.amperka.ru/members/%D0%98%D0%B3%D0%BE%D1%80%D1%8C%D0%9A.2107/" class="avatar Av2107m" data-avatarhtml="true"><img src="http://www.gravatar.com/avatar/ea9164685e6d4753c78c17436f3da91d?s=96&d=http%3A%2F%2Fforum.amperka.ru%2Fstyles%2Fdefault%2Fxenforo%2Favatarz%2Favatar_male_m.png" width="96" height="96" alt="ИгорьК"></a>
+			
+			<!-- slot: message_user_info_avatar -->
+		</div>
+	
+
+
+	
+		<h3 class="userText">
+			<a href="http://forum.amperka.ru/members/%D0%98%D0%B3%D0%BE%D1%80%D1%8C%D0%9A.2107/" class="username" dir="auto" itemprop="name">ИгорьК</a>
+			<em class="userTitle" itemprop="title">Победитель модулей</em>
+			
+			<!-- slot: message_user_info_text -->
+		</h3>
+	
+		
+	
+		
+
+
+	<span class="arrow"><span></span></span>
+</div>
+</div>
+
+	<div class="messageInfo primaryContent">
+		
+		
+		
+		
+		
+		<div class="messageContent">		
+			<article>
+				<blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+					
+					<div class="bbCodeBlock bbCodeQuote" data-author="Arduinщик">
+	<aside>
+		
+			<div class="attribution type">Arduinщик сказал(а):
+				
+					<a href="http://forum.amperka.ru/goto/post?id=25290#post-25290" class="AttributionLink">↑</a>
+				
+			</div>
+		
+		<blockquote class="quoteContainer"><div class="quote">А почему не подойдёт библиотека Mirf ?</div><div class="quoteExpand">Нажмите, чтобы раскрыть...</div></blockquote>
+	</aside>
+</div>1. Потому что мы не ищем легких путей, и эта библиотека мне больше понравилась. Надеюсь, понравится и Вам.<br>
+2. Потому что эта библиотека снабжена <a href="http://maniacbug.github.io/RF24/examples.html" target="_blank" class="externalLink" rel="nofollow">большим количеством примеров</a>. Mirf абсолютно "голая", без пояснений. Смог разобраться в ней лишь после изучения этой библиотеки.<br>
+3. Потому что она, по утверждению отдельных граждан в сети, обладает бОльшими возможностями и универсальностью. В частности, позволяет в ответ на запрос <b>автоматом </b>проталкивать заранее заготовленный ответ, что может быть полезно при опросе датчиков без построения сети типа XBee.<br>
+4. Потому что эта библиотека лежит в основе <a href="http://maniacbug.github.io/RF24Network/annotated.html" target="_blank" class="externalLink" rel="nofollow">другой библиотеки</a>, которая позволяет строить <a href="http://maniacbug.wordpress.com/2012/03/30/rf24network/" target="_blank" class="externalLink" rel="nofollow">сеть типа XBee</a>, но за цену модулей nRF24L01+.
+					<div class="messageTextEndMarker">&nbsp;</div>
+				</blockquote>
+			</article>
+			
+			
+		</div>
+		
+		
+		
+			<div class="editDate">
+			
+				Последнее редактирование: <span class="DateTime" title="24 июн 2014 в 01:25">24 июн 2014</span>
+			
+			</div>
+		
+		
+		
+		
+		
+				
+		<div class="messageMeta ToggleTriggerAnchor">
+			
+			<div class="privateControls">
+				
+				<span class="item muted">
+					<span class="authorEnd"><a href="http://forum.amperka.ru/members/%D0%98%D0%B3%D0%BE%D1%80%D1%8C%D0%9A.2107/" class="username author" dir="auto">ИгорьК</a>,</span>
+					<a href="http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/#post-25292" title="Постоянная ссылка" class="datePermalink"><span class="DateTime" title="20 июн 2014 в 11:54">20 июн 2014</span></a>
+				</span>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</div>
+			
+			<div class="publicControls">
+				<a href="http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/#post-25292" title="Постоянная ссылка" class="item muted postNumber hashPermalink OverlayTrigger" data-href="posts/25292/permalink">#7</a>
+				
+				
+				
+				
+			</div>
+		</div>
+	
+		
+		<div id="likes-post-25292">
+	
+	<div class="likesSummary secondaryContent">
+		<span class="LikeText">
+			<a href="http://forum.amperka.ru/members/megakoteyka.806/" class="username" dir="auto">Megakoteyka</a> нравится это.
+		</span>
+	</div>
+</div>
+	</div>
+
+	
+	
+	
+	
+</li>
+			
+		
+			
+				
+
+
+<li id="post-25295" class="message   " data-author="ИгорьК">
+
+	
+
+<div class="messageUserInfo" itemscope="itemscope" itemtype="http://data-vocabulary.org/Person">	
+<div class="messageUserBlock ">
+	
+		<div class="avatarHolder">
+			<span class="helper"></span>
+			<a href="http://forum.amperka.ru/members/%D0%98%D0%B3%D0%BE%D1%80%D1%8C%D0%9A.2107/" class="avatar Av2107m" data-avatarhtml="true"><img src="http://www.gravatar.com/avatar/ea9164685e6d4753c78c17436f3da91d?s=96&d=http%3A%2F%2Fforum.amperka.ru%2Fstyles%2Fdefault%2Fxenforo%2Favatarz%2Favatar_male_m.png" width="96" height="96" alt="ИгорьК"></a>
+			
+			<!-- slot: message_user_info_avatar -->
+		</div>
+	
+
+
+	
+		<h3 class="userText">
+			<a href="http://forum.amperka.ru/members/%D0%98%D0%B3%D0%BE%D1%80%D1%8C%D0%9A.2107/" class="username" dir="auto" itemprop="name">ИгорьК</a>
+			<em class="userTitle" itemprop="title">Победитель модулей</em>
+			
+			<!-- slot: message_user_info_text -->
+		</h3>
+	
+		
+	
+		
+
+
+	<span class="arrow"><span></span></span>
+</div>
+</div>
+
+	<div class="messageInfo primaryContent">
+		
+		
+		
+		
+		
+		<div class="messageContent">		
+			<article>
+				<blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+					
+					<b>Вторая полезная вещь</b> выглядит вот так:<br>
+
+	
+	<img src="./nRF24L01+ _ побеждаем модуль. _ Амперка _ Форум_files/saved_resource(4)" alt="0004.jpg" class="bbCodeImage LbImage" style="">
+		
+<br>
+В первой строке - первая цифра номера канала, во второй строке - вторая (hex). А ниже - уровень зашумленности. В данном случае каналы 39-42 использовать не рекомендуется. Ну и 49 -4а тоже. У вас обязаны быть другие результаты.
+					<div class="messageTextEndMarker">&nbsp;</div>
+				</blockquote>
+			</article>
+			
+			
+		</div>
+		
+		
+		
+			<div class="editDate">
+			
+				Последнее редактирование: <span class="DateTime" title="20 июн 2014 в 12:19">20 июн 2014</span>
+			
+			</div>
+		
+		
+		
+		
+		
+				
+		<div class="messageMeta ToggleTriggerAnchor">
+			
+			<div class="privateControls">
+				
+				<span class="item muted">
+					<span class="authorEnd"><a href="http://forum.amperka.ru/members/%D0%98%D0%B3%D0%BE%D1%80%D1%8C%D0%9A.2107/" class="username author" dir="auto">ИгорьК</a>,</span>
+					<a href="http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/#post-25295" title="Постоянная ссылка" class="datePermalink"><span class="DateTime" title="20 июн 2014 в 12:11">20 июн 2014</span></a>
+				</span>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</div>
+			
+			<div class="publicControls">
+				<a href="http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/#post-25295" title="Постоянная ссылка" class="item muted postNumber hashPermalink OverlayTrigger" data-href="posts/25295/permalink">#8</a>
+				
+				
+				
+				
+			</div>
+		</div>
+	
+		
+		<div id="likes-post-25295">
+	
+	<div class="likesSummary secondaryContent">
+		<span class="LikeText">
+			<a href="http://forum.amperka.ru/members/altex.5145/" class="username" dir="auto">altex</a>, <a href="http://forum.amperka.ru/members/acos.3475/" class="username" dir="auto">acos</a> и <a href="http://forum.amperka.ru/members/megakoteyka.806/" class="username" dir="auto">Megakoteyka</a> нравится это.
+		</span>
+	</div>
+</div>
+	</div>
+
+	
+	
+	
+	
+</li>
+			
+		
+			
+				
+
+
+<li id="post-25297" class="message   " data-author="Megakoteyka">
+
+	
+
+<div class="messageUserInfo" itemscope="itemscope" itemtype="http://data-vocabulary.org/Person">	
+<div class="messageUserBlock ">
+	
+		<div class="avatarHolder">
+			<span class="helper"></span>
+			<a href="http://forum.amperka.ru/members/megakoteyka.806/" class="avatar Av806m" data-avatarhtml="true"><img src="./nRF24L01+ _ побеждаем модуль. _ Амперка _ Форум_files/806.jpg" width="96" height="96" alt="Megakoteyka"></a>
+			
+			<!-- slot: message_user_info_avatar -->
+		</div>
+	
+
+
+	
+		<h3 class="userText">
+			<a href="http://forum.amperka.ru/members/megakoteyka.806/" class="username" dir="auto" itemprop="name">Megakoteyka</a>
+			<em class="userTitle" itemprop="title">Оракул</em>
+			
+			<!-- slot: message_user_info_text -->
+		</h3>
+	
+		
+	
+		
+
+
+	<span class="arrow"><span></span></span>
+</div>
+</div>
+
+	<div class="messageInfo primaryContent">
+		
+		
+		
+		
+		
+		<div class="messageContent">		
+			<article>
+				<blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+					
+					Отличная работа! Спасибо.<br>
+<a href="http://forum.amperka.ru/members/acos.3475/" class="internalLink">acos</a>, тащите это в вики <img src="./nRF24L01+ _ побеждаем модуль. _ Амперка _ Форум_files/wink.png" class="mceSmilie" alt=";)" title="Wink    ;)"><br>
+Кстати, когда там уже появится давно обещанный раздел для пользователей/песочница?
+					<div class="messageTextEndMarker">&nbsp;</div>
+				</blockquote>
+			</article>
+			
+			
+		</div>
+		
+		
+		
+		
+		
+		
+		
+				
+		<div class="messageMeta ToggleTriggerAnchor">
+			
+			<div class="privateControls">
+				
+				<span class="item muted">
+					<span class="authorEnd"><a href="http://forum.amperka.ru/members/megakoteyka.806/" class="username author" dir="auto">Megakoteyka</a>,</span>
+					<a href="http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/#post-25297" title="Постоянная ссылка" class="datePermalink"><span class="DateTime" title="20 июн 2014 в 12:37">20 июн 2014</span></a>
+				</span>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</div>
+			
+			<div class="publicControls">
+				<a href="http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/#post-25297" title="Постоянная ссылка" class="item muted postNumber hashPermalink OverlayTrigger" data-href="posts/25297/permalink">#9</a>
+				
+				
+				
+				
+			</div>
+		</div>
+	
+		
+		<div id="likes-post-25297"></div>
+	</div>
+
+	
+	
+	
+	
+</li>
+			
+		
+			
+				
+
+
+<li id="post-25299" class="message   " data-author="ИгорьК">
+
+	
+
+<div class="messageUserInfo" itemscope="itemscope" itemtype="http://data-vocabulary.org/Person">	
+<div class="messageUserBlock ">
+	
+		<div class="avatarHolder">
+			<span class="helper"></span>
+			<a href="http://forum.amperka.ru/members/%D0%98%D0%B3%D0%BE%D1%80%D1%8C%D0%9A.2107/" class="avatar Av2107m" data-avatarhtml="true"><img src="http://www.gravatar.com/avatar/ea9164685e6d4753c78c17436f3da91d?s=96&d=http%3A%2F%2Fforum.amperka.ru%2Fstyles%2Fdefault%2Fxenforo%2Favatarz%2Favatar_male_m.png" width="96" height="96" alt="ИгорьК"></a>
+			
+			<!-- slot: message_user_info_avatar -->
+		</div>
+	
+
+
+	
+		<h3 class="userText">
+			<a href="http://forum.amperka.ru/members/%D0%98%D0%B3%D0%BE%D1%80%D1%8C%D0%9A.2107/" class="username" dir="auto" itemprop="name">ИгорьК</a>
+			<em class="userTitle" itemprop="title">Победитель модулей</em>
+			
+			<!-- slot: message_user_info_text -->
+		</h3>
+	
+		
+	
+		
+
+
+	<span class="arrow"><span></span></span>
+</div>
+</div>
+
+	<div class="messageInfo primaryContent">
+		
+		
+		
+		
+		
+		<div class="messageContent">		
+			<article>
+				<blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+					
+					<div class="bbCodeBlock bbCodeQuote" data-author="Megakoteyka">
+	<aside>
+		
+			<div class="attribution type">Megakoteyka сказал(а):
+				
+					<a href="http://forum.amperka.ru/goto/post?id=25297#post-25297" class="AttributionLink">↑</a>
+				
+			</div>
+		
+		<blockquote class="quoteContainer"><div class="quote"><a href="http://forum.amperka.ru/members/acos.3475/" class="internalLink">acos</a>, тащите это в вики <img src="./nRF24L01+ _ побеждаем модуль. _ Амперка _ Форум_files/wink.png" class="mceSmilie" alt=";)" title="Wink    ;)"></div><div class="quoteExpand">Нажмите, чтобы раскрыть...</div></blockquote>
+	</aside>
+</div>Это еще не конец <img src="./nRF24L01+ _ побеждаем модуль. _ Амперка _ Форум_files/smile.png" class="mceSmilie" alt=":)" title="Smile    :)"> Надеюсь, Амперка нальет мне немного<a href="http://goo.gl/rSyhFZ" target="_blank" class="externalLink" rel="nofollow"> за продвижение</a> ее продуктов <img src="./nRF24L01+ _ побеждаем модуль. _ Амперка _ Форум_files/rolleyes.png" class="mceSmilie" alt=":rolleyes:" title="Roll Eyes    :rolleyes:">
+					<div class="messageTextEndMarker">&nbsp;</div>
+				</blockquote>
+			</article>
+			
+			
+		</div>
+		
+		
+		
+		
+		
+		
+		
+				
+		<div class="messageMeta ToggleTriggerAnchor">
+			
+			<div class="privateControls">
+				
+				<span class="item muted">
+					<span class="authorEnd"><a href="http://forum.amperka.ru/members/%D0%98%D0%B3%D0%BE%D1%80%D1%8C%D0%9A.2107/" class="username author" dir="auto">ИгорьК</a>,</span>
+					<a href="http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/#post-25299" title="Постоянная ссылка" class="datePermalink"><span class="DateTime" title="20 июн 2014 в 12:40">20 июн 2014</span></a>
+				</span>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</div>
+			
+			<div class="publicControls">
+				<a href="http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/#post-25299" title="Постоянная ссылка" class="item muted postNumber hashPermalink OverlayTrigger" data-href="posts/25299/permalink">#10</a>
+				
+				
+				
+				
+			</div>
+		</div>
+	
+		
+		<div id="likes-post-25299"></div>
+	</div>
+
+	
+	
+	
+	
+</li>
+			
+		
+			
+				
+
+
+<li id="post-25303" class="message   " data-author="ИгорьК">
+
+	
+
+<div class="messageUserInfo" itemscope="itemscope" itemtype="http://data-vocabulary.org/Person">	
+<div class="messageUserBlock ">
+	
+		<div class="avatarHolder">
+			<span class="helper"></span>
+			<a href="http://forum.amperka.ru/members/%D0%98%D0%B3%D0%BE%D1%80%D1%8C%D0%9A.2107/" class="avatar Av2107m" data-avatarhtml="true"><img src="http://www.gravatar.com/avatar/ea9164685e6d4753c78c17436f3da91d?s=96&d=http%3A%2F%2Fforum.amperka.ru%2Fstyles%2Fdefault%2Fxenforo%2Favatarz%2Favatar_male_m.png" width="96" height="96" alt="ИгорьК"></a>
+			
+			<!-- slot: message_user_info_avatar -->
+		</div>
+	
+
+
+	
+		<h3 class="userText">
+			<a href="http://forum.amperka.ru/members/%D0%98%D0%B3%D0%BE%D1%80%D1%8C%D0%9A.2107/" class="username" dir="auto" itemprop="name">ИгорьК</a>
+			<em class="userTitle" itemprop="title">Победитель модулей</em>
+			
+			<!-- slot: message_user_info_text -->
+		</h3>
+	
+		
+	
+		
+
+
+	<span class="arrow"><span></span></span>
+</div>
+</div>
+
+	<div class="messageInfo primaryContent">
+		
+		
+		
+		
+		
+		<div class="messageContent">		
+			<article>
+				<blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+					
+					Теперь <b>несколько слов о самом модуле</b> (спасибо тому (<a href="http://forum.amperka.ru/members/%D0%9F%D1%83%D1%88%D0%BD%D0%BE%D0%B9-%D0%B7%D0%B2%D0%B5%D1%80.4003/" class="internalLink">Пушной звер</a>), кто отговорил меня пользоваться модулями на 433 МГц). Вот <a href="http://www.nordicsemi.com/eng/Products/2.4GHz-RF/nRF24L01P/(language)/eng-GB" target="_blank" class="externalLink" rel="nofollow">официальная документация</a> о 78 страницах. Как обычно бывает, когда кто-то написал для нас библиотеку, из нее, в этом случае, достаточно хорошо понять возможности модуля, а затем искать их реализацию в библиотеке.<br>
+Попробую изложить все несколькими тезисами.<br>
+<div style="padding-left: 30px">- Работа по шине SPI, которая поддерживается Ардуино на уровне железа и соответствующей библиотеки.<br>
+- 3.3 вольта на питание. 5 Ардуиновских, обычно, выдерживает, не сгорает, но и не работает. Экспериментировать не рекомендуется.<br>
+- три скорости передачи, причем на медленной - выше чувствительность. По умолчанию установлена средняя скорость.<br>
+- несколько уровней мощности передачи;<br>
+- передача в буфер (за раз, за сеанс) до 32 байт. Регулируемая величина. В интернете видел, что ее уменьшение повышает стабильность связи, но... НО см. посты выше. Моя практика это не подтвердила.<br>
+- прослушка одновременно шести pipe (труба?). То есть может одновременно ловить сигнал от шести таких же модулей, передающих на одном частотном канале;<br>
+- передача (<span style="color: #b30000"><b>без перенастройки! перенастроил - и хоть сотня, в первом посте передача идет по двум разным трубам!</b></span> ) - по одной трубе/pipe;<br>
+- включаемый/выключаемый режим контроля получения адресатом сообщения;<br>
+- в этом режиме задаются количество попыток и интервал "добивания" приемника на предмет получения сообщения;<br>
+- при включенном режиме контроля полученного сообщения, приемник может в обратку отправить заранее заготовленную информацию.​</div>Этот последний режим, ИМХО, очень интересен для организации опроса датчиков, например, температуры. Ведомый периодически измеряет температуру и отправляет ее к себе в буфер - в эфир ничего не говорит, не засоряет.   Ведущий обращается <b>когда ему надо</b> к ведомому с любой командой, а в ответ принимает температуру, или вообще любую другую информацию. При такой работе количество прослушиваемых неограниченно.<br>
+Иной способ - отключить систему оповещения о приеме сообщения и "в лоб" давать запросы на ведомого, вынуждая его к ответу в другой "трубе".<br>
+Третий способ - вообще молчать и слушать только шесть труб. Однако, подозреваю, в случае одновременной передачи двумя модулями может произойти что-то нехорошее.
+					<div class="messageTextEndMarker">&nbsp;</div>
+				</blockquote>
+			</article>
+			
+			
+		</div>
+		
+		
+		
+			<div class="editDate">
+			
+				Последнее редактирование: <span class="DateTime" title="20 июн 2014 в 13:46">20 июн 2014</span>
+			
+			</div>
+		
+		
+		
+		
+		
+				
+		<div class="messageMeta ToggleTriggerAnchor">
+			
+			<div class="privateControls">
+				
+				<span class="item muted">
+					<span class="authorEnd"><a href="http://forum.amperka.ru/members/%D0%98%D0%B3%D0%BE%D1%80%D1%8C%D0%9A.2107/" class="username author" dir="auto">ИгорьК</a>,</span>
+					<a href="http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/#post-25303" title="Постоянная ссылка" class="datePermalink"><span class="DateTime" title="20 июн 2014 в 13:10">20 июн 2014</span></a>
+				</span>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</div>
+			
+			<div class="publicControls">
+				<a href="http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/#post-25303" title="Постоянная ссылка" class="item muted postNumber hashPermalink OverlayTrigger" data-href="posts/25303/permalink">#11</a>
+				
+				
+				
+				
+			</div>
+		</div>
+	
+		
+		<div id="likes-post-25303"></div>
+	</div>
+
+	
+	
+	
+	
+</li>
+			
+		
+			
+				
+
+
+<li id="post-25305" class="message   " data-author="Пушной звер">
+
+	
+
+<div class="messageUserInfo" itemscope="itemscope" itemtype="http://data-vocabulary.org/Person">	
+<div class="messageUserBlock ">
+	
+		<div class="avatarHolder">
+			<span class="helper"></span>
+			<a href="http://forum.amperka.ru/members/%D0%9F%D1%83%D1%88%D0%BD%D0%BE%D0%B9-%D0%B7%D0%B2%D0%B5%D1%80.4003/" class="avatar Av4003m" data-avatarhtml="true"><img src="./nRF24L01+ _ побеждаем модуль. _ Амперка _ Форум_files/4003.jpg" width="96" height="96" alt="Пушной звер"></a>
+			
+			<!-- slot: message_user_info_avatar -->
+		</div>
+	
+
+
+	
+		<h3 class="userText">
+			<a href="http://forum.amperka.ru/members/%D0%9F%D1%83%D1%88%D0%BD%D0%BE%D0%B9-%D0%B7%D0%B2%D0%B5%D1%80.4003/" class="username" dir="auto" itemprop="name">Пушной звер</a>
+			<em class="userTitle" itemprop="title">Гик</em>
+			
+			<!-- slot: message_user_info_text -->
+		</h3>
+	
+		
+	
+		
+
+
+	<span class="arrow"><span></span></span>
+</div>
+</div>
+
+	<div class="messageInfo primaryContent">
+		
+		
+		
+		
+		
+		<div class="messageContent">		
+			<article>
+				<blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+					
+					я тогда еще пофлужу, на 433 есть нормальные модули, вроде на SI4432, но опятьже использовать их имеет смысл для дальнобоя, ибо в комнате жарить ими ну смысл? особенно когда есть куча вариантов на 2,4 без головной боли.
+					<div class="messageTextEndMarker">&nbsp;</div>
+				</blockquote>
+			</article>
+			
+			
+		</div>
+		
+		
+		
+		
+		
+		
+		
+				
+		<div class="messageMeta ToggleTriggerAnchor">
+			
+			<div class="privateControls">
+				
+				<span class="item muted">
+					<span class="authorEnd"><a href="http://forum.amperka.ru/members/%D0%9F%D1%83%D1%88%D0%BD%D0%BE%D0%B9-%D0%B7%D0%B2%D0%B5%D1%80.4003/" class="username author" dir="auto">Пушной звер</a>,</span>
+					<a href="http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/#post-25305" title="Постоянная ссылка" class="datePermalink"><span class="DateTime" title="20 июн 2014 в 13:28">20 июн 2014</span></a>
+				</span>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</div>
+			
+			<div class="publicControls">
+				<a href="http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/#post-25305" title="Постоянная ссылка" class="item muted postNumber hashPermalink OverlayTrigger" data-href="posts/25305/permalink">#12</a>
+				
+				
+				
+				
+			</div>
+		</div>
+	
+		
+		<div id="likes-post-25305"></div>
+	</div>
+
+	
+	
+	
+	
+</li>
+			
+		
+			
+				
+
+
+<li id="post-25306" class="message   " data-author="Megakoteyka">
+
+	
+
+<div class="messageUserInfo" itemscope="itemscope" itemtype="http://data-vocabulary.org/Person">	
+<div class="messageUserBlock ">
+	
+		<div class="avatarHolder">
+			<span class="helper"></span>
+			<a href="http://forum.amperka.ru/members/megakoteyka.806/" class="avatar Av806m" data-avatarhtml="true"><img src="./nRF24L01+ _ побеждаем модуль. _ Амперка _ Форум_files/806.jpg" width="96" height="96" alt="Megakoteyka"></a>
+			
+			<!-- slot: message_user_info_avatar -->
+		</div>
+	
+
+
+	
+		<h3 class="userText">
+			<a href="http://forum.amperka.ru/members/megakoteyka.806/" class="username" dir="auto" itemprop="name">Megakoteyka</a>
+			<em class="userTitle" itemprop="title">Оракул</em>
+			
+			<!-- slot: message_user_info_text -->
+		</h3>
+	
+		
+	
+		
+
+
+	<span class="arrow"><span></span></span>
+</div>
+</div>
+
+	<div class="messageInfo primaryContent">
+		
+		
+		
+		
+		
+		<div class="messageContent">		
+			<article>
+				<blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+					
+					<div class="bbCodeBlock bbCodeQuote" data-author="Пушной звер">
+	<aside>
+		
+			<div class="attribution type">Пушной звер сказал(а):
+				
+					<a href="http://forum.amperka.ru/goto/post?id=25305#post-25305" class="AttributionLink">↑</a>
+				
+			</div>
+		
+		<blockquote class="quoteContainer"><div class="quote">я тогда еще пофлужу, на 433 есть нормальные модули, вроде на SI4432, но опятьже использовать их имеет смысл для дальнобоя, ибо в комнате жарить ими ну смысл? особенно когда есть куча вариантов на 2,4 без головной боли.</div><div class="quoteExpand">Нажмите, чтобы раскрыть...</div></blockquote>
+	</aside>
+</div>А на километры открытой местности посоветуете что-нибудь? Важна дальность, а не скорость.
+					<div class="messageTextEndMarker">&nbsp;</div>
+				</blockquote>
+			</article>
+			
+			
+		</div>
+		
+		
+		
+		
+		
+		
+		
+				
+		<div class="messageMeta ToggleTriggerAnchor">
+			
+			<div class="privateControls">
+				
+				<span class="item muted">
+					<span class="authorEnd"><a href="http://forum.amperka.ru/members/megakoteyka.806/" class="username author" dir="auto">Megakoteyka</a>,</span>
+					<a href="http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/#post-25306" title="Постоянная ссылка" class="datePermalink"><span class="DateTime" title="20 июн 2014 в 14:19">20 июн 2014</span></a>
+				</span>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</div>
+			
+			<div class="publicControls">
+				<a href="http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/#post-25306" title="Постоянная ссылка" class="item muted postNumber hashPermalink OverlayTrigger" data-href="posts/25306/permalink">#13</a>
+				
+				
+				
+				
+			</div>
+		</div>
+	
+		
+		<div id="likes-post-25306"></div>
+	</div>
+
+	
+	
+	
+	
+</li>
+			
+		
+			
+				
+
+
+<li id="post-25307" class="message   " data-author="Пушной звер">
+
+	
+
+<div class="messageUserInfo" itemscope="itemscope" itemtype="http://data-vocabulary.org/Person">	
+<div class="messageUserBlock ">
+	
+		<div class="avatarHolder">
+			<span class="helper"></span>
+			<a href="http://forum.amperka.ru/members/%D0%9F%D1%83%D1%88%D0%BD%D0%BE%D0%B9-%D0%B7%D0%B2%D0%B5%D1%80.4003/" class="avatar Av4003m" data-avatarhtml="true"><img src="./nRF24L01+ _ побеждаем модуль. _ Амперка _ Форум_files/4003.jpg" width="96" height="96" alt="Пушной звер"></a>
+			
+			<!-- slot: message_user_info_avatar -->
+		</div>
+	
+
+
+	
+		<h3 class="userText">
+			<a href="http://forum.amperka.ru/members/%D0%9F%D1%83%D1%88%D0%BD%D0%BE%D0%B9-%D0%B7%D0%B2%D0%B5%D1%80.4003/" class="username" dir="auto" itemprop="name">Пушной звер</a>
+			<em class="userTitle" itemprop="title">Гик</em>
+			
+			<!-- slot: message_user_info_text -->
+		</h3>
+	
+		
+	
+		
+
+
+	<span class="arrow"><span></span></span>
+</div>
+</div>
+
+	<div class="messageInfo primaryContent">
+		
+		
+		
+		
+		
+		<div class="messageContent">		
+			<article>
+				<blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+					
+					на километры можно все те же SI4432 или nRF24L01+ но с усилком и правильной антенной, вот к примеру первый попавшийся <a href="http://www.ebay.com/itm/RF-Wireless-Transceiver-Module-Si4432-STM8L101-433MHZ-MCU-5000-meter-/300891651883?pt=Home_Automation_Controls_Touchscreens&hash=item460e8a3f2b" target="_blank" class="externalLink" rel="nofollow">http://www.ebay.com/itm/RF-Wireless...ion_Controls_Touchscreens&amp;hash=item460e8a3f2b</a> пол ватта на 433, а nRF24L01+ с услом на 100 милливат и антенной ~16дб, думаю и на 10км долбануть не проблема будет <a href="http://www.ebay.com/itm/NRF24L01-PA-LNA-SMA-Antenna-Wireless-Transceiver-communication-module-2-4G-1100m-/310651702557?pt=LH_DefaultDomain_0&hash=item485448cd1d" target="_blank" class="externalLink" rel="nofollow">http://www.ebay.com/itm/NRF24L01-PA...557?pt=LH_DefaultDomain_0&amp;hash=item485448cd1d</a> <br>
+SMA там есть, даже паять нечего не надо.
+					<div class="messageTextEndMarker">&nbsp;</div>
+				</blockquote>
+			</article>
+			
+			
+		</div>
+		
+		
+		
+		
+		
+		
+		
+				
+		<div class="messageMeta ToggleTriggerAnchor">
+			
+			<div class="privateControls">
+				
+				<span class="item muted">
+					<span class="authorEnd"><a href="http://forum.amperka.ru/members/%D0%9F%D1%83%D1%88%D0%BD%D0%BE%D0%B9-%D0%B7%D0%B2%D0%B5%D1%80.4003/" class="username author" dir="auto">Пушной звер</a>,</span>
+					<a href="http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/#post-25307" title="Постоянная ссылка" class="datePermalink"><span class="DateTime" title="20 июн 2014 в 14:37">20 июн 2014</span></a>
+				</span>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</div>
+			
+			<div class="publicControls">
+				<a href="http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/#post-25307" title="Постоянная ссылка" class="item muted postNumber hashPermalink OverlayTrigger" data-href="posts/25307/permalink">#14</a>
+				
+				
+				
+				
+			</div>
+		</div>
+	
+		
+		<div id="likes-post-25307"></div>
+	</div>
+
+	
+	
+	
+	
+</li>
+			
+		
+			
+				
+
+
+<li id="post-25309" class="message   " data-author="Megakoteyka">
+
+	
+
+<div class="messageUserInfo" itemscope="itemscope" itemtype="http://data-vocabulary.org/Person">	
+<div class="messageUserBlock ">
+	
+		<div class="avatarHolder">
+			<span class="helper"></span>
+			<a href="http://forum.amperka.ru/members/megakoteyka.806/" class="avatar Av806m" data-avatarhtml="true"><img src="./nRF24L01+ _ побеждаем модуль. _ Амперка _ Форум_files/806.jpg" width="96" height="96" alt="Megakoteyka"></a>
+			
+			<!-- slot: message_user_info_avatar -->
+		</div>
+	
+
+
+	
+		<h3 class="userText">
+			<a href="http://forum.amperka.ru/members/megakoteyka.806/" class="username" dir="auto" itemprop="name">Megakoteyka</a>
+			<em class="userTitle" itemprop="title">Оракул</em>
+			
+			<!-- slot: message_user_info_text -->
+		</h3>
+	
+		
+	
+		
+
+
+	<span class="arrow"><span></span></span>
+</div>
+</div>
+
+	<div class="messageInfo primaryContent">
+		
+		
+		
+		
+		
+		<div class="messageContent">		
+			<article>
+				<blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+					
+					Я что-то путаю или у нас излучать разрешается только 20 мВт?<br>
+Если так, то пол ватта перебор...<br>
+Или запрет только на закрытые диапазоны работает?
+					<div class="messageTextEndMarker">&nbsp;</div>
+				</blockquote>
+			</article>
+			
+			
+		</div>
+		
+		
+		
+		
+		
+		
+		
+				
+		<div class="messageMeta ToggleTriggerAnchor">
+			
+			<div class="privateControls">
+				
+				<span class="item muted">
+					<span class="authorEnd"><a href="http://forum.amperka.ru/members/megakoteyka.806/" class="username author" dir="auto">Megakoteyka</a>,</span>
+					<a href="http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/#post-25309" title="Постоянная ссылка" class="datePermalink"><span class="DateTime" title="20 июн 2014 в 15:08">20 июн 2014</span></a>
+				</span>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</div>
+			
+			<div class="publicControls">
+				<a href="http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/#post-25309" title="Постоянная ссылка" class="item muted postNumber hashPermalink OverlayTrigger" data-href="posts/25309/permalink">#15</a>
+				
+				
+				
+				
+			</div>
+		</div>
+	
+		
+		<div id="likes-post-25309"></div>
+	</div>
+
+	
+	
+	
+	
+</li>
+			
+		
+			
+				
+
+
+<li id="post-25310" class="message   " data-author="ИгорьК">
+
+	
+
+<div class="messageUserInfo" itemscope="itemscope" itemtype="http://data-vocabulary.org/Person">	
+<div class="messageUserBlock ">
+	
+		<div class="avatarHolder">
+			<span class="helper"></span>
+			<a href="http://forum.amperka.ru/members/%D0%98%D0%B3%D0%BE%D1%80%D1%8C%D0%9A.2107/" class="avatar Av2107m" data-avatarhtml="true"><img src="http://www.gravatar.com/avatar/ea9164685e6d4753c78c17436f3da91d?s=96&d=http%3A%2F%2Fforum.amperka.ru%2Fstyles%2Fdefault%2Fxenforo%2Favatarz%2Favatar_male_m.png" width="96" height="96" alt="ИгорьК"></a>
+			
+			<!-- slot: message_user_info_avatar -->
+		</div>
+	
+
+
+	
+		<h3 class="userText">
+			<a href="http://forum.amperka.ru/members/%D0%98%D0%B3%D0%BE%D1%80%D1%8C%D0%9A.2107/" class="username" dir="auto" itemprop="name">ИгорьК</a>
+			<em class="userTitle" itemprop="title">Победитель модулей</em>
+			
+			<!-- slot: message_user_info_text -->
+		</h3>
+	
+		
+	
+		
+
+
+	<span class="arrow"><span></span></span>
+</div>
+</div>
+
+	<div class="messageInfo primaryContent">
+		
+		
+		
+		
+		
+		<div class="messageContent">		
+			<article>
+				<blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+					
+					<div class="bbCodeBlock bbCodeQuote" data-author="Megakoteyka">
+	<aside>
+		
+			<div class="attribution type">Megakoteyka сказал(а):
+				
+					<a href="http://forum.amperka.ru/goto/post?id=25306#post-25306" class="AttributionLink">↑</a>
+				
+			</div>
+		
+		<blockquote class="quoteContainer"><div class="quote">А на километры открытой местности посоветуете что-нибудь? Важна дальность, а не скорость.</div><div class="quoteExpand">Нажмите, чтобы раскрыть...</div></blockquote>
+	</aside>
+</div>Если разговор пошел в эту сторону, то советую вот <a href="http://forum.rcdesign.ru/#aviamodeli-obschii" target="_blank" class="externalLink" rel="nofollow">этот ресурс</a>... Там вопросы "на дальность" и "на законность" проработаны очень хорошо. И в России есть производитель, который имеет очень хорошую продукцию. Надо только <a href="http://www.expertrc.com/" target="_blank" class="externalLink" rel="nofollow">поискать </a>и <a href="http://shop.rudron.ru/radiocontrol/" target="_blank" class="externalLink" rel="nofollow">поискать</a>. Или <a href="http://yandex.ru/yandsearch?text=%D0%B0%D0%BF%D0%BF%D0%B0%D1%80%D0%B0%D1%82%D1%83%D1%80%D0%B0%20LRS&lr=213" target="_blank" class="externalLink" rel="nofollow">спросить Яндекс</a>.<br>
+Ясный пень, вещи специализированные, но если очень надо...
+					<div class="messageTextEndMarker">&nbsp;</div>
+				</blockquote>
+			</article>
+			
+			
+		</div>
+		
+		
+		
+			<div class="editDate">
+			
+				Последнее редактирование: <span class="DateTime" title="20 июн 2014 в 15:39">20 июн 2014</span>
+			
+			</div>
+		
+		
+		
+		
+		
+				
+		<div class="messageMeta ToggleTriggerAnchor">
+			
+			<div class="privateControls">
+				
+				<span class="item muted">
+					<span class="authorEnd"><a href="http://forum.amperka.ru/members/%D0%98%D0%B3%D0%BE%D1%80%D1%8C%D0%9A.2107/" class="username author" dir="auto">ИгорьК</a>,</span>
+					<a href="http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/#post-25310" title="Постоянная ссылка" class="datePermalink"><span class="DateTime" title="20 июн 2014 в 15:20">20 июн 2014</span></a>
+				</span>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</div>
+			
+			<div class="publicControls">
+				<a href="http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/#post-25310" title="Постоянная ссылка" class="item muted postNumber hashPermalink OverlayTrigger" data-href="posts/25310/permalink">#16</a>
+				
+				
+				
+				
+			</div>
+		</div>
+	
+		
+		<div id="likes-post-25310">
+	
+	<div class="likesSummary secondaryContent">
+		<span class="LikeText">
+			<a href="http://forum.amperka.ru/members/megakoteyka.806/" class="username" dir="auto">Megakoteyka</a> нравится это.
+		</span>
+	</div>
+</div>
+	</div>
+
+	
+	
+	
+	
+</li>
+			
+		
+			
+				
+
+
+<li id="post-25314" class="message   " data-author="ИгорьК">
+
+	
+
+<div class="messageUserInfo" itemscope="itemscope" itemtype="http://data-vocabulary.org/Person">	
+<div class="messageUserBlock ">
+	
+		<div class="avatarHolder">
+			<span class="helper"></span>
+			<a href="http://forum.amperka.ru/members/%D0%98%D0%B3%D0%BE%D1%80%D1%8C%D0%9A.2107/" class="avatar Av2107m" data-avatarhtml="true"><img src="http://www.gravatar.com/avatar/ea9164685e6d4753c78c17436f3da91d?s=96&d=http%3A%2F%2Fforum.amperka.ru%2Fstyles%2Fdefault%2Fxenforo%2Favatarz%2Favatar_male_m.png" width="96" height="96" alt="ИгорьК"></a>
+			
+			<!-- slot: message_user_info_avatar -->
+		</div>
+	
+
+
+	
+		<h3 class="userText">
+			<a href="http://forum.amperka.ru/members/%D0%98%D0%B3%D0%BE%D1%80%D1%8C%D0%9A.2107/" class="username" dir="auto" itemprop="name">ИгорьК</a>
+			<em class="userTitle" itemprop="title">Победитель модулей</em>
+			
+			<!-- slot: message_user_info_text -->
+		</h3>
+	
+		
+	
+		
+
+
+	<span class="arrow"><span></span></span>
+</div>
+</div>
+
+	<div class="messageInfo primaryContent">
+		
+		
+		
+		
+		
+		<div class="messageContent">		
+			<article>
+				<blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+					
+					Теперь <b><a href="http://maniacbug.github.io/RF24/classRF24.html" target="_blank" class="externalLink" rel="nofollow">пробежимся по библиотеке</a></b>. В целом. Самые простые команды для начала работы.<br>
+<b><a href="http://maniacbug.github.io/RF24/classRF24.html" target="_blank" class="externalLink" rel="nofollow">RF24</a> radio(9,10);</b> - начинаем с этого. Создаем класс <b>radio</b> c парой ножек (9,10 для Уно или 9, 53 для Меги) из таблицы с подключением.<br>
+<b>const uint64_t pipe00 = 0xE8E8F0F0E1LL;</b> - следующее, что нужно сделать, создать константу <b>pipe00</b>. Pipe - это труба с адресом из пяти байтов. <span style="color: #b30000"><b>В "трубы" мы передаем, трубы мы слушаем. Причем труба - это не номер канала передачи. Это идентификатор принимающего/передающего устройства на рабочем канале.</b></span><br>
+Их можно организовать еще пять. Но есть ограничение: может различаться лишь последний значащий байт. Например, вот что еще можно определить:<br>
+<b>const uint64_t pipe01 = 0xE8E8F0F0<span style="color: #ff0000">E2</span>LL;<br>
+<b>const uint64_t pipe02 = 0xE8E8F0F0<span style="color: #ff0000">A2</span>LL;<br>
+<b>const uint64_t pipe03 = 0xE8E8F0F0<span style="color: #ff0000">D1</span>LL;<br>
+<b>const uint64_t pipe04 = 0xE8E8F0F0<span style="color: #ff0000">C3</span>LL;<br>
+<b>const uint64_t pipe05 = 0xE8E8F0F0<span style="color: #ff0000">E7</span>LL;</b></b></b></b></b><br>
+Меняем только последний байт!<br>
+<b>radio.begin();</b> - будет следующей необходимой командой - пора начинать!<br>
+<b>radio.setChannel(0x22); </b>- установим канал в котором ранее <a href="http://goo.gl/Hqria5" target="_blank" class="externalLink" rel="nofollow">обнаруживались одни нули</a>. Это можно и не делать, если в канале 76 (по умолчанию) тоже одни нули.<br>
+<br>
+Дальше сладкая парочка:<br>
+<b>radio.openWritingPipe(pipe00); </b>- если хотим что-то передавать<b>.<br>
+radio.openReadingPipe(1,pipe01)</b>; где 1 - номер трубы для прослушки.<br>
+<i>Что еще надо знать - <b>openWritingPipe </b>пишет адрес трубы <b>в НУЛЕВУЮ область труб. </b>Если вы дадите команду<b><b>  openReadingPipe(<span style="color: #ff0000">0</span>,pipe01), то адрес первой команды будет затерт. </b></b>И так, с возможностью передачи, модуль может слушать только пять труб, с 1 по 5.</i><br>
+<b>radio.startListening();</b> - начали слушать эфир, все готово.<br>
+<br>
+<br>
+Как передать что-то простое? например,<br>
+<b>int out = 100;<br>
+radio.stopListening();</b> - хватит слушать, готовимся передавать!<br>
+Отправка осуществляется командой<br>
+<b>radio.write( &amp;out, sizeof(out) )</b>; Разберем. <b>&amp;out - </b>это не переменная out, <a href="http://www.chitay.org/c/05/05.htm" target="_blank" class="externalLink" rel="nofollow">а ее адрес. Все переменные хранятся где-то в памяти</a>,  знак &amp;, привязанный к имени переменной, указывает именно на это. Функции передается не значение (100), а адрес ячейки памяти и количество байт для прочтения из него: sizeof(out) - оператор вычисления длинны переменной. Для int это всегда 2. Но мы можем передавать не только переменные, но и небольшие массивы - не больше 32 байт. И там оператор sizeof просто необходим.<br>
+<b>radio.startListening(); - </b>продолжаем заслушивание, если это вообще надо передатчику.<br>
+<br>
+Ну а как "словить" наше число на приемнике? <span style="font-size: 22px"><span style="color: #b30000"><a href="http://goo.gl/ZsfteI" target="_blank" class="externalLink" rel="nofollow">Важное дополнение!</a></span></span> Вот так:<br>
+<b>int in;<br>
+radio.read( &amp;in, sizeof(in) );</b><br>
+Полный код организации приема будет таким:<br>
+
+
+<div class="bbCodeBlock bbCodeCode">
+	<div class="type">Код (C):</div>
+	<div class="code"><span style="color: #993333;">int</span> in<span style="color: #339933;">;</span><br>
+bool done <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">false</span><span style="color: #339933;">;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="color: #666666; font-style: italic;">//Вспомогательная переменная;</span><br>
+<span style="color: #b1b100;">if</span> <span style="color: #009900;">(</span> radio.<span style="color: #202020;">available</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span> <span style="color: #009900;">)</span><span style="color: #009900;">{</span><br>
+&nbsp; &nbsp; <span style="color: #b1b100;">while</span> <span style="color: #009900;">(</span><span style="color: #339933;">!</span>done<span style="color: #009900;">)</span> <span style="color: #009900;">{</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="color: #666666; font-style: italic;">// Упираемся и</span><br>
+&nbsp; &nbsp; &nbsp; &nbsp; done <span style="color: #339933;">=</span> radio.<span style="color: #202020;">read</span><span style="color: #009900;">(</span> <span style="color: #339933;">&amp;</span>in<span style="color: #339933;">,</span> <span style="color: #993333;">sizeof</span><span style="color: #009900;">(</span>in<span style="color: #009900;">)</span> <span style="color: #009900;">)</span><span style="color: #339933;">;</span> &nbsp;<span style="color: #666666; font-style: italic;">// по адресу переменной in функция записывает принятые данные;</span><br>
+&nbsp; &nbsp; <span style="color: #009900;">}</span><br>
+<span style="color: #009900;">}</span></div>
+</div>Теперь наша переменная (in) заполнена полученной цифрой 100. Почему нет оператора присваивания (<b>in = ...</b>)? Потому что функции чтения из модуля мы передали адрес переменной (<b>&amp;in</b>), а функция сама записала по этому адресу полученное значение.<br>
+Итак, это минимальный набор действий. По умолчанию, модуль работает в режиме подтверждения приема. Передатчик будет несколько раз <b>самостоятельно, без нашего вмешательства,</b> долбить приемник в ожидании подтверждения.  Это все замечательно, но хорошо только для случая "один на один". Дальше поговорим о чуть более сложных ситуациях.
+					<div class="messageTextEndMarker">&nbsp;</div>
+				</blockquote>
+			</article>
+			
+			
+		</div>
+		
+		
+		
+			<div class="editDate">
+			
+				Последнее редактирование: <span class="DateTime" title="25 ноя 2014 в 18:11">25 ноя 2014</span>
+			
+			</div>
+		
+		
+		
+		
+		
+				
+		<div class="messageMeta ToggleTriggerAnchor">
+			
+			<div class="privateControls">
+				
+				<span class="item muted">
+					<span class="authorEnd"><a href="http://forum.amperka.ru/members/%D0%98%D0%B3%D0%BE%D1%80%D1%8C%D0%9A.2107/" class="username author" dir="auto">ИгорьК</a>,</span>
+					<a href="http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/#post-25314" title="Постоянная ссылка" class="datePermalink"><span class="DateTime" title="20 июн 2014 в 16:40">20 июн 2014</span></a>
+				</span>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</div>
+			
+			<div class="publicControls">
+				<a href="http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/#post-25314" title="Постоянная ссылка" class="item muted postNumber hashPermalink OverlayTrigger" data-href="posts/25314/permalink">#17</a>
+				
+				
+				
+				
+			</div>
+		</div>
+	
+		
+		<div id="likes-post-25314">
+	
+	<div class="likesSummary secondaryContent">
+		<span class="LikeText">
+			<a href="http://forum.amperka.ru/members/%D0%9F%D1%83%D1%88%D0%BD%D0%BE%D0%B9-%D0%B7%D0%B2%D0%B5%D1%80.4003/" class="username" dir="auto">Пушной звер</a> нравится это.
+		</span>
+	</div>
+</div>
+	</div>
+
+	
+	
+	
+	
+</li>
+			
+		
+			
+				
+
+
+<li id="post-25317" class="message   " data-author="ИгорьК">
+
+	
+
+<div class="messageUserInfo" itemscope="itemscope" itemtype="http://data-vocabulary.org/Person">	
+<div class="messageUserBlock ">
+	
+		<div class="avatarHolder">
+			<span class="helper"></span>
+			<a href="http://forum.amperka.ru/members/%D0%98%D0%B3%D0%BE%D1%80%D1%8C%D0%9A.2107/" class="avatar Av2107m" data-avatarhtml="true"><img src="http://www.gravatar.com/avatar/ea9164685e6d4753c78c17436f3da91d?s=96&d=http%3A%2F%2Fforum.amperka.ru%2Fstyles%2Fdefault%2Fxenforo%2Favatarz%2Favatar_male_m.png" width="96" height="96" alt="ИгорьК"></a>
+			
+			<!-- slot: message_user_info_avatar -->
+		</div>
+	
+
+
+	
+		<h3 class="userText">
+			<a href="http://forum.amperka.ru/members/%D0%98%D0%B3%D0%BE%D1%80%D1%8C%D0%9A.2107/" class="username" dir="auto" itemprop="name">ИгорьК</a>
+			<em class="userTitle" itemprop="title">Победитель модулей</em>
+			
+			<!-- slot: message_user_info_text -->
+		</h3>
+	
+		
+	
+		
+
+
+	<span class="arrow"><span></span></span>
+</div>
+</div>
+
+	<div class="messageInfo primaryContent">
+		
+		
+		
+		
+		
+		<div class="messageContent">		
+			<article>
+				<blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+					
+					Примечание. Во всех приведенных автором библиотеки <a href="http://maniacbug.github.io/RF24/examples.html" target="_blank" class="externalLink" rel="nofollow">примерах</a> присутствует заголовок библиотеки "printf.h".<br>
+Чтобы не мучиться с этим файлом, исключите ссылку на него <span style="text-decoration: line-through">#include "printf.h"</span>, а в конце скетча добавьте две функции:<br>
+
+
+<div class="bbCodeBlock bbCodeCode">
+	<div class="type">Код (C):</div>
+	<div class="code"><span style="color: #993333;">int</span> serial_putc<span style="color: #009900;">(</span> <span style="color: #993333;">char</span> c<span style="color: #339933;">,</span> FILE <span style="color: #339933;">*</span> <span style="color: #009900;">)</span> <span style="color: #009900;">{</span><br>
+&nbsp; Serial.<span style="color: #202020;">write</span><span style="color: #009900;">(</span> c <span style="color: #009900;">)</span><span style="color: #339933;">;</span><br>
+&nbsp; <span style="color: #b1b100;">return</span> c<span style="color: #339933;">;</span><br>
+<span style="color: #009900;">}</span><br>
+<br>
+<span style="color: #993333;">void</span> printf_begin<span style="color: #009900;">(</span><span style="color: #993333;">void</span><span style="color: #009900;">)</span> <span style="color: #009900;">{</span><br>
+&nbsp; fdevopen<span style="color: #009900;">(</span> <span style="color: #339933;">&amp;</span>serial_putc<span style="color: #339933;">,</span> <span style="color: #0000dd;">0</span> <span style="color: #009900;">)</span><span style="color: #339933;">;</span><br>
+<span style="color: #009900;">}</span><br>
+&nbsp;</div>
+</div>
+					<div class="messageTextEndMarker">&nbsp;</div>
+				</blockquote>
+			</article>
+			
+			
+		</div>
+		
+		
+		
+		
+		
+		
+		
+				
+		<div class="messageMeta ToggleTriggerAnchor">
+			
+			<div class="privateControls">
+				
+				<span class="item muted">
+					<span class="authorEnd"><a href="http://forum.amperka.ru/members/%D0%98%D0%B3%D0%BE%D1%80%D1%8C%D0%9A.2107/" class="username author" dir="auto">ИгорьК</a>,</span>
+					<a href="http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/#post-25317" title="Постоянная ссылка" class="datePermalink"><span class="DateTime" title="20 июн 2014 в 17:29">20 июн 2014</span></a>
+				</span>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</div>
+			
+			<div class="publicControls">
+				<a href="http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/#post-25317" title="Постоянная ссылка" class="item muted postNumber hashPermalink OverlayTrigger" data-href="posts/25317/permalink">#18</a>
+				
+				
+				
+				
+			</div>
+		</div>
+	
+		
+		<div id="likes-post-25317"></div>
+	</div>
+
+	
+	
+	
+	
+</li>
+			
+		
+			
+				
+
+
+<li id="post-25332" class="message   " data-author="Пушной звер">
+
+	
+
+<div class="messageUserInfo" itemscope="itemscope" itemtype="http://data-vocabulary.org/Person">	
+<div class="messageUserBlock ">
+	
+		<div class="avatarHolder">
+			<span class="helper"></span>
+			<a href="http://forum.amperka.ru/members/%D0%9F%D1%83%D1%88%D0%BD%D0%BE%D0%B9-%D0%B7%D0%B2%D0%B5%D1%80.4003/" class="avatar Av4003m" data-avatarhtml="true"><img src="./nRF24L01+ _ побеждаем модуль. _ Амперка _ Форум_files/4003.jpg" width="96" height="96" alt="Пушной звер"></a>
+			
+			<!-- slot: message_user_info_avatar -->
+		</div>
+	
+
+
+	
+		<h3 class="userText">
+			<a href="http://forum.amperka.ru/members/%D0%9F%D1%83%D1%88%D0%BD%D0%BE%D0%B9-%D0%B7%D0%B2%D0%B5%D1%80.4003/" class="username" dir="auto" itemprop="name">Пушной звер</a>
+			<em class="userTitle" itemprop="title">Гик</em>
+			
+			<!-- slot: message_user_info_text -->
+		</h3>
+	
+		
+	
+		
+
+
+	<span class="arrow"><span></span></span>
+</div>
+</div>
+
+	<div class="messageInfo primaryContent">
+		
+		
+		
+		
+		
+		<div class="messageContent">		
+			<article>
+				<blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+					
+					<div class="bbCodeBlock bbCodeQuote" data-author="Megakoteyka">
+	<aside>
+		
+			<div class="attribution type">Megakoteyka сказал(а):
+				
+					<a href="http://forum.amperka.ru/goto/post?id=25309#post-25309" class="AttributionLink">↑</a>
+				
+			</div>
+		
+		<blockquote class="quoteContainer"><div class="quote">Я что-то путаю или у нас излучать разрешается только 20 мВт?</div><div class="quoteExpand">Нажмите, чтобы раскрыть...</div></blockquote>
+	</aside>
+</div>разрешено пол ватта, радиолюбители могут получить разрешение и на стационарные 20 ватт.. это вроде совсем не сложно<br>
+та и к моей 5 ваттной рации еще не кто не придирался.<br>
+<br>
+но имхо лесть на 433 стоит только когда 2.4 не работает, скажем на пути радиоканала внезапно выросло дерево.
+					<div class="messageTextEndMarker">&nbsp;</div>
+				</blockquote>
+			</article>
+			
+			
+		</div>
+		
+		
+		
+		
+		
+		
+		
+				
+		<div class="messageMeta ToggleTriggerAnchor">
+			
+			<div class="privateControls">
+				
+				<span class="item muted">
+					<span class="authorEnd"><a href="http://forum.amperka.ru/members/%D0%9F%D1%83%D1%88%D0%BD%D0%BE%D0%B9-%D0%B7%D0%B2%D0%B5%D1%80.4003/" class="username author" dir="auto">Пушной звер</a>,</span>
+					<a href="http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/#post-25332" title="Постоянная ссылка" class="datePermalink"><span class="DateTime" title="20 июн 2014 в 22:01">20 июн 2014</span></a>
+				</span>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</div>
+			
+			<div class="publicControls">
+				<a href="http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/#post-25332" title="Постоянная ссылка" class="item muted postNumber hashPermalink OverlayTrigger" data-href="posts/25332/permalink">#19</a>
+				
+				
+				
+				
+			</div>
+		</div>
+	
+		
+		<div id="likes-post-25332"></div>
+	</div>
+
+	
+	
+	
+	
+</li>
+			
+		
+			
+				
+
+
+<li id="post-25445" class="message   " data-author="ИгорьК">
+
+	
+
+<div class="messageUserInfo" itemscope="itemscope" itemtype="http://data-vocabulary.org/Person">	
+<div class="messageUserBlock ">
+	
+		<div class="avatarHolder">
+			<span class="helper"></span>
+			<a href="http://forum.amperka.ru/members/%D0%98%D0%B3%D0%BE%D1%80%D1%8C%D0%9A.2107/" class="avatar Av2107m" data-avatarhtml="true"><img src="http://www.gravatar.com/avatar/ea9164685e6d4753c78c17436f3da91d?s=96&d=http%3A%2F%2Fforum.amperka.ru%2Fstyles%2Fdefault%2Fxenforo%2Favatarz%2Favatar_male_m.png" width="96" height="96" alt="ИгорьК"></a>
+			
+			<!-- slot: message_user_info_avatar -->
+		</div>
+	
+
+
+	
+		<h3 class="userText">
+			<a href="http://forum.amperka.ru/members/%D0%98%D0%B3%D0%BE%D1%80%D1%8C%D0%9A.2107/" class="username" dir="auto" itemprop="name">ИгорьК</a>
+			<em class="userTitle" itemprop="title">Победитель модулей</em>
+			
+			<!-- slot: message_user_info_text -->
+		</h3>
+	
+		
+	
+		
+
+
+	<span class="arrow"><span></span></span>
+</div>
+</div>
+
+	<div class="messageInfo primaryContent">
+		
+		
+		
+		
+		
+		<div class="messageContent">		
+			<article>
+				<blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+					
+					Следующий вопрос - как <b>работать с несколькими трубами</b>.<br>
+В библиотеке есть две функции: <b>bool   available (void) </b>и <b>bool available (uint8_t *pipe_num)</b>.<br>
+Если первая требуется для того, чтобы знать есть ли в буфере <span style="color: #b30000"><b>единственной объявленной</b></span> трубы что-то для чтения, то вторая позволяет работать со всеми, но для этого ее необходимо правильно вызывать, а именно:<br>
+
+
+<div class="bbCodeBlock bbCodeCode">
+	<div class="type">Код (C):</div>
+	<div class="code"><span style="color: #993333;">int</span> in<span style="color: #339933;">;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #666666; font-style: italic;">//Переменная для приема информации;</span><br>
+<span style="color: #993333;">uint8_t</span> pipe_num<span style="color: #339933;">;</span> &nbsp; &nbsp; <span style="color: #666666; font-style: italic;">//Переменная, которая покажет нам из какой трубы достали информацию;</span><br>
+bool done <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">false</span><span style="color: #339933;">;</span> &nbsp; &nbsp;<span style="color: #666666; font-style: italic;">//Вспомогательная переменная;</span><br>
+<span style="color: #b1b100;">if</span> <span style="color: #009900;">(</span> radio.<span style="color: #202020;">available</span><span style="color: #009900;">(</span><span style="color: #339933;">&amp;</span>pipe_num<span style="color: #009900;">)</span> <span style="color: #009900;">)</span> <span style="color: #009900;">{</span> <span style="color: #666666; font-style: italic;">//Скармливаем функции адрес переменной, которая покажет нам номер трубы;</span><br>
+&nbsp; &nbsp; <span style="color: #b1b100;">while</span> <span style="color: #009900;">(</span><span style="color: #339933;">!</span>done<span style="color: #009900;">)</span> <span style="color: #009900;">{</span> &nbsp; <span style="color: #666666; font-style: italic;">// Упираемся и</span><br>
+&nbsp; &nbsp; &nbsp; &nbsp; done <span style="color: #339933;">=</span> radio.<span style="color: #202020;">read</span><span style="color: #009900;">(</span> <span style="color: #339933;">&amp;</span>in<span style="color: #339933;">,</span> <span style="color: #993333;">sizeof</span><span style="color: #009900;">(</span>in<span style="color: #009900;">)</span> <span style="color: #009900;">)</span><span style="color: #339933;">;</span> &nbsp; <span style="color: #666666; font-style: italic;">// по адресу переменной in функция записывает принятые данные;</span><br>
+&nbsp; &nbsp; <span style="color: #009900;">}</span><br>
+<span style="color: #009900;">}</span></div>
+</div>Постоянный вызов указанного выше кода позволяет последовательно прочитывать содержимое буферов, если там что-то есть, то есть в переменной <b>in </b>будет полезная информация, а в переменной<b> pipe_num </b>- номер трубы, из которой она поступила<b>.<br>
+</b><br>
+Обратим внимание еще на некоторые полезные функции.<br>
+<b>setPayloadSize (uint8_t size);</b> - функция определяет размер буфера обмена.  По умолчанию размер буфера 32 байта. Если меняем это значение, то обязательно как на приемнике, так и на передатчике.<br>
+void setRetries (uint8_t delay, uint8_t count); - функция изменяет время повтора и количество попыток передатчика "достучаться" до приемника, пример:<br>
+<b>setRetries (15, 15);</b> - с задержкой 15 мс 15 попыток.<br>
+void setPALevel (rf24_pa_dbm_e level); - устанавливает уровень мощности передатчика, и может принимать значения RF24_PA_MIN, RF24_PA_LOW, RF24_PA_HIGH, RF24_PA_MAX. Пример:<br>
+<b>setPALevel (RF24_PA_MAX);</b> - максимальный уровень мощности передатчика.<br>
+bool setDataRate (rf24_datarate_e speed); - одна из трех скоростей, должна быть одинаковой на приемнике и передатчике. Принимает значения RF24_1MBPS, RF24_2MBPS, RF24_250KBPS. 250 кбит занимает более узкую полосу и является наиболее чувствительной скоростью приема. По умолчанию - 1Мбит Пример:<br>
+<b>setDataRate (RF24_250KBPS); ...<br>
+<br>
+Теперь передадим/примем массив.</b><br>
+Передатчик:<br>
+
+
+<div class="bbCodeBlock bbCodeCode">
+	<div class="type">Код (C):</div>
+	<div class="code"><span style="color: #993333;">int</span> massive<span style="color: #009900;">[</span><span style="color: #0000dd;">3</span><span style="color: #009900;">]</span> <span style="color: #339933;">=</span> <span style="color: #009900;">{</span><span style="color: #0000dd;">100</span><span style="color: #339933;">,</span> <span style="color: #0000dd;">200</span><span style="color: #339933;">,</span> <span style="color: #0000dd;">300</span><span style="color: #009900;">}</span><span style="color: #339933;">;</span><br>
+radio.<span style="color: #202020;">write</span><span style="color: #009900;">(</span> massive<span style="color: #339933;">,</span> <span style="color: #993333;">sizeof</span><span style="color: #009900;">(</span>massive<span style="color: #009900;">)</span> <span style="color: #009900;">)</span><span style="color: #339933;">;</span></div>
+</div>Приемник:<br>
+
+
+<div class="bbCodeBlock bbCodeCode">
+	<div class="type">Код (C):</div>
+	<div class="code"><span style="color: #993333;">int</span> massive<span style="color: #009900;">[</span><span style="color: #0000dd;">3</span><span style="color: #009900;">]</span><span style="color: #339933;">;</span><br>
+<span style="color: #b1b100;">if</span> <span style="color: #009900;">(</span>radio.<span style="color: #202020;">available</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #009900;">)</span> <span style="color: #009900;">{</span><br>
+&nbsp; &nbsp; bool done <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">false</span><span style="color: #339933;">;</span><br>
+&nbsp; &nbsp; <span style="color: #b1b100;">while</span> <span style="color: #009900;">(</span><span style="color: #339933;">!</span>done<span style="color: #009900;">)</span> <span style="color: #009900;">{</span><br>
+&nbsp; &nbsp; &nbsp; done <span style="color: #339933;">=</span> radio.<span style="color: #202020;">read</span><span style="color: #009900;">(</span>massive<span style="color: #339933;">,</span> <span style="color: #993333;">sizeof</span><span style="color: #009900;">(</span>massive<span style="color: #009900;">)</span> <span style="color: #009900;">)</span><span style="color: #339933;">;</span> &nbsp; <span style="color: #666666; font-style: italic;">//Здесь массив наполняется данными;</span><br>
+&nbsp; &nbsp; <span style="color: #009900;">}</span><br>
+<span style="color: #009900;">}</span></div>
+</div>Помним, что для массива его имя является указателем адреса. А еще помним, что модуль может протолкнуть через себя максимум 32 байта. То есть для int, массив может быть не более 16 элементов. Массив может быть любого типа, лишь бы вписаться в ограничения.
+					<div class="messageTextEndMarker">&nbsp;</div>
+				</blockquote>
+			</article>
+			
+			
+		</div>
+		
+		
+		
+			<div class="editDate">
+			
+				Последнее редактирование: <span class="DateTime" title="25 июн 2014 в 13:56">25 июн 2014</span>
+			
+			</div>
+		
+		
+		
+		
+		
+				
+		<div class="messageMeta ToggleTriggerAnchor">
+			
+			<div class="privateControls">
+				
+				<span class="item muted">
+					<span class="authorEnd"><a href="http://forum.amperka.ru/members/%D0%98%D0%B3%D0%BE%D1%80%D1%8C%D0%9A.2107/" class="username author" dir="auto">ИгорьК</a>,</span>
+					<a href="http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/#post-25445" title="Постоянная ссылка" class="datePermalink"><span class="DateTime" title="24 июн 2014 в 15:53">24 июн 2014</span></a>
+				</span>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</div>
+			
+			<div class="publicControls">
+				<a href="http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/#post-25445" title="Постоянная ссылка" class="item muted postNumber hashPermalink OverlayTrigger" data-href="posts/25445/permalink">#20</a>
+				
+				
+				
+				
+			</div>
+		</div>
+	
+		
+		<div id="likes-post-25445">
+	
+	<div class="likesSummary secondaryContent">
+		<span class="LikeText">
+			<a href="http://forum.amperka.ru/members/altex.5145/" class="username" dir="auto">altex</a> нравится это.
+		</span>
+	</div>
+</div>
+	</div>
+
+	
+	
+	
+	
+</li>
+			
+		
+		
+	</ol>
+
+	
+
+	<input type="hidden" name="_xfToken" value="">
+
+</form>
+
+	<div class="pageNavLinkGroup">
+			
+				<div class="linkGroup">
+					
+						<label for="LoginControl"><a href="http://forum.amperka.ru/login/" class="concealed element">(Вы должны войти или зарегистрироваться, чтобы ответить.)</a></label>
+					
+				</div>
+			
+			<div class="linkGroup" style="display: none"><a href="javascript:" class="muted JsOnly DisplayIgnoredContent Tooltip">Показать игнорируемое содержимое</a></div>
+
+			
+
+
+<div class="PageNav" data-page="1" data-range="2" data-start="2" data-end="6" data-last="26" data-sentinel="{{sentinel}}" data-baseurl="threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/page-{{sentinel}}">
+	
+	<span class="pageNavHeader">Страница 1 из 26</span>
+	
+	<nav>
+		
+		
+		<a href="./nRF24L01+ _ побеждаем модуль. _ Амперка _ Форум_files/nRF24L01+ _ побеждаем модуль. _ Амперка _ Форум.html" class="currentPage " rel="start">1</a>
+		
+		
+			<a class="PageNavPrev hidden" style="">←</a> <span class="scrollable"><span class="items">
+		
+		
+		
+			<a href="http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/page-2" class="">2</a>
+		
+			<a href="http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/page-3" class="">3</a>
+		
+			<a href="http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/page-4" class="">4</a>
+		
+			<a href="http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/page-5" class="">5</a>
+		
+			<a href="http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/page-6" class="">6</a>
+		
+		
+		
+			</span></span> <a class="PageNavNext " style="">→</a>
+		
+		
+		<a href="http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/page-26" class="">26</a>
+		
+		
+			<a href="http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/page-2" class="text">Вперёд &gt;</a>
+			
+		
+	</nav>	
+	
+	
+</div>
+
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+						
+						
+						
+						
+							<!-- login form, to be moved to the upper drop-down -->
+							
+
+
+
+
+
+
+
+
+						
+						
+					
+			
+						
+			<div class="breadBoxBottom">
+
+<nav>
+	
+
+	<fieldset class="breadcrumb" style="">
+		<a href="http://forum.amperka.ru/misc/quick-navigation-menu?selected=node-18" class="OverlayTrigger jumpMenuTrigger" data-cacheoverlay="true" title="Открыть быструю навигацию"><!--Перейти к...--></a>
+			
+		<div class="boardTitle"><strong>Амперка / Форум</strong></div>
+		
+		<span class="crumbs">
+			
+			
+			
+				<span class="crust selectedTabCrumb">
+					<a href="http://forum.amperka.ru/" class="crumb"><span>Форум</span></a>
+					<span class="arrow"><span>&gt;</span></span>
+				</span>
+			
+			
+			
+				
+					<span class="crust">
+						<a href="http://forum.amperka.ru/#ehlektronika.1" class="crumb"><span>Электроника</span></a>
+						<span class="arrow"><span>&gt;</span></span>
+					</span>
+				
+					<span class="crust">
+						<a href="http://forum.amperka.ru/forums/%D0%9F%D1%80%D0%BE%D0%B2%D0%BE%D0%B4%D0%BD%D0%B0%D1%8F-%D0%B8-%D0%B1%D0%B5%D1%81%D0%BF%D1%80%D0%BE%D0%B2%D0%BE%D0%B4%D0%BD%D0%B0%D1%8F-%D1%81%D0%B2%D1%8F%D0%B7%D1%8C.18/" class="crumb"><span>Проводная и беспроводная связь</span></a>
+						<span class="arrow"><span>&gt;</span></span>
+					</span>
+				
+			
+		</span>
+	</fieldset>
+</nav></div>
+			
+						
+			
+						
+		</div>
+	</div>
+</div>
+
+<header>
+	
+
+
+<div id="header">
+	<div id="logoBlock">
+		<div class="pageWidth">
+			<div class="pageContent">
+				
+				
+				<div id="logo"><a href="http://amperka.ru/">
+					<span></span>
+					<img src="./nRF24L01+ _ побеждаем модуль. _ Амперка _ Форум_files/logo.png" alt="Амперка / Форум">
+				</a>
+				<ul id="scope" class="head-menu">
+        	        		<li><a href="http://wiki.amperka.ru/">Вики</a></li>
+			                <li><a href="http://youtube.com/AmperkaRu">Видео</a></li>
+		        	        <li><a href="http://forum.amperka.ru/" class="current">Форум</a></li>
+		                	<li><a href="http://blog.amperka.ru/">Блог</a></li>
+			        </ul>
+			        
+
+<div id="navigation">
+		<nav>
+
+<div class="navTabs">
+	<ul class="publicTabs">
+	
+		<!-- home -->
+		
+		
+		
+		<!-- extra tabs: home -->
+		
+		
+		
+		<!-- forums -->
+		
+			<li class="navTab forums Popup PopupControl PopupClosed PopupContainerControl">
+			
+				<a href="http://forum.amperka.ru/" class="navLink" rel="Menu">Посты<span class="arrowWidget"></span></a>
+				
+				
+			</li>
+		
+		
+		
+		<!-- extra tabs: middle -->
+		
+		
+		
+		<!-- members -->
+		
+			<li class="navTab members Popup PopupControl PopupClosed PopupContainerControl">
+			
+				<a href="http://forum.amperka.ru/members/" class="navLink" rel="Menu">Люди<span class="arrowWidget"></span></a>
+				
+				
+			</li>
+						
+		
+		<!-- extra tabs: end -->
+		
+
+		<!-- responsive popup -->
+		<li class="navTab navigationHiddenTabs Popup PopupControl PopupClosed PopupContainerControl" style="display: none;">	
+						
+			<a rel="Menu" class="navLink NoPopupGadget"><span class="menuIcon">Меню</span></a>
+			
+			
+		</li>
+			
+		
+		<!-- no selection -->
+		
+		
+	</ul>
+	
+	
+</div>
+
+<span class="helper"></span>
+			
+		</nav>	
+</div>
+			        </div>
+				
+				<span class="helper"></span>
+			</div>
+		</div>
+	</div>
+</div>
+
+	
+	
+</header>
+
+</div>
+
+<footer>
+	
+
+
+<div class="footer">
+	<div class="pageWidth">
+		<div class="pageContent">
+			
+			<dl class="choosers">
+				
+					<dt>Стиль</dt>
+					<dd><a href="http://forum.amperka.ru/misc/style?redirect=%2Fthreads%2Fnrf24l01-%25D0%25BF%25D0%25BE%25D0%25B1%25D0%25B5%25D0%25B6%25D0%25B4%25D0%25B0%25D0%25B5%25D0%25BC-%25D0%25BC%25D0%25BE%25D0%25B4%25D1%2583%25D0%25BB%25D1%258C.3205%2F" class="OverlayTrigger Tooltip" rel="nofollow">AmperkaXF</a></dd>
+				
+				
+					<dt>Язык</dt>
+					<dd><a href="http://forum.amperka.ru/misc/language?redirect=%2Fthreads%2Fnrf24l01-%25D0%25BF%25D0%25BE%25D0%25B1%25D0%25B5%25D0%25B6%25D0%25B4%25D0%25B0%25D0%25B5%25D0%25BC-%25D0%25BC%25D0%25BE%25D0%25B4%25D1%2583%25D0%25BB%25D1%258C.3205%2F" class="OverlayTrigger Tooltip" rel="nofollow">Russian (RU)</a></dd>
+				
+			</dl>
+			
+			
+			<ul class="footerLinks">
+			
+				
+				<li><a href="http://forum.amperka.ru/help/">Помощь</a></li>
+				<li><a href="http://forum.amperka.ru/" class="homeLink">Главная</a></li>
+				<li><a href="http://forum.amperka.ru/threads/nrf24l01-%D0%BF%D0%BE%D0%B1%D0%B5%D0%B6%D0%B4%D0%B0%D0%B5%D0%BC-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C.3205/#navigation" class="topLink">Вверх</a></li>
+				<li><a href="http://forum.amperka.ru/forums/-/index.rss" rel="alternate" class="globalFeed" target="_blank" title="RSS-лента для Амперка / Форум">RSS</a></li>
+			
+			</ul>
+			
+			<span class="helper"></span>
+		</div>
+	</div>
+</div>
+
+<div class="footerLegal">
+	<div class="pageWidth">
+		<div class="pageContent">
+			<ul id="legal">
+			
+				<li><a href="http://forum.amperka.ru/help/terms">Условия и правила</a></li>
+				
+			
+			</ul>
+			
+			<div id="copyright"><a href="https://xenforo.com/" class="concealed">Forum software by XenForo™ <span>©2010-2015 XenForo Ltd.</span></a> <div style="text-align:left">Перевод: <a class="concealed" href="http://www.xf-russia.ru/" target="_blank">XF-Russia.ru</a></div></div>
+			
+		
+			
+			
+			<span class="helper"></span>
+		</div>
+	</div>	
+</div>
+
+</footer>
+
+<script>
+
+
+jQuery.extend(true, XenForo,
+{
+	visitor: { user_id: 0 },
+	serverTimeInfo:
+	{
+		now: 1447409400,
+		today: 1447358400,
+		todayDow: 5
+	},
+	_lightBoxUniversal: "0",
+	_enableOverlays: "1",
+	_animationSpeedMultiplier: "1",
+	_overlayConfig:
+	{
+		top: "10%",
+		speed: 200,
+		closeSpeed: 100,
+		mask:
+		{
+			color: "rgb(255, 255, 255)",
+			opacity: "0.6",
+			loadSpeed: 200,
+			closeSpeed: 100
+		}
+	},
+	_ignoredUsers: [],
+	_loadedScripts: {"thread_view":true,"message":true,"bb_code":true,"message_user_info":true,"likes_summary":true,"bbm_buttons":true,"login_bar":true},
+	_cookieConfig: { path: "/", domain: "", prefix: "xf_"},
+	_csrfToken: "",
+	_csrfRefreshUrl: "login/csrf-token-refresh",
+	_jsVersion: "3dfbf1e8",
+	_noSocialLogin: false
+});
+jQuery.extend(XenForo.phrases,
+{
+	cancel: "Отмена",
+
+	a_moment_ago:    "только что",
+	one_minute_ago:  "минуту назад",
+	x_minutes_ago:   "%minutes% мин. назад",
+	today_at_x:      "Сегодня, в %time%",
+	yesterday_at_x:  "Вчера, в %time%",
+	day_x_at_time_y: "%day% в %time%",
+
+	day0: "Воскресенье",
+	day1: "Понедельник",
+	day2: "Вторник",
+	day3: "Среда",
+	day4: "Четверг",
+	day5: "Пятница",
+	day6: "Суббота",
+
+	_months: "Январь,Февраль,Март,Апрель,Май,Июнь,Июль,Август,Сентябрь,Октябрь,Ноябрь,Декабрь",
+	_daysShort: "Вс,Пн,Вт,Ср,Чт,Пт,Сб",
+
+	following_error_occurred: "Произошла ошибка",
+	server_did_not_respond_in_time_try_again: "Сервер не ответил вовремя. Пожалуйста, попробуйте снова.",
+	logging_in: "Авторизация",
+	click_image_show_full_size_version: "Нажмите на это изображение для просмотра полноразмерной версии.",
+	show_hidden_content_by_x: "Показать скрытое содержимое от {names}"
+});
+
+// Facebook Javascript SDK
+XenForo.Facebook.appId = "";
+XenForo.Facebook.forceInit = false;
+
+
+</script>
+
+
+
+
+
+<div id="calroot" style="display: none; position: absolute;"><div id="calhead"><a id="calprev">←</a><div id="caltitle"></div><a id="calnext">→</a></div><div id="calbody"><div id="caldays"><span>Вс</span><span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span></div><div id="calweeks"></div></div></div><div class="Menu" id="XenForoUniq0">
+								<div class="primaryContent menuHeader">
+									<h3>Быстрый поиск</h3>
+								</div>
+								<ul class="secondaryContent blockLinksList">
+									<!-- block: useful_searches -->
+									<li><a href="http://forum.amperka.ru/find-new/posts?recent=1" rel="nofollow">Последние сообщения</a></li>
+									
+									<!-- end block: useful_searches -->
+								</ul>
+							</div><div class="Menu JsOnly tabMenu forumsTabLinks" id="XenForoUniq1">
+					
+					<ul class="secondaryContent blockLinksList">
+					
+						
+						<li><a href="http://forum.amperka.ru/search/?type=post">Поиск сообщений</a></li>
+						
+						<li><a href="http://forum.amperka.ru/find-new/posts" rel="nofollow">Последние сообщения</a></li>
+					
+					</ul>
+				</div><div class="Menu JsOnly tabMenu membersTabLinks" id="XenForoUniq2">
+					
+					<ul class="secondaryContent blockLinksList">
+					
+						<li><a href="http://forum.amperka.ru/members/">Выдающиеся пользователи</a></li>
+						
+						<li><a href="http://forum.amperka.ru/online/">Сейчас на форуме</a></li>
+						<li><a href="http://forum.amperka.ru/recent-activity/">Недавняя активность</a></li>
+						<li><a href="http://forum.amperka.ru/find-new/profile-posts">Новые сообщения профиля</a></li>
+					
+					</ul>
+				</div><div class="Menu JsOnly blockLinksList primaryContent" id="NavigationHiddenMenu"></div></body></html>

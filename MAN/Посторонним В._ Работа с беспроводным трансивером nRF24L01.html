@@ -1,0 +1,2251 @@
+<!DOCTYPE html>
+<!-- saved from url=(0046)http://blog.sci-smart.ru/2013/06/nrf24l01.html -->
+<html class="v2" dir="ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta content="width=1100" name="viewport">
+
+<script src="./Посторонним В._ Работа с беспроводным трансивером nRF24L01_files/cb=gapi.loaded_2" async=""></script><script src="./Посторонним В._ Работа с беспроводным трансивером nRF24L01_files/cb=gapi.loaded_1" async=""></script><script src="./Посторонним В._ Работа с беспроводным трансивером nRF24L01_files/cb=gapi.loaded_0" async=""></script><script type="text/javascript">(function() { (function(){function c(a){this.t={};this.tick=function(a,c,b){var d=void 0!=b?b:(new Date).getTime();this.t[a]=[d,c];if(void 0==b)try{window.console.timeStamp("CSI/"+a)}catch(e){}};this.tick("start",null,a)}var a;window.performance&&(a=window.performance.timing);var h=a?new c(a.responseStart):new c;window.jstiming={Timer:c,load:h};if(a){var b=a.navigationStart,e=a.responseStart;0<b&&e>=b&&(window.jstiming.srt=e-b)}if(a){var d=window.jstiming.load;0<b&&e>=b&&(d.tick("_wtsrt",void 0,b),d.tick("wtsrt_",
+"_wtsrt",e),d.tick("tbsd_","wtsrt_"))}try{a=null,window.chrome&&window.chrome.csi&&(a=Math.floor(window.chrome.csi().pageT),d&&0<b&&(d.tick("_tbnd",void 0,window.chrome.csi().startE),d.tick("tbnd_","_tbnd",b))),null==a&&window.gtbExternal&&(a=window.gtbExternal.pageT()),null==a&&window.external&&(a=window.external.pageT,d&&0<b&&(d.tick("_tbnd",void 0,window.external.startE),d.tick("tbnd_","_tbnd",b))),a&&(window.jstiming.pt=a)}catch(k){}})();window.tickAboveFold=function(c){var a=0;if(c.offsetParent){do a+=c.offsetTop;while(c=c.offsetParent)}c=a;750>=c&&window.jstiming.load.tick("aft")};var f=!1;function g(){f||(f=!0,window.jstiming.load.tick("firstScrollTime"))}window.addEventListener?window.addEventListener("scroll",g,!1):window.attachEvent("onscroll",g);
+ })();</script>
+<meta content="blogger" name="generator">
+<link href="http://blog.sci-smart.ru/favicon.ico" rel="icon" type="image/x-icon">
+<link href="./Посторонним В._ Работа с беспроводным трансивером nRF24L01_files/Посторонним В._ Работа с беспроводным трансивером nRF24L01.html" rel="canonical">
+<link rel="alternate" type="application/atom+xml" title="Посторонним В. - Atom" href="http://blog.sci-smart.ru/feeds/posts/default">
+<link rel="alternate" type="application/rss+xml" title="Посторонним В. - RSS" href="http://blog.sci-smart.ru/feeds/posts/default?alt=rss">
+<link rel="service.post" type="application/atom+xml" title="Посторонним В. - Atom" href="https://www.blogger.com/feeds/6147491879181811068/posts/default">
+
+<link rel="alternate" type="application/atom+xml" title="Посторонним В. - Atom" href="http://blog.sci-smart.ru/feeds/8625747934140915420/comments/default">
+<!--[if IE]><script type="text/javascript" src="https://www.blogger.com/static/v1/jsbin/1494333581-ieretrofit.js"></script>
+<![endif]-->
+<link href="./Посторонним В._ Работа с беспроводным трансивером nRF24L01_files/layout_NRF24L01.JPG" rel="image_src">
+<!--[if IE]> <script> (function() { var html5 = ("abbr,article,aside,audio,canvas,datalist,details," + "figure,footer,header,hgroup,mark,menu,meter,nav,output," + "progress,section,time,video").split(','); for (var i = 0; i < html5.length; i++) { document.createElement(html5[i]); } try { document.execCommand('BackgroundImageCache', false, true); } catch(e) {} })(); </script> <![endif]-->
+<title>Посторонним В.: Работа с беспроводным трансивером nRF24L01</title>
+<link type="text/css" rel="stylesheet" href="./Посторонним В._ Работа с беспроводным трансивером nRF24L01_files/176275667-css_bundle_v2.css">
+<link type="text/css" rel="stylesheet" href="./Посторонним В._ Работа с беспроводным трансивером nRF24L01_files/authorization.css">
+<style id="page-skin-1" type="text/css"><!--
+/*
+-----------------------------------------------
+Blogger Template Style
+Name:     Simple
+Designer: Josh Peterson
+URL:      www.noaesthetic.com
+----------------------------------------------- */
+/* Variable definitions
+====================
+<Variable name="keycolor" description="Main Color" type="color" default="#66bbdd"/>
+<Group description="Page Text" selector="body">
+<Variable name="body.font" description="Font" type="font"
+default="normal normal 12px Arial, Tahoma, Helvetica, FreeSans, sans-serif"/>
+<Variable name="body.text.color" description="Text Color" type="color" default="#222222"/>
+</Group>
+<Group description="Backgrounds" selector=".body-fauxcolumns-outer">
+<Variable name="body.background.color" description="Outer Background" type="color" default="#66bbdd"/>
+<Variable name="content.background.color" description="Main Background" type="color" default="#ffffff"/>
+<Variable name="header.background.color" description="Header Background" type="color" default="transparent"/>
+</Group>
+<Group description="Links" selector=".main-outer">
+<Variable name="link.color" description="Link Color" type="color" default="#2288bb"/>
+<Variable name="link.visited.color" description="Visited Color" type="color" default="#888888"/>
+<Variable name="link.hover.color" description="Hover Color" type="color" default="#33aaff"/>
+</Group>
+<Group description="Blog Title" selector=".header h1">
+<Variable name="header.font" description="Font" type="font"
+default="normal normal 60px Arial, Tahoma, Helvetica, FreeSans, sans-serif"/>
+<Variable name="header.text.color" description="Title Color" type="color" default="#3399bb" />
+</Group>
+<Group description="Blog Description" selector=".header .description">
+<Variable name="description.text.color" description="Description Color" type="color"
+default="#777777" />
+</Group>
+<Group description="Tabs Text" selector=".tabs-inner .widget li a">
+<Variable name="tabs.font" description="Font" type="font"
+default="normal normal 14px Arial, Tahoma, Helvetica, FreeSans, sans-serif"/>
+<Variable name="tabs.text.color" description="Text Color" type="color" default="#999999"/>
+<Variable name="tabs.selected.text.color" description="Selected Color" type="color" default="#000000"/>
+</Group>
+<Group description="Tabs Background" selector=".tabs-outer .PageList">
+<Variable name="tabs.background.color" description="Background Color" type="color" default="#f5f5f5"/>
+<Variable name="tabs.selected.background.color" description="Selected Color" type="color" default="#eeeeee"/>
+</Group>
+<Group description="Post Title" selector="h3.post-title, .comments h4">
+<Variable name="post.title.font" description="Font" type="font"
+default="normal normal 22px Arial, Tahoma, Helvetica, FreeSans, sans-serif"/>
+</Group>
+<Group description="Date Header" selector=".date-header">
+<Variable name="date.header.color" description="Text Color" type="color"
+default="#cccccc"/>
+<Variable name="date.header.background.color" description="Background Color" type="color"
+default="transparent"/>
+<Variable name="date.header.font" description="Text Font" type="font"
+default="normal bold 11px Arial, Tahoma, Helvetica, FreeSans, sans-serif"/>
+<Variable name="date.header.padding" description="Date Header Padding" type="string" default="inherit"/>
+<Variable name="date.header.letterspacing" description="Date Header Letter Spacing" type="string" default="inherit"/>
+<Variable name="date.header.margin" description="Date Header Margin" type="string" default="inherit"/>
+</Group>
+<Group description="Post Footer" selector=".post-footer">
+<Variable name="post.footer.text.color" description="Text Color" type="color" default="#666666"/>
+<Variable name="post.footer.background.color" description="Background Color" type="color"
+default="#f9f9f9"/>
+<Variable name="post.footer.border.color" description="Shadow Color" type="color" default="#eeeeee"/>
+</Group>
+<Group description="Gadgets" selector="h2">
+<Variable name="widget.title.font" description="Title Font" type="font"
+default="normal bold 11px Arial, Tahoma, Helvetica, FreeSans, sans-serif"/>
+<Variable name="widget.title.text.color" description="Title Color" type="color" default="#000000"/>
+<Variable name="widget.alternate.text.color" description="Alternate Color" type="color" default="#999999"/>
+</Group>
+<Group description="Images" selector=".main-inner">
+<Variable name="image.background.color" description="Background Color" type="color" default="#ffffff"/>
+<Variable name="image.border.color" description="Border Color" type="color" default="#eeeeee"/>
+<Variable name="image.text.color" description="Caption Text Color" type="color" default="#cccccc"/>
+</Group>
+<Group description="Accents" selector=".content-inner">
+<Variable name="body.rule.color" description="Separator Line Color" type="color" default="#eeeeee"/>
+<Variable name="tabs.border.color" description="Tabs Border Color" type="color" default="#404040"/>
+</Group>
+<Variable name="body.background" description="Body Background" type="background"
+color="#292929" default="$(color) none repeat scroll top left"/>
+<Variable name="body.background.override" description="Body Background Override" type="string" default=""/>
+<Variable name="body.background.gradient.cap" description="Body Gradient Cap" type="url"
+default="url(//www.blogblog.com/1kt/simple/gradients_light.png)"/>
+<Variable name="body.background.gradient.tile" description="Body Gradient Tile" type="url"
+default="url(//www.blogblog.com/1kt/simple/body_gradient_tile_light.png)"/>
+<Variable name="content.background.color.selector" description="Content Background Color Selector" type="string" default=".content-inner"/>
+<Variable name="content.padding" description="Content Padding" type="length" default="10px" min="0" max="100px"/>
+<Variable name="content.padding.horizontal" description="Content Horizontal Padding" type="length" default="10px" min="0" max="100px"/>
+<Variable name="content.shadow.spread" description="Content Shadow Spread" type="length" default="40px" min="0" max="100px"/>
+<Variable name="content.shadow.spread.webkit" description="Content Shadow Spread (WebKit)" type="length" default="5px" min="0" max="100px"/>
+<Variable name="content.shadow.spread.ie" description="Content Shadow Spread (IE)" type="length" default="10px" min="0" max="100px"/>
+<Variable name="main.border.width" description="Main Border Width" type="length" default="0" min="0" max="10px"/>
+<Variable name="header.background.gradient" description="Header Gradient" type="url" default="none"/>
+<Variable name="header.shadow.offset.left" description="Header Shadow Offset Left" type="length" default="-1px" min="-50px" max="50px"/>
+<Variable name="header.shadow.offset.top" description="Header Shadow Offset Top" type="length" default="-1px" min="-50px" max="50px"/>
+<Variable name="header.shadow.spread" description="Header Shadow Spread" type="length" default="1px" min="0" max="100px"/>
+<Variable name="header.padding" description="Header Padding" type="length" default="30px" min="0" max="100px"/>
+<Variable name="header.border.size" description="Header Border Size" type="length" default="1px" min="0" max="10px"/>
+<Variable name="header.bottom.border.size" description="Header Bottom Border Size" type="length" default="1px" min="0" max="10px"/>
+<Variable name="header.border.horizontalsize" description="Header Horizontal Border Size" type="length" default="0" min="0" max="10px"/>
+<Variable name="description.text.size" description="Description Text Size" type="string" default="140%"/>
+<Variable name="tabs.margin.top" description="Tabs Margin Top" type="length" default="0" min="0" max="100px"/>
+<Variable name="tabs.margin.side" description="Tabs Side Margin" type="length" default="30px" min="0" max="100px"/>
+<Variable name="tabs.background.gradient" description="Tabs Background Gradient" type="url"
+default="url(//www.blogblog.com/1kt/simple/gradients_light.png)"/>
+<Variable name="tabs.border.width" description="Tabs Border Width" type="length" default="1px" min="0" max="10px"/>
+<Variable name="tabs.bevel.border.width" description="Tabs Bevel Border Width" type="length" default="1px" min="0" max="10px"/>
+<Variable name="post.margin.bottom" description="Post Bottom Margin" type="length" default="25px" min="0" max="100px"/>
+<Variable name="image.border.small.size" description="Image Border Small Size" type="length" default="2px" min="0" max="10px"/>
+<Variable name="image.border.large.size" description="Image Border Large Size" type="length" default="5px" min="0" max="10px"/>
+<Variable name="page.width.selector" description="Page Width Selector" type="string" default=".region-inner"/>
+<Variable name="page.width" description="Page Width" type="string" default="auto"/>
+<Variable name="main.section.margin" description="Main Section Margin" type="length" default="15px" min="0" max="100px"/>
+<Variable name="main.padding" description="Main Padding" type="length" default="15px" min="0" max="100px"/>
+<Variable name="main.padding.top" description="Main Padding Top" type="length" default="30px" min="0" max="100px"/>
+<Variable name="main.padding.bottom" description="Main Padding Bottom" type="length" default="30px" min="0" max="100px"/>
+<Variable name="paging.background"
+color="#333333"
+description="Background of blog paging area" type="background"
+default="transparent none no-repeat scroll top center"/>
+<Variable name="footer.bevel" description="Bevel border length of footer" type="length" default="0" min="0" max="10px"/>
+<Variable name="mobile.background.overlay" description="Mobile Background Overlay" type="string"
+default="transparent none repeat scroll top left"/>
+<Variable name="mobile.background.size" description="Mobile Background Size" type="string" default="auto"/>
+<Variable name="mobile.button.color" description="Mobile Button Color" type="color" default="#ffffff" />
+<Variable name="startSide" description="Side where text starts in blog language" type="automatic" default="left"/>
+<Variable name="endSide" description="Side where text ends in blog language" type="automatic" default="right"/>
+*/
+/* Content
+----------------------------------------------- */
+body {
+font: normal normal 12px Arial, Tahoma, Helvetica, FreeSans, sans-serif;
+color: #cccccc;
+background: #292929 none repeat scroll top left;
+padding: 0 40px 40px 40px;
+}
+html body .region-inner {
+min-width: 0;
+max-width: 100%;
+width: auto;
+}
+h2 {
+font-size: 22px;
+}
+a:link {
+text-decoration:none;
+color: #dd7700;
+}
+a:visited {
+text-decoration:none;
+color: #cc6600;
+}
+a:hover {
+text-decoration:underline;
+color: #cc6600;
+}
+.body-fauxcolumn-outer .fauxcolumn-inner {
+background: transparent none repeat scroll top left;
+_background-image: none;
+}
+.body-fauxcolumn-outer .cap-top {
+position: absolute;
+z-index: 1;
+height: 400px;
+width: 100%;
+background: #292929 none repeat scroll top left;
+}
+.body-fauxcolumn-outer .cap-top .cap-left {
+width: 100%;
+background: transparent none repeat-x scroll top left;
+_background-image: none;
+}
+.content-outer {
+-moz-box-shadow: 0 0 40px rgba(0, 0, 0, .15);
+-webkit-box-shadow: 0 0 5px rgba(0, 0, 0, .15);
+-goog-ms-box-shadow: 0 0 10px #333333;
+box-shadow: 0 0 40px rgba(0, 0, 0, .15);
+margin-bottom: 1px;
+}
+.content-inner {
+padding: 10px 10px;
+}
+.content-inner {
+background-color: #333333;
+}
+/* Header
+----------------------------------------------- */
+.header-outer {
+background: transparent none repeat-x scroll 0 -400px;
+_background-image: none;
+}
+.Header h1 {
+font: normal normal 60px Arial, Tahoma, Helvetica, FreeSans, sans-serif;
+color: #ffffff;
+text-shadow: -1px -1px 1px rgba(0, 0, 0, .2);
+}
+.Header h1 a {
+color: #ffffff;
+}
+.Header .description {
+font-size: 140%;
+color: #aaaaaa;
+}
+.header-inner .Header .titlewrapper {
+padding: 22px 30px;
+}
+.header-inner .Header .descriptionwrapper {
+padding: 0 30px;
+}
+/* Tabs
+----------------------------------------------- */
+.tabs-inner .section:first-child {
+border-top: 1px solid #404040;
+}
+.tabs-inner .section:first-child ul {
+margin-top: -1px;
+border-top: 1px solid #404040;
+border-left: 0 solid #404040;
+border-right: 0 solid #404040;
+}
+.tabs-inner .widget ul {
+background: #222222 none repeat-x scroll 0 -800px;
+_background-image: none;
+border-bottom: 1px solid #404040;
+margin-top: 0;
+margin-left: -30px;
+margin-right: -30px;
+}
+.tabs-inner .widget li a {
+display: inline-block;
+padding: .6em 1em;
+font: normal normal 14px Arial, Tahoma, Helvetica, FreeSans, sans-serif;
+color: #999999;
+border-left: 1px solid #333333;
+border-right: 0 solid #404040;
+}
+.tabs-inner .widget li:first-child a {
+border-left: none;
+}
+.tabs-inner .widget li.selected a, .tabs-inner .widget li a:hover {
+color: #ffffff;
+background-color: #000000;
+text-decoration: none;
+}
+/* Columns
+----------------------------------------------- */
+.main-outer {
+border-top: 0 solid #404040;
+}
+.fauxcolumn-left-outer .fauxcolumn-inner {
+border-right: 1px solid #404040;
+}
+.fauxcolumn-right-outer .fauxcolumn-inner {
+border-left: 1px solid #404040;
+}
+/* Headings
+----------------------------------------------- */
+div.widget > h2,
+div.widget h2.title {
+margin: 0 0 1em 0;
+font: normal bold 11px Arial, Tahoma, Helvetica, FreeSans, sans-serif;
+color: #ffffff;
+}
+/* Widgets
+----------------------------------------------- */
+.widget .zippy {
+color: #999999;
+text-shadow: 2px 2px 1px rgba(0, 0, 0, .1);
+}
+.widget .popular-posts ul {
+list-style: none;
+}
+/* Posts
+----------------------------------------------- */
+h2.date-header {
+font: normal bold 11px Arial, Tahoma, Helvetica, FreeSans, sans-serif;
+}
+.date-header span {
+background-color: transparent;
+color: #cccccc;
+padding: inherit;
+letter-spacing: inherit;
+margin: inherit;
+}
+.main-inner {
+padding-top: 30px;
+padding-bottom: 30px;
+}
+.main-inner .column-center-inner {
+padding: 0 15px;
+}
+.main-inner .column-center-inner .section {
+margin: 0 15px;
+}
+.post {
+margin: 0 0 25px 0;
+}
+h3.post-title, .comments h4 {
+font: normal normal 22px Arial, Tahoma, Helvetica, FreeSans, sans-serif;
+margin: .75em 0 0;
+}
+.post-body {
+font-size: 110%;
+line-height: 1.4;
+position: relative;
+}
+.post-body img, .post-body .tr-caption-container, .Profile img, .Image img,
+.BlogList .item-thumbnail img {
+padding: 0;
+background: #111111;
+border: 1px solid #111111;
+-moz-box-shadow: 1px 1px 5px rgba(0, 0, 0, .1);
+-webkit-box-shadow: 1px 1px 5px rgba(0, 0, 0, .1);
+box-shadow: 1px 1px 5px rgba(0, 0, 0, .1);
+}
+.post-body img, .post-body .tr-caption-container {
+padding: 1px;
+}
+.post-body .tr-caption-container {
+color: #cccccc;
+}
+.post-body .tr-caption-container img {
+padding: 0;
+background: transparent;
+border: none;
+-moz-box-shadow: 0 0 0 rgba(0, 0, 0, .1);
+-webkit-box-shadow: 0 0 0 rgba(0, 0, 0, .1);
+box-shadow: 0 0 0 rgba(0, 0, 0, .1);
+}
+.post-header {
+margin: 0 0 1.5em;
+line-height: 1.6;
+font-size: 90%;
+}
+.post-footer {
+margin: 20px -2px 0;
+padding: 5px 10px;
+color: #888888;
+background-color: #303030;
+border-bottom: 1px solid #444444;
+line-height: 1.6;
+font-size: 90%;
+}
+#comments .comment-author {
+padding-top: 1.5em;
+border-top: 1px solid #404040;
+background-position: 0 1.5em;
+}
+#comments .comment-author:first-child {
+padding-top: 0;
+border-top: none;
+}
+.avatar-image-container {
+margin: .2em 0 0;
+}
+#comments .avatar-image-container img {
+border: 1px solid #111111;
+}
+/* Comments
+----------------------------------------------- */
+.comments .comments-content .icon.blog-author {
+background-repeat: no-repeat;
+background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEgAACxIB0t1+/AAAAAd0SU1FB9sLFwMeCjjhcOMAAAD+SURBVDjLtZSvTgNBEIe/WRRnm3U8RC1neQdsm1zSBIU9VVF1FkUguQQsD9ITmD7ECZIJSE4OZo9stoVjC/zc7ky+zH9hXwVwDpTAWWLrgS3QAe8AZgaAJI5zYAmc8r0G4AHYHQKVwII8PZrZFsBFkeRCABYiMh9BRUhnSkPTNCtVXYXURi1FpBDgArj8QU1eVXUzfnjv7yP7kwu1mYrkWlU33vs1QNu2qU8pwN0UpKoqokjWwCztrMuBhEhmh8bD5UDqur75asbcX0BGUB9/HAMB+r32hznJgXy2v0sGLBcyAJ1EK3LFcbo1s91JeLwAbwGYu7TP/3ZGfnXYPgAVNngtqatUNgAAAABJRU5ErkJggg==);
+}
+.comments .comments-content .loadmore a {
+border-top: 1px solid #999999;
+border-bottom: 1px solid #999999;
+}
+.comments .comment-thread.inline-thread {
+background-color: #303030;
+}
+.comments .continue {
+border-top: 2px solid #999999;
+}
+/* Accents
+---------------------------------------------- */
+.section-columns td.columns-cell {
+border-left: 1px solid #404040;
+}
+.blog-pager {
+background: transparent none no-repeat scroll top center;
+}
+.blog-pager-older-link, .home-link,
+.blog-pager-newer-link {
+background-color: #333333;
+padding: 5px;
+}
+.footer-outer {
+border-top: 0 dashed #bbbbbb;
+}
+/* Mobile
+----------------------------------------------- */
+body.mobile  {
+background-size: auto;
+}
+.mobile .body-fauxcolumn-outer {
+background: transparent none repeat scroll top left;
+}
+.mobile .body-fauxcolumn-outer .cap-top {
+background-size: 100% auto;
+}
+.mobile .content-outer {
+-webkit-box-shadow: 0 0 3px rgba(0, 0, 0, .15);
+box-shadow: 0 0 3px rgba(0, 0, 0, .15);
+}
+body.mobile .AdSense {
+margin: 0 -40px;
+}
+.mobile .tabs-inner .widget ul {
+margin-left: 0;
+margin-right: 0;
+}
+.mobile .post {
+margin: 0;
+}
+.mobile .main-inner .column-center-inner .section {
+margin: 0;
+}
+.mobile .date-header span {
+padding: 0.1em 10px;
+margin: 0 -10px;
+}
+.mobile h3.post-title {
+margin: 0;
+}
+.mobile .blog-pager {
+background: transparent none no-repeat scroll top center;
+}
+.mobile .footer-outer {
+border-top: none;
+}
+.mobile .main-inner, .mobile .footer-inner {
+background-color: #333333;
+}
+.mobile-index-contents {
+color: #cccccc;
+}
+.mobile-link-button {
+background-color: #dd7700;
+}
+.mobile-link-button a:link, .mobile-link-button a:visited {
+color: #ffffff;
+}
+.mobile .tabs-inner .section:first-child {
+border-top: none;
+}
+.mobile .tabs-inner .PageList .widget-content {
+background-color: #000000;
+color: #ffffff;
+border-top: 1px solid #404040;
+border-bottom: 1px solid #404040;
+}
+.mobile .tabs-inner .PageList .widget-content .pagelist-arrow {
+border-left: 1px solid #404040;
+}
+blockquote {
+border: 1px dotted #fff;
+display: block;
+max-height: 400px;
+font-family: courier, monospace;
+font-size: 12px;
+margin: 7px 15px;
+padding: 15px;
+white-space: nowrap;
+overflow-y: scroll;
+overflow-x: auto;
+}
+h2, h3, h4 { margin: 20px 0px 10px 0px; font-weight: normal; }
+.post-body h2 { font-size: 1.9em; }
+h3 { font-size: 1.7em; }
+h4 { font-size: 1.5em; }
+--></style>
+<style id="template-skin-1" type="text/css"><!--
+body {
+min-width: 1000px;
+}
+.content-outer, .content-fauxcolumn-outer, .region-inner {
+min-width: 1000px;
+max-width: 1000px;
+_width: 1000px;
+}
+.main-inner .columns {
+padding-left: 0px;
+padding-right: 260px;
+}
+.main-inner .fauxcolumn-center-outer {
+left: 0px;
+right: 260px;
+/* IE6 does not respect left and right together */
+_width: expression(this.parentNode.offsetWidth -
+parseInt("0px") -
+parseInt("260px") + 'px');
+}
+.main-inner .fauxcolumn-left-outer {
+width: 0px;
+}
+.main-inner .fauxcolumn-right-outer {
+width: 260px;
+}
+.main-inner .column-left-outer {
+width: 0px;
+right: 100%;
+margin-left: -0px;
+}
+.main-inner .column-right-outer {
+width: 260px;
+margin-right: -260px;
+}
+#layout {
+min-width: 0;
+}
+#layout .content-outer {
+min-width: 0;
+width: 800px;
+}
+#layout .region-inner {
+min-width: 0;
+width: auto;
+}
+--></style>
+<script type="text/javascript">var a="&m=1",d="(^|&)m=",e="?",f="?m=1";function g(){var b=window.location.href,c=b.split(e);switch(c.length){case 1:return b+f;case 2:return 0<=c[1].search(d)?null:b+a;default:return null}}var h=navigator.userAgent;if(-1!=h.indexOf("Mobile")&&-1!=h.indexOf("WebKit")&&-1==h.indexOf("iPad")||-1!=h.indexOf("Opera Mini")||-1!=h.indexOf("IEMobile")){var k=g();k&&window.location.replace(k)};
+</script><script type="text/javascript">
+if (window.jstiming) window.jstiming.load.tick('headEnd');
+</script></head>
+<body class=" variant-dark">
+<div class="navbar section" id="navbar" name="Navbar">
+</div>
+<div class="body-fauxcolumns">
+<div class="fauxcolumn-outer body-fauxcolumn-outer">
+<div class="cap-top">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+<div class="fauxborder-left">
+<div class="fauxborder-right"></div>
+<div class="fauxcolumn-inner">
+</div>
+</div>
+<div class="cap-bottom">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+</div>
+</div>
+<div class="content">
+<div class="content-fauxcolumns">
+<div class="fauxcolumn-outer content-fauxcolumn-outer">
+<div class="cap-top">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+<div class="fauxborder-left">
+<div class="fauxborder-right"></div>
+<div class="fauxcolumn-inner">
+</div>
+</div>
+<div class="cap-bottom">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+</div>
+</div>
+<div class="content-outer">
+<div class="content-cap-top cap-top">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+<div class="fauxborder-left content-fauxborder-left">
+<div class="fauxborder-right content-fauxborder-right"></div>
+<div class="content-inner">
+<header>
+<div class="header-outer">
+<div class="header-cap-top cap-top">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+<div class="fauxborder-left header-fauxborder-left">
+<div class="fauxborder-right header-fauxborder-right"></div>
+<div class="region-inner header-inner">
+<div class="header section" id="header" name="Header"><div class="widget Header" id="Header1">
+<div id="header-inner">
+<div class="titlewrapper">
+<h1 class="title">
+<a href="http://blog.sci-smart.ru/">Посторонним В.</a>
+</h1>
+</div>
+<div class="descriptionwrapper">
+<p class="description"><span>
+</span></p>
+</div>
+</div>
+</div></div>
+</div>
+</div>
+<div class="header-cap-bottom cap-bottom">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+</div>
+</header>
+<div class="tabs-outer">
+<div class="tabs-cap-top cap-top">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+<div class="fauxborder-left tabs-fauxborder-left">
+<div class="fauxborder-right tabs-fauxborder-right"></div>
+<div class="region-inner tabs-inner">
+<div class="tabs section" id="crosscol" name="Cross-Column"></div>
+<div class="tabs section" id="crosscol-overflow" name="Cross-Column 2"></div>
+</div>
+</div>
+<div class="tabs-cap-bottom cap-bottom">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+</div>
+<div class="main-outer">
+<div class="main-cap-top cap-top">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+<div class="fauxborder-left main-fauxborder-left">
+<div class="fauxborder-right main-fauxborder-right"></div>
+<div class="region-inner main-inner">
+<div class="columns fauxcolumns">
+<div class="fauxcolumn-outer fauxcolumn-center-outer">
+<div class="cap-top">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+<div class="fauxborder-left">
+<div class="fauxborder-right"></div>
+<div class="fauxcolumn-inner">
+</div>
+</div>
+<div class="cap-bottom">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+</div>
+<div class="fauxcolumn-outer fauxcolumn-left-outer">
+<div class="cap-top">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+<div class="fauxborder-left">
+<div class="fauxborder-right"></div>
+<div class="fauxcolumn-inner">
+</div>
+</div>
+<div class="cap-bottom">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+</div>
+<div class="fauxcolumn-outer fauxcolumn-right-outer">
+<div class="cap-top">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+<div class="fauxborder-left">
+<div class="fauxborder-right"></div>
+<div class="fauxcolumn-inner">
+</div>
+</div>
+<div class="cap-bottom">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+</div>
+<!-- corrects IE6 width calculation -->
+<div class="columns-inner">
+<div class="column-center-outer">
+<div class="column-center-inner">
+<div class="main section" id="main" name="Main"><div class="widget Blog" id="Blog1">
+<div class="blog-posts hfeed">
+
+          <div class="date-outer">
+        
+<h2 class="date-header"><span>понедельник, 24 июня 2013 г.</span></h2>
+
+          <div class="date-posts">
+        
+<div class="post-outer">
+<div class="post hentry" itemprop="blogPost" itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
+<meta content="http://2.bp.blogspot.com/-JAPLh7ptVaY/UcC8u8RLpcI/AAAAAAAABWA/ubvFhPmdF94/s1600/layout_NRF24L01.JPG" itemprop="image_url">
+<meta content="6147491879181811068" itemprop="blogId">
+<meta content="8625747934140915420" itemprop="postId">
+<a name="8625747934140915420"></a>
+<h3 class="post-title entry-title" itemprop="name">
+Работа с беспроводным трансивером nRF24L01
+</h3>
+<div class="post-header">
+<div class="post-header-line-1"></div>
+</div>
+<div class="post-body entry-content" id="post-body-8625747934140915420" itemprop="description articleBody">
+Когда то много недель назад получил я заказанные много месяцев назад по сходной цене из китая беспроводные трансиверы (приемопередатчики) на 2.4ГГц nRF24L01. Только спустя много времени наконец дошли руки их поковырять, а заодно задокументировать процесс в статье а-ля "<b>пример работы с nRF24L01</b>".<br>
+<br>
+Начали всплывать проблемы:<br>
+&nbsp;- на этот раз в Proteus не оказалось такой микрухи, так что лафа кончилась, паять и отлаживать придется в железе, но благо чип уже сам на плате и со всеми нужными выведенными контактами<br>
+&nbsp;- отлаживать придется 2 шт одновременно, одна передает, другая принимает, вероятность неработоспособности связки равна произведению вероятностей неработоспособности каждой из двух микросхем<br>
+&nbsp;- на 2 передатчика понадобится и 2 контроллера<br>
+&nbsp;- питается передатчик напряжением до 3.3В, придется мутить стабилизатор и конфигурировать фьюзы МК, чтоб работали на пониженном напряжении, впрочем не такая уж это большая проблема<br>
+<br>
+<a name="more"></a><br>
+<br>
+<h3>
+Распиновка nRF24L01</h3>
+<a href="./Посторонним В._ Работа с беспроводным трансивером nRF24L01_files/layout_NRF24L01.JPG" imageanchor="1" style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;"><img border="0" src="./Посторонним В._ Работа с беспроводным трансивером nRF24L01_files/layout_NRF24L01.JPG" height="106" width="200"></a>Для начала познакомимся с выводами nRF:<br>
+<b>1-2</b>. <b>Питание</b>, от 1.9 до 3.6В, не более (рекомендуется 3В)! однако на другие пины можно подавать до 5.25В (in datasheet we trust).<br>
+<b>3</b>. <b>CE: Chip Enable</b>. Зависит от режима работы. Если чип сконфигурен как приемник, то высокий (HIGH) уровень на CE позволяет чипу мониторить среду и получать пакеты. Низкий (LOW) уровень переводит чип в <b>Standby-I</b> и такая возможность становится уже недоступна. Если чип настроен на передачу, CE всегда держится на низком уровне. В этом случае для передачи данных нужно положить их в очередь FIFO и дернуть CE минимум на 10мкс (LOW-&gt;HIGH, 10мкс, HIGH-&gt;LOW).<br>
+<b>4. CSN. Chip Select Not</b>. Not, потому что активный уровень - низкий. Пин всегда держится на высоком уровне, переводим на низкий уровень для начала общения между чипом и МК по SPI. Когда пообщались - снова возвращаем на высокий уровень.<br>
+<b>5. SCK</b>. Стробирующий сигнал SPI. Дежурный уровень - LOW. Переход L-&gt;H говорит чипу что можно читать бит с MOSI и писать на MISO. <b>nRF24 - SLAVE</b>&nbsp;устройство. Оно никогда не инициирует связь с МК само, строб-сигнал SCK генерирует именно МК.<br>
+<b>6-7. MOSI+MISO</b>. Собственно линии дуплексной передачи данных от чипа к МК и обратно. Когда МК вывел новый бит на линию MOSI и/или считал бит с MISO, он может дергать SCK, чтобы дать понять чипу, что он может читать/писать следующий бит.<br>
+<b>8. IRQ. Interrupt Pin</b>. Дежурный уровень - высокий. Пин полезно мониторить со стороны МК, дабы понять, не случилось ли чего интересного, например новый пакет пришел (прерывания настраиваются в чипе по SPI). Активный уровень - низкий. Когда случается прерывание - читаем статусный регистр и смотрим, что случилось.&nbsp;Всего&nbsp;прерываний три.<br>
+<br>
+<h3>
+Как общаться с nRF24L01</h3>
+<div>
+Для начала можно пообщаться с самим чипом по SPI и например почитать его внутренние регистры. Для этого достаточно при инициализации МК не забыть задрать линию CSN к питанию, это дежурный режим; чтобы начать сеанс - прижимаем CSN к земле, чип понимает это как начало передачи данных по SPI и готовится выдать на MISO свой статус-регистр. Чип делает это всегда при начале общения по SPI. Если мы хотим что то писать в регистры чипа или читать из них, для начала мы должны дать соответствующую инструкцию (1 байт), и пока мы ее пишем на линию MOSI, чип выдает на MISO свой статус-регистр, тоже 1 байт.</div>
+<div>
+Пожалуй отладку можно начать с чтения и записи регистров nRF и выдачи этих данных например на терминал.</div>
+<div>
+Байт инструкции передается начиная со старшего бита.&nbsp;</div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="./Посторонним В._ Работа с беспроводным трансивером nRF24L01_files/Безымянный.png" imageanchor="1" style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;"><img border="0" src="./Посторонним В._ Работа с беспроводным трансивером nRF24L01_files/Безымянный.png" height="74" width="200"></a></div>
+<div>
+Далее, не отпуская линии CSN, дергаем SCK и читаем ответ чипа. Сколько байт читать зависит от того, какой регистр читаем, это нужно задавать в коде программы. Никакого признака "окончания передачи" тут нет. Регистры в основном имеют длину 1 байт, исключение составляют регистры TX_ADDR и RX_ADDR_P*. Как видно из иллюстрации, байты ответа также приходят "вперед ногами", т.е. сначала старший бит (7).</div>
+<div>
+К примеру, чтение регистра EN_RXADDR (адрес 02h) будет проходить так:</div>
+<div>
+1. CSN - к земле, начинаем передавать байт 02h (0b 0000 0010) с наложенной маской инструкции R_REGISTER (00h)</div>
+<div>
+2. вывели бит 7, дернули SCK вверх-вниз, сдвинули байт логически влево, и так 8 раз для передачи всего байта инструкции</div>
+<div>
+3. далее еще 8 раз дергаем SCK, читая уровни на линии MISO в байт ответа</div>
+<div>
+4. поднимаем линию CSN, обмен завершен</div>
+<div>
+<br></div>
+<div>
+Для записи байта в регистр EN_RXADDR последовательность такая же, только в п.1 маска будет W_REGISTER (20h) и байт инструкции получится уже 02h OR 20h = 22h. а в п.3 вместо чтения в байт из MISO напротив, <b>пишем</b>&nbsp;из байта на линию MOSI, опять же сначала бит 7, потом 6 и т.д.</div>
+<div>
+<br></div>
+<h3>
+Ближе к делу</h3>
+<div>
+<b>Q</b>. как настроить в рабочий режим и подготовить чип к передаче?</div>
+<div>
+<b>A</b>. перед началом работы в обязательном порядке нужно выставить бит PWR_UP в регистре CONFIG. При подаче питания на чип этот бит по-умолчанию равен 0. Впрочем это не означает, что чип выключен и не подает признаков жизни. По SPI он общается всегда. Также выставляем бит PRIM_RX &nbsp;того же регистра в 1 для режима приема и в 0 для режима передачи. По-умолчанию бит равен нулю, т.е. чип настроен на передачу. Также стоит отметить, что при старте включены все прерывания. Для <b>приема</b> данных обязательно надо настроить размер пакета, т.е. записать число больше нуля в&nbsp;RX_PW_P0. &nbsp;<b>На принимающей стороне настройка длины пакета должна быть такой, чтобы умещались передаваемые данные!</b>&nbsp;</div>
+<div>
+<br></div>
+<div>
+<b>Q</b>. Как работать с прерываниями?</div>
+<div>
+<b>A</b>. При генерации прерывания (низкий уровень на пин IRQ), читаем STATUS регистр, определяем событие. Например установлен бит RX_DR (Data Ready): пришел новый пакет. Читаем пакет, <b>обязательно пишем 1</b> (не 0, а 1, ага) на место этого бита, чтобы <b>сбросить</b> флаг прерывания. Не забываем записать получившийся байт обратно в STATUS регистр.</div>
+<div>
+<br></div>
+<div>
+<b>Q</b>. Ну и как уже что то передать в эфир?</div>
+<div>
+<b>A</b>. Если дерево падает в глухом лесу, производит ли оно грохот? А если пакет передать в никуда? Попробуем.</div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="./Посторонним В._ Работа с беспроводным трансивером nRF24L01_files/Безымянный(1).png" imageanchor="1" style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;"><img border="0" src="./Посторонним В._ Работа с беспроводным трансивером nRF24L01_files/Безымянный(1).png" height="163" width="200"></a></div>
+<div>
+На рисунке обозначено:</div>
+<div>
+&nbsp;- <b>Antenna</b> - интервалы активности в эфире, т.е. собственно отправка и прием пакетов</div>
+<div>
+&nbsp;- <b>PTX и PRX Mode</b>&nbsp;- режимы, в которых находятся передатчик (PTX) и приемник (PRX)</div>
+<div>
+<br></div>
+<div>
+Из диаграммы становится ясно (и это описано в ДШ), что передача начинается нифига не по заднему фронту на линии CE, а через 130мкс (128+2 на рисунке) после переднего фронта. А значит с отпусканием CE можно не спешить. Также показано, что CE поднимается аккурат перед генерацией прерывания TX_DS, <i>по какому событию - неизвестно, как неизвестно и зачем вообще ее поднимать, если мы в режиме передатчика</i>.</div>
+<div>
+Итак, перед процедурой передачи необходимо убедиться, что CE прижато к земле. Отправляем инструкцию W_TX_PAYLOAD (A0h)&nbsp;(это передача по SPI, соответственно про CSN тоже не забываем), а следом 3 байта данных, которые хотим передать пришельцам. Это будут 3 буквы. Я еще не решил какие. После того, как передали наши 3 буквы по SPI и подняли CSN, нужно дать понять чипу, что пора передавать данные в эфир. Это делается дерганием линии CE: ее нужно поднять как минимум на 10мкс, как показано на рисунке, затем снова придавить к земле на все время передачи. По окончании передачи будет сгенерировано прерывание: либо TX_DS (если данные переданы), либо MAX_RT (если не удалось передать в пределах заданного числа попыток). В любом случае линию CE пора поднимать (<i>зачем</i>), а бит прерывания очистить в регистре записью в него <b>единицы</b>. А вот зачем поднимать линию CE:</div>
+<blockquote class="tr_bq">
+nRF24 goes into standby-I mode if CE is low. Otherwise next payload in TX FIFO is transmitted. If TX FIFO is empty and CE still high, nRF24 enters standby-II mode</blockquote>
+<div>
+Отсюда следует, что имеет смысл поднимать линию, если в очереди на передачу еще что-то есть, иначе можно оставлять линию у земли и девайс перейдет в режим энергосбережения.</div>
+<div>
+<br></div>
+<div>
+<br></div>
+<div>
+<b>Q</b>. как переходить из режима RX в TX и обратно?</div>
+<div>
+<b>A</b>. записью бита PRIM_RX = 1 в регистр CONFIG мы переводим чип в режим приемника. по-умолчанию при подаче питания чип в режиме передачи (PRIM_RX = 0). <i>Разобраться как при этом управлять линией CE</i>... А вот как: переводя бит PRIM_RX и 1 или 0 меняем режим чипа, но чтобы его собственно активировать - надо поднять линию CE, иначе чип будет как бы в режиме готовности, но неактивен. Для PRX это означает, что слушать эфир начнем, как только поднимем линию CE. Для PTX это значит что передавать данные из TX FIFO начнем как только поднимем линию CE. Опускание линии CE означает переход в режим энергосбережения.</div>
+<div>
+<br></div>
+<div>
+<b>Q</b>.&nbsp;где настраивается сколько байт можно пихать в TX FIFO для передачи?</div>
+<div>
+<b>A</b>. "The width of TX-payload is counted from number of bytes written to the TX FIFO from the MCU". По-русски говоря, чип имеет счетчик байт, и к моменту начала SPI обмена с целью положить в TX FIFO данные, этот счетчик сбрасывается и начинает считать, сколько байт мы ложим в TX FIFO. Положить можно вроде как от 1 до 32 байт. Сколько положили - все передаст. R_RX_PAYLOAD тоже выдает от 1 до 32 байт.&nbsp;</div>
+<div>
+<br></div>
+<div>
+<b>Q</b>.&nbsp;как происходит адресация и распределение пакетов по пайпам?</div>
+<div>
+<b>A</b>. адреса пайпов задаются в регистрах RX_ADDR_P*. Нужно внимательно следить, чтобы не оказалось 2 одинаковых адресов в регистрах RX_* одного чипа. <b>НО</b>&nbsp;адреса отправителя и получателя <b>должны совпадать</b>! Т.е. регистры TX_ADDR и RX_ADDR_P0 обоих чипов должны быть равны между собой (итого 4 одинаковых значения).&nbsp;Чтобы получить пакет на одном nRF, нужно сначала его RX_ADDR_P0 сконфигурировать известным адресом, затем с другого nRF посылать по этому адресу пакеты (адрес вводится на передатчике в регистр TX_ADDR).</div>
+<blockquote class="tr_bq">
+On the PTX the TX_ADDR must be the same as the RX_ADDR_P0 and as the pipe address for the designated pipe.</blockquote>
+эта фигня гласит, что на передатчике (PTX) адрес для отправки должен совпадать с собственным RX_ADDR_P0 адресом (чтобы автоматом разруливать ACK), а также с RX_ADDR_P* пайпа приемника (PRX) (чтобы вообще пакет дошел до назначения).<br>
+ACK разруливаются сами только при включенном Enhanced ShockBurst mode.<br>
+<b>Однако</b>, по-умолчанию все чипы имеют один и тот же TX_ADDR, который к тому же равен&nbsp;RX_ADDR_P0 (чтобы работал авто-ACK), т.е. для quick-start конфигурировать адреса чипов необязательно! Все чипы будут рассылать на всех и принимать данные ото всех.<br>
+<br>
+<b>Q</b>. Надо ли задавать RX_PW_P0 для работы авто-ACK.<br>
+<b>A</b>. На передатчике RX_PW_P0 задавать необязательно<br>
+<br>
+<b>Q</b>. как просканировать передатчики в округе?<br>
+<b>A</b>.&nbsp;Регистр CD содержит 1, если мы в RX режиме видим несущую (кто-то передает). вот походу и все, promisc-mode? кажется нету.<br>
+<br>
+<div>
+<b>Q</b>.&nbsp;что будет если передать 10 байт, а приемник настроен принимать только 3?<br>
+<b>A</b>. не пробовал, ДШ читать уже лень, вероятно приемник нифига не получит, потому что в передаваемом пакете CRC будет далеко за пределами 3 байт. Вопрос пока открытый.<br>
+UPD: Если размер PAYLOAD не совпадает - передачи не будет. В принципе для передатчика нет такого понятия как размер пакета. Он передает столько байт, сколько по SPI получит. Но если это число байт отличается (хоть на 1 больше или меньше) от установленного на приемнике&nbsp;RX_PW_P0 - приемник не получит пакета.<br>
+<div>
+<br>
+А также:<br>
+- если скорости устройств (RF_SETUP, 0.25..2Mbps) не совпадают &nbsp;или если каналы устройств (RF_CH) не совпадают - передачи не будет.<br>
+- если не хватает отведенных чипом 15-ти попыток передачи пакета, можно использовать команду REUSE_TX_PL и пытаться отсылать хоть до бесконечности. Суть в том, что в каждом пакете есть PID и приемник точно отличит повторный пакет среди потока. Может быть ситуация, что ACK не дошел до передатчика и тот отправил пакет снова, приемник поймет, что пакет повторный, и отправит ACK снова.<br>
+Не стоит мутить повторную отправку руками, через W_TX_PAYLOAD, это неверный путь, да и ненужный труд, все уже реализовано в железе.<br>
+<br></div>
+</div>
+<h3>
+Troubleshooting</h3>
+<div>
+<b>1.</b>&nbsp;не хочет отвечать по SPI</div>
+<div>
+как оказалось перепутал линии IRQ и MISO, а еще думаю, чего оно мне на IRQ какие то 6 импульсов выдает, так то были 6 байт ответа при обмене по SPI. Осциллограф, великая вещь.</div>
+<div>
+<b>2</b>. потери пакетов на PTX. Переключаемся в режим PRX, детектим несущую (CD), если есть - значит коллизия на канале (более одного передатчика одновременно), меняем канал, пробуем передавать снова.</div>
+<div>
+<b>3</b>. не срабатывает ни одно из прерываний при отправке тестового пакета в пустоту (ожидалось MAX_RT). перепутал W_TX_PAYLOAD с R_RX_PAYLOAD. затем оказалось, что RX_PW_P0 сбрасывается после вызова процедуры отправки в эфир (W_TX_PAYLOAD). цикличный мониторинг регистра STATUS не давал результатов, биты прерываний всегда сброшены. далее стало ясно, что сбрасывается вообще все, и конфиг и RX_PW*. происходит это после 10us-строба на линии CE. Не хватало питания. Сброс чипа.<br>
+<b>4</b>. Подключил второй чип, настроил как приемник. Наблюдается необъяснимая мистика, PTX передает 11 пакетов без каких-либо прерываний, молча, затем 3 пакета с прерыванием TX_DS, остальные - с MAX_RT. На принимающей стороне такой же трансивер в режиме приемника, настроенным RX_PW_P0=3 (как и на передатчике). Мониторинг разнообразных регистров PTX и PRX выявил опять же сброс их значений вследствие нехватки питания (уже 2 трансивера на одном TL431), поставил электролит - все заработало как часы!<br>
+<br>
+<h3>
+Итоги</h3>
+<div>
+Таки добился стабильной передачи.&nbsp;</div>
+<div>
+Настройка передатчика сводится к установке&nbsp;PWR_UP в регистре CONFIG и прижатию линии CE к земле.</div>
+<div>
+Настройка приемника - установка PWR_UP и PRIM_RX в CONFIG, RX_PW_P0 &gt; 0 и подтягивании CE к питанию.<br>
+Далее мониторим линии IRQ, читаем биты прерываний из регистра STATUS и не забываем их сбрасывать, читаем полученные данные из pipe 0.</div>
+<div>
+Выкладываю архив сильно чернового проекта для ATMega8 и двух подключенных к ней <a href="https://docs.google.com/file/d/0B610P3FMdTo6RU9va0pZbmgtXzA/edit?usp=sharing">nRF24L01 на ассемблере</a>.<br>
+А вот видео с примером реального полезного устройства на nRF24 -&nbsp;<a href="http://www.youtube.com/watch?v=U58U8tzE4c8">http://www.youtube.com/watch?v=U58U8tzE4c8</a></div>
+<div>
+<br>
+UPD: у статьи появилось <a href="http://mexxval.blogspot.ru/2014/02/nrf24l01.html">продолжение</a><br>
+UPD2: еще пример: простой ассемблерный <a href="https://drive.google.com/file/d/0B610P3FMdTo6TTJILWlYMGpQVDg/edit?usp=sharing" target="_blank">код приемника и передатчика</a> (включение/выключение светодиода), поделился <a href="https://plus.google.com/u/0/117519491145543145591/posts" target="_blank">Александр</a></div>
+<h3>
+Материалы</h3>
+</div>
+<div>
+<a href="http://www.diyembedded.com/tutorials/nrf24l01_0/nrf24l01_tutorial_0.pdf">http://www.diyembedded.com/tutorials/nrf24l01_0/nrf24l01_tutorial_0.pdf</a></div>
+<div>
+<a href="https://www.sparkfun.com/datasheets/Components/nRF24L01_prelim_prod_spec_1_2.pdf">https://www.sparkfun.com/datasheets/Components/nRF24L01_prelim_prod_spec_1_2.pdf</a></div>
+<div>
+<br>
+<br></div>
+<div style="clear: both;"></div>
+</div>
+<div class="post-footer">
+<div class="post-footer-line post-footer-line-1"><span class="post-timestamp">
+◔
+<meta content="http://blog.sci-smart.ru/2013/06/nrf24l01.html" itemprop="url">
+<a class="timestamp-link" href="./Посторонним В._ Работа с беспроводным трансивером nRF24L01_files/Посторонним В._ Работа с беспроводным трансивером nRF24L01.html" rel="bookmark" title="permanent link"><abbr class="published" itemprop="datePublished" title="2013-06-24T14:50:00+04:00">14:50</abbr></a>
+</span>
+<span class="post-author vcard">
+Автор:
+<span class="fn" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person">
+<meta content="https://plus.google.com/115943249252563762164" itemprop="url">
+<a class="g-profile" href="https://plus.google.com/115943249252563762164" rel="author" title="author profile" data-gapiscan="true" data-onload="true" data-gapiattached="true">
+<span itemprop="name">Валерий Кадышев</span>
+</a>
+</span>
+</span>
+<span class="post-icons">
+</span>
+<span class="post-comment-link">
+</span>
+<div class="post-share-buttons goog-inline-block">
+<a class="goog-inline-block share-button sb-email" href="https://www.blogger.com/share-post.g?blogID=6147491879181811068&postID=8625747934140915420&target=email" target="_blank" title="Отправить по электронной почте"><span class="share-button-link-text">Отправить по электронной почте</span></a><a class="goog-inline-block share-button sb-blog" href="https://www.blogger.com/share-post.g?blogID=6147491879181811068&postID=8625747934140915420&target=blog" onclick="window.open(this.href, &quot;_blank&quot;, &quot;height=270,width=475&quot;); return false;" target="_blank" title="Написать об этом в блоге"><span class="share-button-link-text">Написать об этом в блоге</span></a><a class="goog-inline-block share-button sb-twitter" href="https://www.blogger.com/share-post.g?blogID=6147491879181811068&postID=8625747934140915420&target=twitter" target="_blank" title="Опубликовать в Twitter"><span class="share-button-link-text">Опубликовать в Twitter</span></a><a class="goog-inline-block share-button sb-facebook" href="https://www.blogger.com/share-post.g?blogID=6147491879181811068&postID=8625747934140915420&target=facebook" onclick="window.open(this.href, &quot;_blank&quot;, &quot;height=430,width=640&quot;); return false;" target="_blank" title="Опубликовать в Facebook"><span class="share-button-link-text">Опубликовать в Facebook</span></a><a class="goog-inline-block share-button sb-pinterest" href="https://www.blogger.com/share-post.g?blogID=6147491879181811068&postID=8625747934140915420&target=pinterest" target="_blank" title="Поделиться в Pinterest"><span class="share-button-link-text">Поделиться в Pinterest</span></a><div class="goog-inline-block google-plus-share-container"><div id="___plusone_0" style="text-indent: 0px; margin: 0px; padding: 0px; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 300px; height: 20px; background: transparent;"><iframe frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 300px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 20px;" tabindex="0" vspace="0" width="100%" id="I0_1447404057618" name="I0_1447404057618" src="./Посторонним В._ Работа с беспроводным трансивером nRF24L01_files/fastbutton.html" data-gapiattached="true" title="+1"></iframe></div></div>
+</div>
+</div>
+<div class="post-footer-line post-footer-line-2"><span class="post-labels">
+Ярлыки:
+<a href="http://blog.sci-smart.ru/search/label/avr" rel="tag">avr</a>,
+<a href="http://blog.sci-smart.ru/search/label/nRF24" rel="tag">nRF24</a>,
+<a href="http://blog.sci-smart.ru/search/label/nRF24L01" rel="tag">nRF24L01</a>,
+<a href="http://blog.sci-smart.ru/search/label/%D1%82%D1%80%D0%B0%D0%BD%D1%81%D0%B8%D0%B2%D0%B5%D1%80%D1%8B" rel="tag">трансиверы</a>
+</span>
+</div>
+<div class="post-footer-line post-footer-line-3"></div>
+</div>
+</div>
+<div class="comments" id="comments">
+<a name="comments"></a>
+<h4>16 комментариев:</h4>
+<div class="comments-content">
+<script async="async" src="./Посторонним В._ Работа с беспроводным трансивером nRF24L01_files/comments.js" type="text/javascript"></script>
+<script type="text/javascript">
+    (function() {
+      var items = [{'id': '8057653016627737975', 'body': 'Спасибо за статью - помогла систематизировать кашу в голове после прочтения даташита. Надеюсь на дальнейшее её развитие :)', 'timestamp': '1377345723780', 'permalink': 'http://blog.sci-smart.ru/2013/06/nrf24l01.html?showComment\0751377345723780#c8057653016627737975', 'author': {'name': 'Андрей Кротков', 'avatarUrl': 'https://img2.blogblog.com/img/b16-rounded.gif', 'profileUrl': 'https://www.blogger.com/profile/11342423491804145256'}, 'displayTime': '24 августа 2013 г., 16:02', 'deleteclass': 'item-control blog-admin pid-1302024530'}, {'id': '1878345959394547213', 'body': 'Спасибо за статью! Пытаюсь написать код для общения 2 железок. Делал, как Вы говорили, сначало пообщался по SPI, все заработало и стало ясно, потом решил толкнуть в эфир. Но тут беда. Уже дня 4 тра... У передатчика срабатывает прерывание IRQ \75 0? проверяю статус, Сначало 1Е, потом по мере заполнения буфера 1F. Приемник сидит в ожидании IRQ. Что может быть? \74br /\76\74br /\76В асме не рулю, точнее очень слаб. Не могли бы вы на пальцах рассказать последовательность действий. \74br /\76Спасибо!', 'timestamp': '1377677582620', 'permalink': 'http://blog.sci-smart.ru/2013/06/nrf24l01.html?showComment\0751377677582620#c1878345959394547213', 'author': {'name': 'Михаил Карлсон', 'avatarUrl': 'https://img2.blogblog.com/img/b16-rounded.gif', 'profileUrl': 'https://www.blogger.com/profile/16935203177272946358'}, 'displayTime': '28 августа 2013 г., 12:13', 'deleteclass': 'item-control blog-admin pid-1261844811'}, {'id': '1697850140550916226', 'parentId': '1878345959394547213', 'body': 'а изучали приложенный к статье архив проекта?', 'timestamp': '1377677846910', 'permalink': 'http://blog.sci-smart.ru/2013/06/nrf24l01.html?showComment\0751377677846910#c1697850140550916226', 'author': {'name': 'Валерий Кадышев', 'avatarUrl': 'https://img2.blogblog.com/img/b16-rounded.gif', 'profileUrl': 'https://www.blogger.com/profile/09214395132755730867'}, 'displayTime': '28 августа 2013 г., 12:17', 'deleteclass': 'item-control blog-admin pid-2043682417'}, {'id': '1290738223460150363', 'body': 'Ну даташит да, а второй пока изучаю. Начал минут 15 назад:)', 'timestamp': '1377680141724', 'permalink': 'http://blog.sci-smart.ru/2013/06/nrf24l01.html?showComment\0751377680141724#c1290738223460150363', 'author': {'name': 'Михаил Карлсон', 'avatarUrl': 'https://img2.blogblog.com/img/b16-rounded.gif', 'profileUrl': 'https://www.blogger.com/profile/16935203177272946358'}, 'displayTime': '28 августа 2013 г., 12:55', 'deleteclass': 'item-control blog-admin pid-1261844811'}, {'id': '160617646294173847', 'body': 'Архив проекта не могу читать. Ссылка не работает', 'timestamp': '1377680571835', 'permalink': 'http://blog.sci-smart.ru/2013/06/nrf24l01.html?showComment\0751377680571835#c160617646294173847', 'author': {'name': 'Михаил Карлсон', 'avatarUrl': 'https://img2.blogblog.com/img/b16-rounded.gif', 'profileUrl': 'https://www.blogger.com/profile/16935203177272946358'}, 'displayTime': '28 августа 2013 г., 13:02', 'deleteclass': 'item-control blog-admin pid-1261844811'}, {'id': '1631036123130248616', 'parentId': '160617646294173847', 'body': 'обновил ссылку на архив. честно говоря даже не знаю, куда более подробнее. может покажете свой код? на чем, кстати, на Сях?', 'timestamp': '1377682142981', 'permalink': 'http://blog.sci-smart.ru/2013/06/nrf24l01.html?showComment\0751377682142981#c1631036123130248616', 'author': {'name': 'Валерий Кадышев', 'avatarUrl': 'https://img2.blogblog.com/img/b16-rounded.gif', 'profileUrl': 'https://www.blogger.com/profile/09214395132755730867'}, 'displayTime': '28 августа 2013 г., 13:29', 'deleteclass': 'item-control blog-admin pid-2043682417'}, {'id': '2585518375213489898', 'body': 'Да ссылка заработала. Пишу на Proton IDE. Basic под PIC. Вот ссылка http://yadi.sk/d/Q82XMJ8Z8Q2ID', 'timestamp': '1377683195693', 'permalink': 'http://blog.sci-smart.ru/2013/06/nrf24l01.html?showComment\0751377683195693#c2585518375213489898', 'author': {'name': 'Михаил Карлсон', 'avatarUrl': 'https://img2.blogblog.com/img/b16-rounded.gif', 'profileUrl': 'https://www.blogger.com/profile/16935203177272946358'}, 'displayTime': '28 августа 2013 г., 13:46', 'deleteclass': 'item-control blog-admin pid-1261844811'}, {'id': '8843449008428355602', 'parentId': '2585518375213489898', 'body': 'ну так у меня проект под AVR. я по PIC никак не помогу', 'timestamp': '1377683969379', 'permalink': 'http://blog.sci-smart.ru/2013/06/nrf24l01.html?showComment\0751377683969379#c8843449008428355602', 'author': {'name': 'Валерий Кадышев', 'avatarUrl': 'https://img2.blogblog.com/img/b16-rounded.gif', 'profileUrl': 'https://www.blogger.com/profile/09214395132755730867'}, 'displayTime': '28 августа 2013 г., 13:59', 'deleteclass': 'item-control blog-admin pid-2043682417'}, {'id': '6565957101942865682', 'body': 'Так я же код не прошу. Просто на человеческом языке можете объяснить что за чем следует. \74br /\76Я делаю так: Сначало поднимаю CSN и опускаю CE, потом опускаю CSN и закидываю адрес, потом регистр, поднимаю CSN, и так пока все адреса не пройду. ', 'timestamp': '1377684561333', 'permalink': 'http://blog.sci-smart.ru/2013/06/nrf24l01.html?showComment\0751377684561333#c6565957101942865682', 'author': {'name': 'Михаил Карлсон', 'avatarUrl': 'https://img2.blogblog.com/img/b16-rounded.gif', 'profileUrl': 'https://www.blogger.com/profile/16935203177272946358'}, 'displayTime': '28 августа 2013 г., 14:09', 'deleteclass': 'item-control blog-admin pid-1261844811'}, {'id': '6990477474128647107', 'parentId': '6565957101942865682', 'body': 'я адреса вообще не трогал. по дефолтным все отсылалось.\74br /\76на передатчике сначала записывается регистр W_TX_PAYLOAD, с общением по SPI вопросов не возникает, как я понял.\74br /\76во время записи регистра CSN опущено, CE тоже.\74br /\76по окончании записи регистра CSN поднимается.\74br /\76далее, чтобы пошла отправка дергаем CE на 10мкс в состояние единицы.\74br /\76\74br /\76все, на приемнике должно быть прерывание\74br /\076', 'timestamp': '1377689060130', 'permalink': 'http://blog.sci-smart.ru/2013/06/nrf24l01.html?showComment\0751377689060130#c6990477474128647107', 'author': {'name': 'Валерий Кадышев', 'avatarUrl': 'https://img2.blogblog.com/img/b16-rounded.gif', 'profileUrl': 'https://www.blogger.com/profile/09214395132755730867'}, 'displayTime': '28 августа 2013 г., 15:24', 'deleteclass': 'item-control blog-admin pid-2043682417'}, {'id': '3526806807186855836', 'body': 'Ага должно быть! Но нет прерывания. Уже пробовал менять местами модули. ', 'timestamp': '1377692293529', 'permalink': 'http://blog.sci-smart.ru/2013/06/nrf24l01.html?showComment\0751377692293529#c3526806807186855836', 'author': {'name': 'Михаил Карлсон', 'avatarUrl': 'https://img2.blogblog.com/img/b16-rounded.gif', 'profileUrl': 'https://www.blogger.com/profile/16935203177272946358'}, 'displayTime': '28 августа 2013 г., 16:18', 'deleteclass': 'item-control blog-admin pid-1261844811'}, {'id': '4534278845572838177', 'body': 'Могу посоветовать читать ещё состаяние FLUSH и выводить на экран (я на период отладки выводин на терминал через USART (атмега правда)) каждый ответ модуля (регистр STATUS) и глядя на то как меняются биты этого регистра добивался одекватной работы (10 часов заняло у меня это удовольствие)\74br /\76P.S. долго не мог понять почему после наладки передатчика до приёмника ни чего не доходтило. Причина была в том что забыл линию CE задрать на верх. Теперь она задрана постоянно на приёмнике.', 'timestamp': '1377947586352', 'permalink': 'http://blog.sci-smart.ru/2013/06/nrf24l01.html?showComment\0751377947586352#c4534278845572838177', 'author': {'name': 'Андрей Кротков', 'avatarUrl': 'https://img2.blogblog.com/img/b16-rounded.gif', 'profileUrl': 'https://www.blogger.com/profile/11342423491804145256'}, 'displayTime': '31 августа 2013 г., 15:13', 'deleteclass': 'item-control blog-admin pid-1302024530'}, {'id': '5878526821476742904', 'body': 'Да, и не забывайте после каждого рестарта МК перезагружать и радиомодуль.', 'timestamp': '1377947953741', 'permalink': 'http://blog.sci-smart.ru/2013/06/nrf24l01.html?showComment\0751377947953741#c5878526821476742904', 'author': {'name': 'Андрей Кротков', 'avatarUrl': 'https://img2.blogblog.com/img/b16-rounded.gif', 'profileUrl': 'https://www.blogger.com/profile/11342423491804145256'}, 'displayTime': '31 августа 2013 г., 15:19', 'deleteclass': 'item-control blog-admin pid-1302024530'}, {'id': '842472591471279213', 'body': 'Спасибо! Попробую!', 'timestamp': '1378104289321', 'permalink': 'http://blog.sci-smart.ru/2013/06/nrf24l01.html?showComment\0751378104289321#c842472591471279213', 'author': {'name': 'Михаил Карлсон', 'avatarUrl': 'https://img2.blogblog.com/img/b16-rounded.gif', 'profileUrl': 'https://www.blogger.com/profile/16935203177272946358'}, 'displayTime': '2 сентября 2013 г., 10:44', 'deleteclass': 'item-control blog-admin pid-1261844811'}, {'id': '2213815403759603727', 'body': 'Всем привет. Сделал машинный перевод описания всех регистров. Могу скинуть,что бы кто нить перевел до понятного русского. ', 'timestamp': '1386137704995', 'permalink': 'http://blog.sci-smart.ru/2013/06/nrf24l01.html?showComment\0751386137704995#c2213815403759603727', 'author': {'name': 'Владислав Колодяжный', 'avatarUrl': 'https://img2.blogblog.com/img/b16-rounded.gif', 'profileUrl': 'https://www.blogger.com/profile/09350861121809584121'}, 'displayTime': '4 декабря 2013 г., 10:15', 'deleteclass': 'item-control blog-admin pid-1648796768'}, {'id': '4627909884705801231', 'body': 'Еще замечания:\74br /\76 - обязательно нужно поставить конденсатор на питание модуля, я поставил 4,7 мкФ (достаточно, наверное, и 1 мкФ, не электролит)\74br /\76- выход IRQ не должен висеть в воздухе, если не нужен, нужно подключить через резистор в 150-200 кОм к плюсу или минусу питания.', 'timestamp': '1400262690337', 'permalink': 'http://blog.sci-smart.ru/2013/06/nrf24l01.html?showComment\0751400262690337#c4627909884705801231', 'author': {'name': 'aloika', 'avatarUrl': 'https://img1.blogblog.com/img/openid16-rounded.gif', 'profileUrl': 'http://aloika.livejournal.com/'}, 'displayTime': '16 мая 2014 г., 21:51', 'deleteclass': 'item-control blog-admin pid-419943047'}];
+      var msgs = {'loadMore': 'Ещё', 'loading': 'Загрузка...', 'loaded': 'Больше ничего нет.', 'addComment': 'Добавить комментарий', 'reply': 'Ответить', 'delete': 'Удалить'};
+      var config = {'blogId': '6147491879181811068', 'postId': '8625747934140915420', 'feed': 'http://blog.sci-smart.ru/feeds/8625747934140915420/comments/default', 'authorName': 'Валерий Кадышев', 'authorUrl': 'https://www.blogger.com/profile/09214395132755730867', 'baseUri': 'https://www.blogger.com', 'maxThreadDepth': 2};
+
+// <![CDATA[
+      var cursor = null;
+      if (items && items.length > 0) {
+        cursor = parseInt(items[items.length - 1].timestamp) + 1;
+      }
+
+      var bodyFromEntry = function(entry) {
+        if (entry.gd$extendedProperty) {
+          for (var k in entry.gd$extendedProperty) {
+            if (entry.gd$extendedProperty[k].name == 'blogger.contentRemoved') {
+              return '<span class="deleted-comment">' + entry.content.$t + '</span>';
+            }
+          }
+        }
+        return entry.content.$t;
+      }
+
+      var parse = function(data) {
+        cursor = null;
+        var comments = [];
+        if (data && data.feed && data.feed.entry) {
+          for (var i = 0, entry; entry = data.feed.entry[i]; i++) {
+            var comment = {};
+            // comment ID, parsed out of the original id format
+            var id = /blog-(\d+).post-(\d+)/.exec(entry.id.$t);
+            comment.id = id ? id[2] : null;
+            comment.body = bodyFromEntry(entry);
+            comment.timestamp = Date.parse(entry.published.$t) + '';
+            if (entry.author && entry.author.constructor === Array) {
+              var auth = entry.author[0];
+              if (auth) {
+                comment.author = {
+                  name: (auth.name ? auth.name.$t : undefined),
+                  profileUrl: (auth.uri ? auth.uri.$t : undefined),
+                  avatarUrl: (auth.gd$image ? auth.gd$image.src : undefined)
+                };
+              }
+            }
+            if (entry.link) {
+              if (entry.link[2]) {
+                comment.link = comment.permalink = entry.link[2].href;
+              }
+              if (entry.link[3]) {
+                var pid = /.*comments\/default\/(\d+)\?.*/.exec(entry.link[3].href);
+                if (pid && pid[1]) {
+                  comment.parentId = pid[1];
+                }
+              }
+            }
+            comment.deleteclass = 'item-control blog-admin';
+            if (entry.gd$extendedProperty) {
+              for (var k in entry.gd$extendedProperty) {
+                if (entry.gd$extendedProperty[k].name == 'blogger.itemClass') {
+                  comment.deleteclass += ' ' + entry.gd$extendedProperty[k].value;
+                } else if (entry.gd$extendedProperty[k].name == 'blogger.displayTime') {
+                  comment.displayTime = entry.gd$extendedProperty[k].value;
+                }
+              }
+            }
+            comments.push(comment);
+          }
+        }
+        return comments;
+      };
+
+      var paginator = function(callback) {
+        if (hasMore()) {
+          var url = config.feed + '?alt=json&v=2&orderby=published&reverse=false&max-results=50';
+          if (cursor) {
+            url += '&published-min=' + new Date(cursor).toISOString();
+          }
+          window.bloggercomments = function(data) {
+            var parsed = parse(data);
+            cursor = parsed.length < 50 ? null
+                : parseInt(parsed[parsed.length - 1].timestamp) + 1
+            callback(parsed);
+            window.bloggercomments = null;
+          }
+          url += '&callback=bloggercomments';
+          var script = document.createElement('script');
+          script.type = 'text/javascript';
+          script.src = url;
+          document.getElementsByTagName('head')[0].appendChild(script);
+        }
+      };
+      var hasMore = function() {
+        return !!cursor;
+      };
+      var getMeta = function(key, comment) {
+        if ('iswriter' == key) {
+          var matches = !!comment.author
+              && comment.author.name == config.authorName
+              && comment.author.profileUrl == config.authorUrl;
+          return matches ? 'true' : '';
+        } else if ('deletelink' == key) {
+          return config.baseUri + '/delete-comment.g?blogID='
+               + config.blogId + '&postID=' + comment.id;
+        } else if ('deleteclass' == key) {
+          return comment.deleteclass;
+        }
+        return '';
+      };
+
+      var replybox = null;
+      var replyUrlParts = null;
+      var replyParent = undefined;
+
+      var onReply = function(commentId, domId) {
+        if (replybox == null) {
+          // lazily cache replybox, and adjust to suit this style:
+          replybox = document.getElementById('comment-editor');
+          if (replybox != null) {
+            replybox.height = '250px';
+            replybox.style.display = 'block';
+            replyUrlParts = replybox.src.split('#');
+          }
+        }
+        if (replybox && (commentId !== replyParent)) {
+          replybox.src = '';
+          document.getElementById(domId).insertBefore(replybox, null);
+          replybox.src = replyUrlParts[0]
+              + (commentId ? '&parentID=' + commentId : '')
+              + '#' + replyUrlParts[1];
+          replyParent = commentId;
+        }
+      };
+
+      var hash = (window.location.hash || '#').substring(1);
+      var startThread, targetComment;
+      if (/^comment-form_/.test(hash)) {
+        startThread = hash.substring('comment-form_'.length);
+      } else if (/^c[0-9]+$/.test(hash)) {
+        targetComment = hash.substring(1);
+      }
+
+      // Configure commenting API:
+      var configJso = {
+        'maxDepth': config.maxThreadDepth
+      };
+      var provider = {
+        'id': config.postId,
+        'data': items,
+        'loadNext': paginator,
+        'hasMore': hasMore,
+        'getMeta': getMeta,
+        'onReply': onReply,
+        'rendered': true,
+        'initComment': targetComment,
+        'initReplyThread': startThread,
+        'config': configJso,
+        'messages': msgs
+      };
+
+      var render = function() {
+        if (window.goog && window.goog.comments) {
+          var holder = document.getElementById('comment-holder');
+          window.goog.comments.render(holder, provider);
+        }
+      };
+
+      // render now, or queue to render when library loads:
+      if (window.goog && window.goog.comments) {
+        render();
+      } else {
+        window.goog = window.goog || {};
+        window.goog.comments = window.goog.comments || {};
+        window.goog.comments.loadQueue = window.goog.comments.loadQueue || [];
+        window.goog.comments.loadQueue.push(render);
+      }
+    })();
+// ]]>
+</script>
+<div id="comment-holder">
+
+<div id="bc_0_17C" kind="c"><div id="bc_0_17CT"><div id="bc_0_16T" class="comment-thread" kind="r" t="0" u="0"><ol id="bc_0_16TB"><li id="bc_0_0B" class="comment" kind="b"><div class="avatar-image-container"><img src="./Посторонним В._ Работа с беспроводным трансивером nRF24L01_files/b36-rounded.png"></div><div id="c8057653016627737975" class="comment-block"><div id="bc_0_0M" class="comment-header" kind="m"><cite class="user"><a rel="nofollow" href="https://www.blogger.com/profile/11342423491804145256">Андрей Кротков</a></cite><span class="icon user"></span><span class="datetime secondary-text"><a rel="nofollow" href="http://blog.sci-smart.ru/2013/06/nrf24l01.html?showComment=1377345723780#c8057653016627737975">24 августа 2013 г., 16:02</a></span></div><p id="bc_0_0MC" class="comment-content">Спасибо за статью - помогла систематизировать кашу в голове после прочтения даташита. Надеюсь на дальнейшее её развитие :)</p><span id="bc_0_0MN" class="comment-actions secondary-text" kind="m"><a kind="i" href="javascript:;" target="_self" o="r">Ответить</a><span class="item-control blog-admin pid-1302024530"><a o="d" target="_self" href="https://www.blogger.com/delete-comment.g?blogID=6147491879181811068&postID=8057653016627737975">Удалить</a></span></span></div><div id="bc_0_0BR" class="comment-replies"></div><div id="bc_0_0B_box" class="comment-replybox-single"></div></li><li id="bc_0_2B" class="comment" kind="b"><div class="avatar-image-container"><img src="./Посторонним В._ Работа с беспроводным трансивером nRF24L01_files/b36-rounded.png"></div><div id="c1878345959394547213" class="comment-block"><div id="bc_0_2M" class="comment-header" kind="m"><cite class="user"><a rel="nofollow" href="https://www.blogger.com/profile/16935203177272946358">Михаил Карлсон</a></cite><span class="icon user"></span><span class="datetime secondary-text"><a rel="nofollow" href="http://blog.sci-smart.ru/2013/06/nrf24l01.html?showComment=1377677582620#c1878345959394547213">28 августа 2013 г., 12:13</a></span></div><p id="bc_0_2MC" class="comment-content">Спасибо за статью! Пытаюсь написать код для общения 2 железок. Делал, как Вы говорили, сначало пообщался по SPI, все заработало и стало ясно, потом решил толкнуть в эфир. Но тут беда. Уже дня 4 тра... У передатчика срабатывает прерывание IRQ = 0? проверяю статус, Сначало 1Е, потом по мере заполнения буфера 1F. Приемник сидит в ожидании IRQ. Что может быть? <br><br>В асме не рулю, точнее очень слаб. Не могли бы вы на пальцах рассказать последовательность действий. <br>Спасибо!</p><span id="bc_0_2MN" class="comment-actions secondary-text" kind="m"><a kind="i" href="javascript:;" target="_self" o="r">Ответить</a><span class="item-control blog-admin pid-1261844811"><a o="d" target="_self" href="https://www.blogger.com/delete-comment.g?blogID=6147491879181811068&postID=1878345959394547213">Удалить</a></span></span></div><div id="bc_0_2BR" class="comment-replies"><span id="bc_0_2b+seedJCfHD" kind="d"><div id="bc_0_1T" class="comment-thread inline-thread" kind="t" t="0" u="0"><span id="bc_0_1TT" class="thread-toggle thread-expanded" kind="g"><span id="bc_0_1TA" class="thread-arrow"></span><span id="bc_0_1TN" class="thread-count"><span id="bc_0_1TNT" style="display: none;"></span><span id="bc_0_1TNU" style="display: none;"></span><a href="javascript:;" target="_self">Ответы</a><div id="bc_0_1TD" class="thread-dropContainer thread-expanded"><span class="thread-drop"></span></div></span></span><ol id="bc_0_1TC" class="thread-chrome thread-expanded"><div><li id="bc_0_1B" class="comment" kind="b"><div class="avatar-image-container"><img src="./Посторонним В._ Работа с беспроводным трансивером nRF24L01_files/b36-rounded.png"></div><div id="c1697850140550916226" class="comment-block"><div id="bc_0_1M" class="comment-header" kind="m"><cite class="user blog-author"><a rel="nofollow" href="https://www.blogger.com/profile/09214395132755730867">Валерий Кадышев</a></cite><span class="icon user blog-author"></span><span class="datetime secondary-text"><a rel="nofollow" href="http://blog.sci-smart.ru/2013/06/nrf24l01.html?showComment=1377677846910#c1697850140550916226">28 августа 2013 г., 12:17</a></span></div><p id="bc_0_1MC" class="comment-content">а изучали приложенный к статье архив проекта?</p><span id="bc_0_1MN" class="comment-actions secondary-text" kind="m"><span class="item-control blog-admin pid-2043682417"><a o="d" target="_self" href="https://www.blogger.com/delete-comment.g?blogID=6147491879181811068&postID=1697850140550916226">Удалить</a></span></span></div><div id="bc_0_1BR" class="comment-replies"></div><div id="bc_0_1B_box" class="comment-replybox-single"></div></li></div><div id="bc_0_1I" class="continue" kind="ci"><a href="javascript:;" target="_self">Ответить</a></div></ol><div id="bc_0_1T_box" class="comment-replybox-thread"></div></div></span></div><div id="bc_0_2B_box" class="comment-replybox-single"></div></li><li id="bc_0_3B" class="comment" kind="b"><div class="avatar-image-container"><img src="./Посторонним В._ Работа с беспроводным трансивером nRF24L01_files/b36-rounded.png"></div><div id="c1290738223460150363" class="comment-block"><div id="bc_0_3M" class="comment-header" kind="m"><cite class="user"><a rel="nofollow" href="https://www.blogger.com/profile/16935203177272946358">Михаил Карлсон</a></cite><span class="icon user"></span><span class="datetime secondary-text"><a rel="nofollow" href="http://blog.sci-smart.ru/2013/06/nrf24l01.html?showComment=1377680141724#c1290738223460150363">28 августа 2013 г., 12:55</a></span></div><p id="bc_0_3MC" class="comment-content">Ну даташит да, а второй пока изучаю. Начал минут 15 назад:)</p><span id="bc_0_3MN" class="comment-actions secondary-text" kind="m"><a kind="i" href="javascript:;" target="_self" o="r">Ответить</a><span class="item-control blog-admin pid-1261844811"><a o="d" target="_self" href="https://www.blogger.com/delete-comment.g?blogID=6147491879181811068&postID=1290738223460150363">Удалить</a></span></span></div><div id="bc_0_3BR" class="comment-replies"></div><div id="bc_0_3B_box" class="comment-replybox-single"></div></li><li id="bc_0_5B" class="comment" kind="b"><div class="avatar-image-container"><img src="./Посторонним В._ Работа с беспроводным трансивером nRF24L01_files/b36-rounded.png"></div><div id="c160617646294173847" class="comment-block"><div id="bc_0_5M" class="comment-header" kind="m"><cite class="user"><a rel="nofollow" href="https://www.blogger.com/profile/16935203177272946358">Михаил Карлсон</a></cite><span class="icon user"></span><span class="datetime secondary-text"><a rel="nofollow" href="http://blog.sci-smart.ru/2013/06/nrf24l01.html?showComment=1377680571835#c160617646294173847">28 августа 2013 г., 13:02</a></span></div><p id="bc_0_5MC" class="comment-content">Архив проекта не могу читать. Ссылка не работает</p><span id="bc_0_5MN" class="comment-actions secondary-text" kind="m"><a kind="i" href="javascript:;" target="_self" o="r">Ответить</a><span class="item-control blog-admin pid-1261844811"><a o="d" target="_self" href="https://www.blogger.com/delete-comment.g?blogID=6147491879181811068&postID=160617646294173847">Удалить</a></span></span></div><div id="bc_0_5BR" class="comment-replies"><span id="bc_0_5b+seedJCfKD" kind="d"><div id="bc_0_4T" class="comment-thread inline-thread" kind="t" t="0" u="0"><span id="bc_0_4TT" class="thread-toggle thread-expanded" kind="g"><span id="bc_0_4TA" class="thread-arrow"></span><span id="bc_0_4TN" class="thread-count"><span id="bc_0_4TNT" style="display: none;"></span><span id="bc_0_4TNU" style="display: none;"></span><a href="javascript:;" target="_self">Ответы</a><div id="bc_0_4TD" class="thread-dropContainer thread-expanded"><span class="thread-drop"></span></div></span></span><ol id="bc_0_4TC" class="thread-chrome thread-expanded"><div><li id="bc_0_4B" class="comment" kind="b"><div class="avatar-image-container"><img src="./Посторонним В._ Работа с беспроводным трансивером nRF24L01_files/b36-rounded.png"></div><div id="c1631036123130248616" class="comment-block"><div id="bc_0_4M" class="comment-header" kind="m"><cite class="user blog-author"><a rel="nofollow" href="https://www.blogger.com/profile/09214395132755730867">Валерий Кадышев</a></cite><span class="icon user blog-author"></span><span class="datetime secondary-text"><a rel="nofollow" href="http://blog.sci-smart.ru/2013/06/nrf24l01.html?showComment=1377682142981#c1631036123130248616">28 августа 2013 г., 13:29</a></span></div><p id="bc_0_4MC" class="comment-content">обновил ссылку на архив. честно говоря даже не знаю, куда более подробнее. может покажете свой код? на чем, кстати, на Сях?</p><span id="bc_0_4MN" class="comment-actions secondary-text" kind="m"><span class="item-control blog-admin pid-2043682417"><a o="d" target="_self" href="https://www.blogger.com/delete-comment.g?blogID=6147491879181811068&postID=1631036123130248616">Удалить</a></span></span></div><div id="bc_0_4BR" class="comment-replies"></div><div id="bc_0_4B_box" class="comment-replybox-single"></div></li></div><div id="bc_0_4I" class="continue" kind="ci"><a href="javascript:;" target="_self">Ответить</a></div></ol><div id="bc_0_4T_box" class="comment-replybox-thread"></div></div></span></div><div id="bc_0_5B_box" class="comment-replybox-single"></div></li><li id="bc_0_7B" class="comment" kind="b"><div class="avatar-image-container"><img src="./Посторонним В._ Работа с беспроводным трансивером nRF24L01_files/b36-rounded.png"></div><div id="c2585518375213489898" class="comment-block"><div id="bc_0_7M" class="comment-header" kind="m"><cite class="user"><a rel="nofollow" href="https://www.blogger.com/profile/16935203177272946358">Михаил Карлсон</a></cite><span class="icon user"></span><span class="datetime secondary-text"><a rel="nofollow" href="http://blog.sci-smart.ru/2013/06/nrf24l01.html?showComment=1377683195693#c2585518375213489898">28 августа 2013 г., 13:46</a></span></div><p id="bc_0_7MC" class="comment-content">Да ссылка заработала. Пишу на Proton IDE. Basic под PIC. Вот ссылка http://yadi.sk/d/Q82XMJ8Z8Q2ID</p><span id="bc_0_7MN" class="comment-actions secondary-text" kind="m"><a kind="i" href="javascript:;" target="_self" o="r">Ответить</a><span class="item-control blog-admin pid-1261844811"><a o="d" target="_self" href="https://www.blogger.com/delete-comment.g?blogID=6147491879181811068&postID=2585518375213489898">Удалить</a></span></span></div><div id="bc_0_7BR" class="comment-replies"><span id="bc_0_7b+seedJCfMD" kind="d"><div id="bc_0_6T" class="comment-thread inline-thread" kind="t" t="0" u="0"><span id="bc_0_6TT" class="thread-toggle thread-expanded" kind="g"><span id="bc_0_6TA" class="thread-arrow"></span><span id="bc_0_6TN" class="thread-count"><span id="bc_0_6TNT" style="display: none;"></span><span id="bc_0_6TNU" style="display: none;"></span><a href="javascript:;" target="_self">Ответы</a><div id="bc_0_6TD" class="thread-dropContainer thread-expanded"><span class="thread-drop"></span></div></span></span><ol id="bc_0_6TC" class="thread-chrome thread-expanded"><div><li id="bc_0_6B" class="comment" kind="b"><div class="avatar-image-container"><img src="./Посторонним В._ Работа с беспроводным трансивером nRF24L01_files/b36-rounded.png"></div><div id="c8843449008428355602" class="comment-block"><div id="bc_0_6M" class="comment-header" kind="m"><cite class="user blog-author"><a rel="nofollow" href="https://www.blogger.com/profile/09214395132755730867">Валерий Кадышев</a></cite><span class="icon user blog-author"></span><span class="datetime secondary-text"><a rel="nofollow" href="http://blog.sci-smart.ru/2013/06/nrf24l01.html?showComment=1377683969379#c8843449008428355602">28 августа 2013 г., 13:59</a></span></div><p id="bc_0_6MC" class="comment-content">ну так у меня проект под AVR. я по PIC никак не помогу</p><span id="bc_0_6MN" class="comment-actions secondary-text" kind="m"><span class="item-control blog-admin pid-2043682417"><a o="d" target="_self" href="https://www.blogger.com/delete-comment.g?blogID=6147491879181811068&postID=8843449008428355602">Удалить</a></span></span></div><div id="bc_0_6BR" class="comment-replies"></div><div id="bc_0_6B_box" class="comment-replybox-single"></div></li></div><div id="bc_0_6I" class="continue" kind="ci"><a href="javascript:;" target="_self">Ответить</a></div></ol><div id="bc_0_6T_box" class="comment-replybox-thread"></div></div></span></div><div id="bc_0_7B_box" class="comment-replybox-single"></div></li><li id="bc_0_9B" class="comment" kind="b"><div class="avatar-image-container"><img src="./Посторонним В._ Работа с беспроводным трансивером nRF24L01_files/b36-rounded.png"></div><div id="c6565957101942865682" class="comment-block"><div id="bc_0_9M" class="comment-header" kind="m"><cite class="user"><a rel="nofollow" href="https://www.blogger.com/profile/16935203177272946358">Михаил Карлсон</a></cite><span class="icon user"></span><span class="datetime secondary-text"><a rel="nofollow" href="http://blog.sci-smart.ru/2013/06/nrf24l01.html?showComment=1377684561333#c6565957101942865682">28 августа 2013 г., 14:09</a></span></div><p id="bc_0_9MC" class="comment-content">Так я же код не прошу. Просто на человеческом языке можете объяснить что за чем следует. <br>Я делаю так: Сначало поднимаю CSN и опускаю CE, потом опускаю CSN и закидываю адрес, потом регистр, поднимаю CSN, и так пока все адреса не пройду. </p><span id="bc_0_9MN" class="comment-actions secondary-text" kind="m"><a kind="i" href="javascript:;" target="_self" o="r">Ответить</a><span class="item-control blog-admin pid-1261844811"><a o="d" target="_self" href="https://www.blogger.com/delete-comment.g?blogID=6147491879181811068&postID=6565957101942865682">Удалить</a></span></span></div><div id="bc_0_9BR" class="comment-replies"><span id="bc_0_9b+seedJCfOD" kind="d"><div id="bc_0_8T" class="comment-thread inline-thread" kind="t" t="0" u="0"><span id="bc_0_8TT" class="thread-toggle thread-expanded" kind="g"><span id="bc_0_8TA" class="thread-arrow"></span><span id="bc_0_8TN" class="thread-count"><span id="bc_0_8TNT" style="display: none;"></span><span id="bc_0_8TNU" style="display: none;"></span><a href="javascript:;" target="_self">Ответы</a><div id="bc_0_8TD" class="thread-dropContainer thread-expanded"><span class="thread-drop"></span></div></span></span><ol id="bc_0_8TC" class="thread-chrome thread-expanded"><div><li id="bc_0_8B" class="comment" kind="b"><div class="avatar-image-container"><img src="./Посторонним В._ Работа с беспроводным трансивером nRF24L01_files/b36-rounded.png"></div><div id="c6990477474128647107" class="comment-block"><div id="bc_0_8M" class="comment-header" kind="m"><cite class="user blog-author"><a rel="nofollow" href="https://www.blogger.com/profile/09214395132755730867">Валерий Кадышев</a></cite><span class="icon user blog-author"></span><span class="datetime secondary-text"><a rel="nofollow" href="http://blog.sci-smart.ru/2013/06/nrf24l01.html?showComment=1377689060130#c6990477474128647107">28 августа 2013 г., 15:24</a></span></div><p id="bc_0_8MC" class="comment-content">я адреса вообще не трогал. по дефолтным все отсылалось.<br>на передатчике сначала записывается регистр W_TX_PAYLOAD, с общением по SPI вопросов не возникает, как я понял.<br>во время записи регистра CSN опущено, CE тоже.<br>по окончании записи регистра CSN поднимается.<br>далее, чтобы пошла отправка дергаем CE на 10мкс в состояние единицы.<br><br>все, на приемнике должно быть прерывание<br></p><span id="bc_0_8MN" class="comment-actions secondary-text" kind="m"><span class="item-control blog-admin pid-2043682417"><a o="d" target="_self" href="https://www.blogger.com/delete-comment.g?blogID=6147491879181811068&postID=6990477474128647107">Удалить</a></span></span></div><div id="bc_0_8BR" class="comment-replies"></div><div id="bc_0_8B_box" class="comment-replybox-single"></div></li></div><div id="bc_0_8I" class="continue" kind="ci"><a href="javascript:;" target="_self">Ответить</a></div></ol><div id="bc_0_8T_box" class="comment-replybox-thread"></div></div></span></div><div id="bc_0_9B_box" class="comment-replybox-single"></div></li><li id="bc_0_10B" class="comment" kind="b"><div class="avatar-image-container"><img src="./Посторонним В._ Работа с беспроводным трансивером nRF24L01_files/b36-rounded.png"></div><div id="c3526806807186855836" class="comment-block"><div id="bc_0_10M" class="comment-header" kind="m"><cite class="user"><a rel="nofollow" href="https://www.blogger.com/profile/16935203177272946358">Михаил Карлсон</a></cite><span class="icon user"></span><span class="datetime secondary-text"><a rel="nofollow" href="http://blog.sci-smart.ru/2013/06/nrf24l01.html?showComment=1377692293529#c3526806807186855836">28 августа 2013 г., 16:18</a></span></div><p id="bc_0_10MC" class="comment-content">Ага должно быть! Но нет прерывания. Уже пробовал менять местами модули. </p><span id="bc_0_10MN" class="comment-actions secondary-text" kind="m"><a kind="i" href="javascript:;" target="_self" o="r">Ответить</a><span class="item-control blog-admin pid-1261844811"><a o="d" target="_self" href="https://www.blogger.com/delete-comment.g?blogID=6147491879181811068&postID=3526806807186855836">Удалить</a></span></span></div><div id="bc_0_10BR" class="comment-replies"></div><div id="bc_0_10B_box" class="comment-replybox-single"></div></li><li id="bc_0_11B" class="comment" kind="b"><div class="avatar-image-container"><img src="./Посторонним В._ Работа с беспроводным трансивером nRF24L01_files/b36-rounded.png"></div><div id="c4534278845572838177" class="comment-block"><div id="bc_0_11M" class="comment-header" kind="m"><cite class="user"><a rel="nofollow" href="https://www.blogger.com/profile/11342423491804145256">Андрей Кротков</a></cite><span class="icon user"></span><span class="datetime secondary-text"><a rel="nofollow" href="http://blog.sci-smart.ru/2013/06/nrf24l01.html?showComment=1377947586352#c4534278845572838177">31 августа 2013 г., 15:13</a></span></div><p id="bc_0_11MC" class="comment-content">Могу посоветовать читать ещё состаяние FLUSH и выводить на экран (я на период отладки выводин на терминал через USART (атмега правда)) каждый ответ модуля (регистр STATUS) и глядя на то как меняются биты этого регистра добивался одекватной работы (10 часов заняло у меня это удовольствие)<br>P.S. долго не мог понять почему после наладки передатчика до приёмника ни чего не доходтило. Причина была в том что забыл линию CE задрать на верх. Теперь она задрана постоянно на приёмнике.</p><span id="bc_0_11MN" class="comment-actions secondary-text" kind="m"><a kind="i" href="javascript:;" target="_self" o="r">Ответить</a><span class="item-control blog-admin pid-1302024530"><a o="d" target="_self" href="https://www.blogger.com/delete-comment.g?blogID=6147491879181811068&postID=4534278845572838177">Удалить</a></span></span></div><div id="bc_0_11BR" class="comment-replies"></div><div id="bc_0_11B_box" class="comment-replybox-single"></div></li><li id="bc_0_12B" class="comment" kind="b"><div class="avatar-image-container"><img src="./Посторонним В._ Работа с беспроводным трансивером nRF24L01_files/b36-rounded.png"></div><div id="c5878526821476742904" class="comment-block"><div id="bc_0_12M" class="comment-header" kind="m"><cite class="user"><a rel="nofollow" href="https://www.blogger.com/profile/11342423491804145256">Андрей Кротков</a></cite><span class="icon user"></span><span class="datetime secondary-text"><a rel="nofollow" href="http://blog.sci-smart.ru/2013/06/nrf24l01.html?showComment=1377947953741#c5878526821476742904">31 августа 2013 г., 15:19</a></span></div><p id="bc_0_12MC" class="comment-content">Да, и не забывайте после каждого рестарта МК перезагружать и радиомодуль.</p><span id="bc_0_12MN" class="comment-actions secondary-text" kind="m"><a kind="i" href="javascript:;" target="_self" o="r">Ответить</a><span class="item-control blog-admin pid-1302024530"><a o="d" target="_self" href="https://www.blogger.com/delete-comment.g?blogID=6147491879181811068&postID=5878526821476742904">Удалить</a></span></span></div><div id="bc_0_12BR" class="comment-replies"></div><div id="bc_0_12B_box" class="comment-replybox-single"></div></li><li id="bc_0_13B" class="comment" kind="b"><div class="avatar-image-container"><img src="./Посторонним В._ Работа с беспроводным трансивером nRF24L01_files/b36-rounded.png"></div><div id="c842472591471279213" class="comment-block"><div id="bc_0_13M" class="comment-header" kind="m"><cite class="user"><a rel="nofollow" href="https://www.blogger.com/profile/16935203177272946358">Михаил Карлсон</a></cite><span class="icon user"></span><span class="datetime secondary-text"><a rel="nofollow" href="http://blog.sci-smart.ru/2013/06/nrf24l01.html?showComment=1378104289321#c842472591471279213">2 сентября 2013 г., 10:44</a></span></div><p id="bc_0_13MC" class="comment-content">Спасибо! Попробую!</p><span id="bc_0_13MN" class="comment-actions secondary-text" kind="m"><a kind="i" href="javascript:;" target="_self" o="r">Ответить</a><span class="item-control blog-admin pid-1261844811"><a o="d" target="_self" href="https://www.blogger.com/delete-comment.g?blogID=6147491879181811068&postID=842472591471279213">Удалить</a></span></span></div><div id="bc_0_13BR" class="comment-replies"></div><div id="bc_0_13B_box" class="comment-replybox-single"></div></li><li id="bc_0_14B" class="comment" kind="b"><div class="avatar-image-container"><img src="./Посторонним В._ Работа с беспроводным трансивером nRF24L01_files/b36-rounded.png"></div><div id="c2213815403759603727" class="comment-block"><div id="bc_0_14M" class="comment-header" kind="m"><cite class="user"><a rel="nofollow" href="https://www.blogger.com/profile/09350861121809584121">Владислав Колодяжный</a></cite><span class="icon user"></span><span class="datetime secondary-text"><a rel="nofollow" href="http://blog.sci-smart.ru/2013/06/nrf24l01.html?showComment=1386137704995#c2213815403759603727">4 декабря 2013 г., 10:15</a></span></div><p id="bc_0_14MC" class="comment-content">Всем привет. Сделал машинный перевод описания всех регистров. Могу скинуть,что бы кто нить перевел до понятного русского. </p><span id="bc_0_14MN" class="comment-actions secondary-text" kind="m"><a kind="i" href="javascript:;" target="_self" o="r">Ответить</a><span class="item-control blog-admin pid-1648796768"><a o="d" target="_self" href="https://www.blogger.com/delete-comment.g?blogID=6147491879181811068&postID=2213815403759603727">Удалить</a></span></span></div><div id="bc_0_14BR" class="comment-replies"></div><div id="bc_0_14B_box" class="comment-replybox-single"></div></li><li id="bc_0_15B" class="comment" kind="b"><div class="avatar-image-container"><img src="./Посторонним В._ Работа с беспроводным трансивером nRF24L01_files/openid36-rounded.png"></div><div id="c4627909884705801231" class="comment-block"><div id="bc_0_15M" class="comment-header" kind="m"><cite class="user"><a rel="nofollow" href="http://aloika.livejournal.com/">aloika</a></cite><span class="icon user"></span><span class="datetime secondary-text"><a rel="nofollow" href="http://blog.sci-smart.ru/2013/06/nrf24l01.html?showComment=1400262690337#c4627909884705801231">16 мая 2014 г., 21:51</a></span></div><p id="bc_0_15MC" class="comment-content">Еще замечания:<br> - обязательно нужно поставить конденсатор на питание модуля, я поставил 4,7 мкФ (достаточно, наверное, и 1 мкФ, не электролит)<br>- выход IRQ не должен висеть в воздухе, если не нужен, нужно подключить через резистор в 150-200 кОм к плюсу или минусу питания.</p><span id="bc_0_15MN" class="comment-actions secondary-text" kind="m"><a kind="i" href="javascript:;" target="_self" o="r">Ответить</a><span class="item-control blog-admin pid-419943047"><a o="d" target="_self" href="https://www.blogger.com/delete-comment.g?blogID=6147491879181811068&postID=4627909884705801231">Удалить</a></span></span></div><div id="bc_0_15BR" class="comment-replies"></div><div id="bc_0_15B_box" class="comment-replybox-single"></div></li></ol><div id="bc_0_16I" class="continue" kind="ci" style="display: none;"><a href="javascript:;" target="_self">Добавить комментарий</a></div><div id="bc_0_16T_box" class="comment-replybox-thread"><iframe allowtransparency="true" class="blogger-iframe-colorize blogger-comment-from-post" frameborder="0" height="254px" id="comment-editor" name="comment-editor" src="./Посторонним В._ Работа с беспроводным трансивером nRF24L01_files/comment-iframe.html" width="100%" style="display: block;"></iframe></div><div id="bc_0_16L" class="loadmore loaded" kind="rb"><a href="javascript:;" target="_self">Ещё</a></div></div></div></div></div>
+</div>
+<p class="comment-footer">
+</p><div class="comment-form">
+<a name="comment-form"></a>
+<p>
+</p>
+<a href="https://www.blogger.com/comment-iframe.g?blogID=6147491879181811068&postID=8625747934140915420&blogspotRpcToken=5928693" id="comment-editor-src"></a>
+
+<script type="text/javascript" src="./Посторонним В._ Работа с беспроводным трансивером nRF24L01_files/2443413180-comment_from_post_iframe.js"></script>
+<script type="text/javascript">
+      BLOG_CMT_createIframe('https://www.blogger.com/rpc_relay.html');
+    </script>
+</div>
+<p></p>
+<div id="backlinks-container">
+<div id="Blog1_backlinks-container">
+</div>
+</div>
+</div>
+</div>
+<div class="inline-ad">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-6720294033108960";
+google_ad_host = "ca-host-pub-1556223355139109";
+google_ad_host_channel = "L0007";
+/* mexxval_main_Blog1_300x250_as */
+google_ad_slot = "8004672990";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+
+        </div></div>
+      
+</div>
+<div class="blog-pager" id="blog-pager">
+<span id="blog-pager-newer-link">
+<a class="blog-pager-newer-link" href="http://blog.sci-smart.ru/2013/08/cups.html" id="Blog1_blog-pager-newer-link" title="Следующее">Следующее</a>
+</span>
+<span id="blog-pager-older-link">
+<a class="blog-pager-older-link" href="http://blog.sci-smart.ru/2013/06/blog-post_12.html" id="Blog1_blog-pager-older-link" title="Предыдущее">Предыдущее</a>
+</span>
+<a class="home-link" href="http://blog.sci-smart.ru/">Главная страница</a>
+</div>
+<div class="clear"></div>
+<div class="post-feeds">
+<div class="feed-links">
+Подписаться на:
+<a class="feed-link" href="http://blog.sci-smart.ru/feeds/8625747934140915420/comments/default" target="_blank" type="application/atom+xml">Комментарии к сообщению (Atom)</a>
+</div>
+</div>
+<script type="text/javascript">window.___gcfg = {'lang': 'ru'};</script>
+</div></div>
+</div>
+</div>
+<div class="column-left-outer">
+<div class="column-left-inner">
+<aside>
+</aside>
+</div>
+</div>
+<div class="column-right-outer">
+<div class="column-right-inner">
+<aside>
+<div class="sidebar section" id="sidebar-right-1"><div class="widget AdSense" id="AdSense1">
+<div class="widget-content">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-6720294033108960";
+google_ad_host = "ca-host-pub-1556223355139109";
+google_ad_host_channel = "L0001";
+/* mexxval_sidebar-right-1_AdSense1_160x600_as */
+google_ad_slot = "9481406195";
+google_ad_width = 160;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=6147491879181811068&widgetType=AdSense&widgetId=AdSense1&action=editWidget&sectionId=sidebar-right-1" onclick="return _WidgetManager._PopupConfig(document.getElementById(&quot;AdSense1&quot;));" target="configAdSense1" title="Изменить">
+<img alt="" height="18" src="./Посторонним В._ Работа с беспроводным трансивером nRF24L01_files/icon18_wrench_allbkg.png" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div>
+</div><div class="widget HTML" id="HTML2">
+<h2 class="title">Смотри также</h2>
+<div class="widget-content">
+мой канал на <a href="https://www.youtube.com/mexxval">youtube</a>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=6147491879181811068&widgetType=HTML&widgetId=HTML2&action=editWidget&sectionId=sidebar-right-1" onclick="return _WidgetManager._PopupConfig(document.getElementById(&quot;HTML2&quot;));" target="configHTML2" title="Изменить">
+<img alt="" height="18" src="./Посторонним В._ Работа с беспроводным трансивером nRF24L01_files/icon18_wrench_allbkg.png" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div><div class="widget Label" id="Label1">
+<h2>Ярлыки</h2>
+<div class="widget-content cloud-label-widget-content">
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/.rtorrent.rc">.rtorrent.rc</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/AceStream">AceStream</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/adblock">adblock</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/android">android</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-2">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/at-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4%D1%8B">at-команды</a>
+<span class="label-count" dir="ltr">(2)</span>
+</span>
+<span class="label-size label-size-3">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/avr">avr</a>
+<span class="label-count" dir="ltr">(3)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/bada%202">bada 2</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/basic-auth">basic-auth</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/bind9">bind9</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/bug">bug</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/buzzer">buzzer</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/collision">collision</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-2">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/com">com</a>
+<span class="label-count" dir="ltr">(2)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/config">config</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/cp1251">cp1251</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/cups">cups</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/curl">curl</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/curlopt_connecttimeout_ms">curlopt_connecttimeout_ms</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/curlopt_timeout_ms">curlopt_timeout_ms</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/dyndns">dyndns</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/ESF2450">ESF2450</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/fastcgi">fastcgi</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/fedora">fedora</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/free%20dns%20hosting">free dns hosting</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/html">html</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/IE">IE</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/javascript">javascript</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-4">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/linux">linux</a>
+<span class="label-count" dir="ltr">(5)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/locale">locale</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/logout">logout</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/max-width">max-width</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/Meizu%20M2%20note">Meizu M2 note</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/nginx">nginx</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-3">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/nRF24">nRF24</a>
+<span class="label-count" dir="ltr">(3)</span>
+</span>
+<span class="label-size label-size-3">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/nRF24L01">nRF24L01</a>
+<span class="label-count" dir="ltr">(3)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/online%20tv">online tv</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/pass-by-reference">pass-by-reference</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-2">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/PDU">PDU</a>
+<span class="label-count" dir="ltr">(2)</span>
+</span>
+<span class="label-size label-size-4">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/php">php</a>
+<span class="label-count" dir="ltr">(5)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/php-fpm">php-fpm</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-2">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/rtmp">rtmp</a>
+<span class="label-count" dir="ltr">(2)</span>
+</span>
+<span class="label-size label-size-2">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/rtorrent">rtorrent</a>
+<span class="label-count" dir="ltr">(2)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/rutube">rutube</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/samba">samba</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/samsung">samsung</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/sequential%20download">sequential download</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-2">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/siemens">siemens</a>
+<span class="label-count" dir="ltr">(2)</span>
+</span>
+<span class="label-size label-size-2">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/sms">sms</a>
+<span class="label-count" dir="ltr">(2)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/ssh">ssh</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/svn">svn</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/timeout">timeout</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/titanium">titanium</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/torrent-tv">torrent-tv</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-2">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/uart">uart</a>
+<span class="label-count" dir="ltr">(2)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/uart%20network">uart network</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/utf-8">utf-8</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/virtualbox">virtualbox</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/wifi%20stuck">wifi stuck</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/win">win</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-3">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/xbmc">xbmc</a>
+<span class="label-count" dir="ltr">(3)</span>
+</span>
+<span class="label-size label-size-2">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/%D0%B0%D0%B2%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F">автоматизация</a>
+<span class="label-count" dir="ltr">(2)</span>
+</span>
+<span class="label-size label-size-3">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/%D0%B0%D0%B2%D1%82%D0%BE%D0%BD%D0%BE%D0%BC%D0%BD%D0%B0%D1%8F%20%D1%8D%D0%BD%D0%B5%D1%80%D0%B3%D0%B5%D1%82%D0%B8%D0%BA%D0%B0">автономная энергетика</a>
+<span class="label-count" dir="ltr">(3)</span>
+</span>
+<span class="label-size label-size-3">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/%D0%B0%D0%B2%D1%82%D0%BE%D0%BD%D0%BE%D0%BC%D0%BD%D1%8B%D0%B9%20%D1%81%D0%B2%D0%B5%D1%82">автономный свет</a>
+<span class="label-count" dir="ltr">(3)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/%D0%B0%D0%B2%D1%82%D0%BE%D1%80%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F">авторизация</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-4">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/%D0%B0%D0%BB%D1%8C%D1%82%D0%B5%D1%80%D0%BD%D0%B0%D1%82%D0%B8%D0%B2%D0%BD%D0%B0%D1%8F%20%D1%8D%D0%BD%D0%B5%D1%80%D0%B3%D0%B8%D1%8F">альтернативная энергия</a>
+<span class="label-count" dir="ltr">(4)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/%D0%90%D0%A2%D0%9E%D0%9B">АТОЛ</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/%D0%B0%D1%83%D1%82%D0%B5%D0%BD%D1%82%D0%B8%D1%84%D0%B8%D0%BA%D0%B0%D1%86%D0%B8%D1%8F">аутентификация</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/%D0%B1%D0%BB%D0%BE%D0%BA%D0%B8%D1%80%D0%BE%D0%B2%D0%BA%D0%B0%20%D1%80%D0%B5%D0%BA%D0%BB%D0%B0%D0%BC%D1%8B">блокировка рекламы</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/%D0%B1%D1%83%D0%B1%D0%B5%D0%BD">бубен</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/%D0%B3%D1%80%D0%B0%D0%B1%D0%B1%D0%B8%D0%BD%D0%B3">граббинг</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/%D0%B4%D0%BE%D0%BB%D0%BE%D0%B9%20%D1%80%D0%B5%D0%BA%D0%BB%D0%B0%D0%BC%D1%83">долой рекламу</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-2">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/%D0%96%D0%9A%D0%A5%20%D1%81%D0%B0%D1%81%D0%B0%D1%82%D1%8C">ЖКХ сасать</a>
+<span class="label-count" dir="ltr">(2)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/%D0%B8%D0%BE%D0%BD%D0%B8%D1%81%D1%82%D0%BE%D1%80">ионистор</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/%D0%BA%D0%B8%D1%82%D0%B0%D0%B9">китай</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/%D0%9A%D0%9A%D0%9C">ККМ</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-2">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/%D0%BA%D0%BB%D0%B0%D1%81%D1%81%D0%BD%D1%8B%D0%B9%20%D1%82%D1%80%D0%B5%D0%BA">классный трек</a>
+<span class="label-count" dir="ltr">(2)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/%D0%BC%D0%BE%D0%B1%D0%B8%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5%20%D0%BF%D1%80%D0%B8%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D1%8F">мобильные приложения</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/%D0%BF%D0%B5%D1%80%D0%B5%D0%B4%D0%B0%D1%87%D0%B0%20%D0%BF%D0%BE%20%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B5">передача по ссылке</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/%D0%BF%D0%B5%D1%87%D0%B0%D1%82%D1%8C%20%D0%B8%D0%B7%20%D0%BA%D0%BE%D0%BD%D1%81%D0%BE%D0%BB%D0%B8">печать из консоли</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/%D0%BF%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F%20%D0%B7%D0%B0%D0%BA%D0%B0%D1%87%D0%BA%D0%B0%20%D1%82%D0%BE%D1%80%D1%80%D0%B5%D0%BD%D1%82%D0%BE%D0%B2">последовательная закачка торрентов</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-5">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/%D0%BF%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA%D0%B0">практика</a>
+<span class="label-count" dir="ltr">(7)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/%D0%BF%D1%80%D0%BE%D1%82%D0%BE%D0%BA%D0%BE%D0%BB%20%D0%BE%D0%B1%D0%BC%D0%B5%D0%BD%D0%B0">протокол обмена</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/%D0%BF%D1%80%D0%BE%D1%88%D0%B8%D0%B2%D0%BA%D0%B0">прошивка</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/%D1%80%D0%B5%D0%BA%D1%83%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80">рекуператор</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-2">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/%D1%80%D0%B5%D0%BC%D0%BE%D0%BD%D1%82">ремонт</a>
+<span class="label-count" dir="ltr">(2)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/%D1%80%D0%BE%D0%B1%D0%BE%D1%82%D1%8B">роботы</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/%D1%81%D0%BE%D0%B1%D1%8B%D1%82%D0%B8%D1%8F">события</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-2">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/%D1%81%D0%BE%D0%BB%D0%BD%D0%B5%D1%87%D0%BD%D0%B0%D1%8F%20%D0%B1%D0%B0%D1%82%D0%B0%D1%80%D0%B5%D1%8F">солнечная батарея</a>
+<span class="label-count" dir="ltr">(2)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/%D1%82%D0%B5%D0%BF%D0%BB%D0%BE%D0%B8%D0%B7%D0%BE%D0%BB%D1%8F%D1%86%D0%B8%D1%8F">теплоизоляция</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/%D1%82%D0%BE%D1%80%D1%80%D0%B5%D0%BD%D1%82">торрент</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-3">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/%D1%82%D1%80%D0%B0%D0%BD%D1%81%D0%B8%D0%B2%D0%B5%D1%80%D1%8B">трансиверы</a>
+<span class="label-count" dir="ltr">(3)</span>
+</span>
+<span class="label-size label-size-2">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/%D1%82%D1%80%D0%B5%D0%BF">треп</a>
+<span class="label-count" dir="ltr">(2)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/%D1%83%D0%BC%D0%BD%D1%8B%D0%B9%20%D0%B4%D0%BE%D0%BC">умный дом</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/%D1%84%D0%B8%D1%81%D0%BA%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9%20%D0%BF%D1%80%D0%B8%D0%BD%D1%82%D0%B5%D1%80">фискальный принтер</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-2">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/%D1%87%D1%82%D0%BE%20%D0%B2%D0%BD%D1%83%D1%82%D1%80%D0%B8">что внутри</a>
+<span class="label-count" dir="ltr">(2)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/%D0%A8%D1%82%D1%80%D0%B8%D1%85-%D0%9C">Штрих-М</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-5">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/%D1%8D%D0%BD%D0%B5%D1%80%D0%B3%D0%BE%D1%81%D0%B1%D0%B5%D1%80%D0%B5%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5">энергосбережение</a>
+<span class="label-count" dir="ltr">(6)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://blog.sci-smart.ru/search/label/%D1%8E%D0%BC%D0%BE%D1%80">юмор</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=6147491879181811068&widgetType=Label&widgetId=Label1&action=editWidget&sectionId=sidebar-right-1" onclick="return _WidgetManager._PopupConfig(document.getElementById(&quot;Label1&quot;));" target="configLabel1" title="Изменить">
+<img alt="" height="18" src="./Посторонним В._ Работа с беспроводным трансивером nRF24L01_files/icon18_wrench_allbkg.png" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div>
+</div><div class="widget BlogArchive" id="BlogArchive1">
+<h2>Архив блога</h2>
+<div class="widget-content">
+<div id="ArchiveList">
+<div id="BlogArchive1_ArchiveList">
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://blog.sci-smart.ru/search?updated-min=2015-01-01T00:00:00%2B03:00&updated-max=2016-01-01T00:00:00%2B03:00&max-results=4">
+2015
+</a>
+<span class="post-count" dir="ltr">(4)</span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://blog.sci-smart.ru/2015_11_01_archive.html">
+ноября
+</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://blog.sci-smart.ru/2015_07_01_archive.html">
+июля
+</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://blog.sci-smart.ru/2015_06_01_archive.html">
+июня
+</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://blog.sci-smart.ru/search?updated-min=2014-01-01T00:00:00%2B04:00&updated-max=2015-01-01T00:00:00%2B03:00&max-results=12">
+2014
+</a>
+<span class="post-count" dir="ltr">(12)</span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://blog.sci-smart.ru/2014_11_01_archive.html">
+ноября
+</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://blog.sci-smart.ru/2014_10_01_archive.html">
+октября
+</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://blog.sci-smart.ru/2014_08_01_archive.html">
+августа
+</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://blog.sci-smart.ru/2014_07_01_archive.html">
+июля
+</a>
+<span class="post-count" dir="ltr">(3)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://blog.sci-smart.ru/2014_04_01_archive.html">
+апреля
+</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://blog.sci-smart.ru/2014_03_01_archive.html">
+марта
+</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://blog.sci-smart.ru/2014_02_01_archive.html">
+февраля
+</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate expanded">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy toggle-open">
+
+        ▼&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://blog.sci-smart.ru/search?updated-min=2013-01-01T00:00:00%2B04:00&updated-max=2014-01-01T00:00:00%2B04:00&max-results=9">
+2013
+</a>
+<span class="post-count" dir="ltr">(9)</span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://blog.sci-smart.ru/2013_12_01_archive.html">
+декабря
+</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://blog.sci-smart.ru/2013_08_01_archive.html">
+августа
+</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate expanded">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy toggle-open">
+
+        ▼&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://blog.sci-smart.ru/2013_06_01_archive.html">
+июня
+</a>
+<span class="post-count" dir="ltr">(3)</span>
+<ul class="posts">
+<li><a href="./Посторонним В._ Работа с беспроводным трансивером nRF24L01_files/Посторонним В._ Работа с беспроводным трансивером nRF24L01.html">Работа с беспроводным трансивером nRF24L01</a></li>
+<li><a href="http://blog.sci-smart.ru/2013/06/blog-post_12.html">Альтернативная энергетика в действии</a></li>
+<li><a href="http://blog.sci-smart.ru/2013/06/blog-post.html">Расчет времени работы от ионистора и заряд аккумул...</a></li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://blog.sci-smart.ru/2013_04_01_archive.html">
+апреля
+</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://blog.sci-smart.ru/search?updated-min=2012-01-01T00:00:00%2B04:00&updated-max=2013-01-01T00:00:00%2B04:00&max-results=21">
+2012
+</a>
+<span class="post-count" dir="ltr">(21)</span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://blog.sci-smart.ru/2012_11_01_archive.html">
+ноября
+</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://blog.sci-smart.ru/2012_10_01_archive.html">
+октября
+</a>
+<span class="post-count" dir="ltr">(4)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://blog.sci-smart.ru/2012_09_01_archive.html">
+сентября
+</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://blog.sci-smart.ru/2012_08_01_archive.html">
+августа
+</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://blog.sci-smart.ru/2012_06_01_archive.html">
+июня
+</a>
+<span class="post-count" dir="ltr">(4)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://blog.sci-smart.ru/2012_05_01_archive.html">
+мая
+</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://blog.sci-smart.ru/2012_04_01_archive.html">
+апреля
+</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://blog.sci-smart.ru/2012_03_01_archive.html">
+марта
+</a>
+<span class="post-count" dir="ltr">(3)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://blog.sci-smart.ru/2012_02_01_archive.html">
+февраля
+</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://blog.sci-smart.ru/2012_01_01_archive.html">
+января
+</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://blog.sci-smart.ru/search?updated-min=2011-01-01T00:00:00%2B03:00&updated-max=2012-01-01T00:00:00%2B04:00&max-results=3">
+2011
+</a>
+<span class="post-count" dir="ltr">(3)</span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://blog.sci-smart.ru/2011_12_01_archive.html">
+декабря
+</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="http://blog.sci-smart.ru/2011_11_01_archive.html">
+ноября
+</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=6147491879181811068&widgetType=BlogArchive&widgetId=BlogArchive1&action=editWidget&sectionId=sidebar-right-1" onclick="return _WidgetManager._PopupConfig(document.getElementById(&quot;BlogArchive1&quot;));" target="configBlogArchive1" title="Изменить">
+<img alt="" height="18" src="./Посторонним В._ Работа с беспроводным трансивером nRF24L01_files/icon18_wrench_allbkg.png" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div>
+</div><div class="widget Profile" id="Profile1">
+<h2>Обо мне</h2>
+<div class="widget-content">
+<a href="https://plus.google.com/115943249252563762164"><img alt="Моя фотография" class="profile-img" height="80" src="./Посторонним В._ Работа с беспроводным трансивером nRF24L01_files/photo.jpg" width="80"></a>
+<dl class="profile-datablock">
+<dt class="profile-data">
+<a class="profile-name-link g-profile" href="https://plus.google.com/115943249252563762164" rel="author" style="background-image: url(//www.google.com/images/icons/ui/gprofile_button-16.png);" data-gapiscan="true" data-onload="true" data-gapiattached="true">
+Валерий Кадышев
+</a>
+<br>
+<div id="___follow_0" style="text-indent: 0px; margin: 0px; padding: 0px; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 133px; height: 20px; background: transparent;"><iframe frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 133px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 20px;" tabindex="0" vspace="0" width="100%" id="I1_1447404057638" name="I1_1447404057638" src="./Посторонним В._ Работа с беспроводным трансивером nRF24L01_files/follow.html" data-gapiattached="true"></iframe></div>
+</dt>
+<dd class="profile-textblock">альтруист, атеист, пацифист, не расист, не конформист, программист</dd>
+</dl>
+<a class="profile-link" href="https://plus.google.com/115943249252563762164" rel="author">Просмотреть профиль</a>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=6147491879181811068&widgetType=Profile&widgetId=Profile1&action=editWidget&sectionId=sidebar-right-1" onclick="return _WidgetManager._PopupConfig(document.getElementById(&quot;Profile1&quot;));" target="configProfile1" title="Изменить">
+<img alt="" height="18" src="./Посторонним В._ Работа с беспроводным трансивером nRF24L01_files/icon18_wrench_allbkg.png" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div>
+</div><div class="widget HTML" id="HTML1">
+<h2 class="title">liru</h2>
+<div class="widget-content">
+<!--LiveInternet counter--><script type="text/javascript"><!--
+document.write("<a href='http://www.liveinternet.ru/click' "+
+"target=_blank><img src='//counter.yadro.ru/hit?t26.3;r"+
+escape(document.referrer)+((typeof(screen)=="undefined")?"":
+";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?
+screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
+";"+Math.random()+
+"' alt='' title='LiveInternet: показано число посетителей за"+
+" сегодня' "+
+"border='0' width='88' height='15'><\/a>")
+//--></script><a href="http://www.liveinternet.ru/click" target="_blank"><img src="http://counter.yadro.ru/hit?t26.3;rhttps%3A//www.google.ru/;s1366*768*24;uhttp%3A//blog.sci-smart.ru/2013/06/nrf24l01.html;0.599049230106175" alt="" title="LiveInternet: показано число посетителей за сегодня" border="0" width="88" height="15"></a><!--/LiveInternet-->
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=6147491879181811068&widgetType=HTML&widgetId=HTML1&action=editWidget&sectionId=sidebar-right-1" onclick="return _WidgetManager._PopupConfig(document.getElementById(&quot;HTML1&quot;));" target="configHTML1" title="Изменить">
+<img alt="" height="18" src="./Посторонним В._ Работа с беспроводным трансивером nRF24L01_files/icon18_wrench_allbkg.png" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div></div>
+</aside>
+</div>
+</div>
+</div>
+<div style="clear: both"></div>
+<!-- columns -->
+</div>
+<!-- main -->
+</div>
+</div>
+<div class="main-cap-bottom cap-bottom">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+</div>
+<footer>
+<div class="footer-outer">
+<div class="footer-cap-top cap-top">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+<div class="fauxborder-left footer-fauxborder-left">
+<div class="fauxborder-right footer-fauxborder-right"></div>
+<div class="region-inner footer-inner">
+<div class="foot section" id="footer-1"></div>
+<table border="0" cellpadding="0" cellspacing="0" class="section-columns columns-2">
+<tbody>
+<tr>
+<td class="first columns-cell">
+<div class="foot section" id="footer-2-1"></div>
+</td>
+<td class="columns-cell">
+<div class="foot section" id="footer-2-2"></div>
+</td>
+</tr>
+</tbody>
+</table>
+<!-- outside of the include in order to lock Attribution widget -->
+<div class="foot section" id="footer-3" name="Footer"><div class="widget Attribution" id="Attribution1">
+<div class="widget-content" style="text-align: center;">
+Шаблон "Simple". Технологии <a href="https://www.blogger.com/" target="_blank">Blogger</a>.
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=6147491879181811068&widgetType=Attribution&widgetId=Attribution1&action=editWidget&sectionId=footer-3" onclick="return _WidgetManager._PopupConfig(document.getElementById(&quot;Attribution1&quot;));" target="configAttribution1" title="Изменить">
+<img alt="" height="18" src="./Посторонним В._ Работа с беспроводным трансивером nRF24L01_files/icon18_wrench_allbkg.png" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div></div>
+</div>
+</div>
+<div class="footer-cap-bottom cap-bottom">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+</div>
+</footer>
+<!-- content -->
+</div>
+</div>
+<div class="content-cap-bottom cap-bottom">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+    window.setTimeout(function() {
+        document.body.className = document.body.className.replace('loading', '');
+      }, 10);
+  </script>
+<script type="text/javascript">
+if (window.jstiming) window.jstiming.load.tick('widgetJsBefore');
+</script><script type="text/javascript" src="./Посторонним В._ Работа с беспроводным трансивером nRF24L01_files/291123194-widgets.js"></script>
+<script type="text/javascript" src="./Посторонним В._ Работа с беспроводным трансивером nRF24L01_files/plusone.js" gapi_processed="true"></script>
+<script type="text/javascript">
+if (typeof(BLOG_attachCsiOnload) != 'undefined' && BLOG_attachCsiOnload != null) { window['blogger_templates_experiment_id'] = "templatesV2";window['blogger_blog_id'] = '6147491879181811068';BLOG_attachCsiOnload('item_'); }_WidgetManager._Init('//www.blogger.com/rearrange?blogID\x3d6147491879181811068','//blog.sci-smart.ru/2013/06/nrf24l01.html','6147491879181811068');
+_WidgetManager._SetDataContext([{'name': 'blog', 'data': {'blogId': '6147491879181811068', 'bloggerUrl': 'https://www.blogger.com', 'title': 'Посторонним В.', 'pageType': 'item', 'postId': '8625747934140915420', 'url': 'http://blog.sci-smart.ru/2013/06/nrf24l01.html', 'canonicalUrl': 'http://blog.sci-smart.ru/2013/06/nrf24l01.html', 'homepageUrl': 'http://blog.sci-smart.ru/', 'canonicalHomepageUrl': 'http://blog.sci-smart.ru/', 'blogspotFaviconUrl': 'http://blog.sci-smart.ru/favicon.ico', 'enabledCommentProfileImages': true, 'adultContent': false, 'disableAdSenseWidget': false, 'analyticsAccountNumber': '', 'useUniversalAnalytics': false, 'searchLabel': '', 'searchQuery': '', 'pageName': 'Работа с беспроводным трансивером nRF24L01', 'pageTitle': 'Посторонним В.: Работа с беспроводным трансивером nRF24L01', 'encoding': 'UTF-8', 'locale': 'ru', 'localeUnderscoreDelimited': 'ru', 'isPrivate': false, 'isMobile': false, 'isMobileRequest': false, 'mobileClass': '', 'isPrivateBlog': false, 'languageDirection': 'ltr', 'feedLinks': '\74link rel\75\42alternate\42 type\75\42application/atom+xml\42 title\75\42Посторонним В. - Atom\42 href\75\42http://blog.sci-smart.ru/feeds/posts/default\42 /\76\n\74link rel\75\42alternate\42 type\75\42application/rss+xml\42 title\75\42Посторонним В. - RSS\42 href\75\42http://blog.sci-smart.ru/feeds/posts/default?alt\75rss\42 /\76\n\74link rel\75\42service.post\42 type\75\42application/atom+xml\42 title\75\42Посторонним В. - Atom\42 href\75\42https://www.blogger.com/feeds/6147491879181811068/posts/default\42 /\76\n\n\74link rel\75\42alternate\42 type\75\42application/atom+xml\42 title\75\42Посторонним В. - Atom\42 href\75\42http://blog.sci-smart.ru/feeds/8625747934140915420/comments/default\42 /\76\n', 'meTag': '', 'openIdOpTag': '', 'postImageThumbnailUrl': 'http://2.bp.blogspot.com/-JAPLh7ptVaY/UcC8u8RLpcI/AAAAAAAABWA/ubvFhPmdF94/s72-c/layout_NRF24L01.JPG', 'postImageUrl': 'http://2.bp.blogspot.com/-JAPLh7ptVaY/UcC8u8RLpcI/AAAAAAAABWA/ubvFhPmdF94/s1600/layout_NRF24L01.JPG', 'latencyHeadScript': '\74script type\75\42text/javascript\42\76(function() { (function(){function c(a){this.t\75{};this.tick\75function(a,c,b){var d\75void 0!\75b?b:(new Date).getTime();this.t[a]\75[d,c];if(void 0\75\75b)try{window.console.timeStamp(\42CSI/\42+a)}catch(e){}};this.tick(\42start\42,null,a)}var a;window.performance\46\46(a\75window.performance.timing);var h\75a?new c(a.responseStart):new c;window.jstiming\75{Timer:c,load:h};if(a){var b\75a.navigationStart,e\75a.responseStart;0\74b\46\46e\76\75b\46\46(window.jstiming.srt\75e-b)}if(a){var d\75window.jstiming.load;0\74b\46\46e\76\75b\46\46(d.tick(\42_wtsrt\42,void 0,b),d.tick(\42wtsrt_\42,\n\42_wtsrt\42,e),d.tick(\42tbsd_\42,\42wtsrt_\42))}try{a\75null,window.chrome\46\46window.chrome.csi\46\46(a\75Math.floor(window.chrome.csi().pageT),d\46\0460\74b\46\46(d.tick(\42_tbnd\42,void 0,window.chrome.csi().startE),d.tick(\42tbnd_\42,\42_tbnd\42,b))),null\75\75a\46\46window.gtbExternal\46\46(a\75window.gtbExternal.pageT()),null\75\75a\46\46window.external\46\46(a\75window.external.pageT,d\46\0460\74b\46\46(d.tick(\42_tbnd\42,void 0,window.external.startE),d.tick(\42tbnd_\42,\42_tbnd\42,b))),a\46\46(window.jstiming.pt\75a)}catch(k){}})();window.tickAboveFold\75function(c){var a\0750;if(c.offsetParent){do a+\75c.offsetTop;while(c\75c.offsetParent)}c\75a;750\76\75c\46\46window.jstiming.load.tick(\42aft\42)};var f\75!1;function g(){f||(f\75!0,window.jstiming.load.tick(\42firstScrollTime\42))}window.addEventListener?window.addEventListener(\42scroll\42,g,!1):window.attachEvent(\42onscroll\42,g);\n })();\74/script\076', 'mobileHeadScript': '', 'adsenseClientId': 'ca-pub-6720294033108960', 'ieCssRetrofitLinks': '\74!--[if IE]\76\74script type\75\42text/javascript\42 src\75\42https://www.blogger.com/static/v1/jsbin/1494333581-ieretrofit.js\42\76\74/script\76\n\74![endif]--\076', 'view': '', 'dynamicViewsCommentsSrc': '//www.blogblog.com/dynamicviews/4224c15c4e7c9321/js/comments.js', 'dynamicViewsScriptSrc': '//www.blogblog.com/dynamicviews/a90bf08c3a30a5f3', 'plusOneApiSrc': 'https://apis.google.com/js/plusone.js', 'sf': 'n', 'tf': ''}}, {'name': 'messages', 'data': {'showAll': 'Показать все'}}, {'name': 'skin', 'data': {'vars': {'post_footer_background_color': '#303030', 'tabs_text_color': '#999999', 'date_header_letterspacing': 'inherit', 'content_shadow_spread': '40px', 'body_background_override': '', 'description_text_size': '140%', 'mobile_background_size': 'auto', 'header_shadow_spread': '1px', 'image_border_color': '#111111', 'date_header_color': '#cccccc', 'header_shadow_offset_top': '-1px', 'header_border_horizontalsize': '0', 'widget_title_font': 'normal bold 11px Arial, Tahoma, Helvetica, FreeSans, sans-serif', 'tabs_border_color': '#404040', 'tabs_bevel_border_width': '0', 'body_background_gradient_tile': 'none', 'description_text_color': '#aaaaaa', 'main_section_margin': '15px', 'post_title_font': 'normal normal 22px Arial, Tahoma, Helvetica, FreeSans, sans-serif', 'page_width': 'auto', 'paging_background': 'transparent none no-repeat scroll top center', 'body_text_color': '#cccccc', 'content_padding': '10px', 'header_background_gradient': 'none', 'post_margin_bottom': '25px', 'header_shadow_offset_left': '-1px', 'tabs_background_color': '#222222', 'content_background_color': '#333333', 'body_background_gradient_cap': 'none', 'main_padding_top': '30px', 'widget_alternate_text_color': '#999999', 'image_text_color': '#cccccc', 'link_visited_color': '#cc6600', 'tabs_margin_side': '30px', 'image_border_large_size': '1px', 'content_shadow_spread_webkit': '5px', 'mobile_button_color': '#ffffff', 'tabs_selected_text_color': '#ffffff', 'main_border_width': '0', 'content_background_color_selector': '.content-inner', 'link_color': '#dd7700', 'post_footer_border_color': '#444444', 'date_header_font': 'normal bold 11px Arial, Tahoma, Helvetica, FreeSans, sans-serif', 'tabs_background_gradient': 'none', 'content_padding_horizontal': '10px', 'header_font': 'normal normal 60px Arial, Tahoma, Helvetica, FreeSans, sans-serif', 'startSide': 'left', 'tabs_font': 'normal normal 14px Arial, Tahoma, Helvetica, FreeSans, sans-serif', 'widget_title_text_color': '#ffffff', 'header_border_size': '1px', 'tabs_selected_background_color': '#000000', 'date_header_margin': 'inherit', 'footer_bevel': '0', 'image_border_small_size': '0', 'content_shadow_spread_ie': '10px', 'mobile_background_overlay': 'transparent none repeat scroll top left', 'endSide': 'right', 'date_header_padding': 'inherit', 'image_background_color': '#111111', 'body_rule_color': '#404040', 'header_bottom_border_size': '1px', 'page_width_selector': '.region-inner', 'body_background_color': '#292929', 'header_text_color': '#ffffff', 'main_padding': '15px', 'date_header_background_color': 'transparent', 'tabs_border_width': '1px', 'body_font': 'normal normal 12px Arial, Tahoma, Helvetica, FreeSans, sans-serif', 'link_hover_color': '#cc6600', 'header_background_color': 'transparent', 'keycolor': '#dd7700', 'main_padding_bottom': '30px', 'post_footer_text_color': '#888888', 'tabs_margin_top': '0', 'header_padding': '30px'}, 'override': 'blockquote {\nborder: 1px dotted #fff;\ndisplay: block;\nmax-height: 400px;\nfont-family: courier, monospace;\nfont-size: 12px;\nmargin: 7px 15px;\npadding: 15px;\nwhite-space: nowrap;\noverflow-y: scroll;\noverflow-x: auto;\n}\nh2, h3, h4 { margin: 20px 0px 10px 0px; font-weight: normal; }\n.post-body h2 { font-size: 1.9em; }\nh3 { font-size: 1.7em; }\nh4 { font-size: 1.5em; }'}}, {'name': 'view', 'data': {'classic': {'name': 'classic', 'url': '?view\75classic'}, 'flipcard': {'name': 'flipcard', 'url': '?view\75flipcard'}, 'magazine': {'name': 'magazine', 'url': '?view\75magazine'}, 'mosaic': {'name': 'mosaic', 'url': '?view\75mosaic'}, 'sidebar': {'name': 'sidebar', 'url': '?view\75sidebar'}, 'snapshot': {'name': 'snapshot', 'url': '?view\75snapshot'}, 'timeslide': {'name': 'timeslide', 'url': '?view\75timeslide'}}}]);
+_WidgetManager._RegisterWidget('_HeaderView', new _WidgetInfo('Header1', 'header', null, document.getElementById('Header1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_BlogView', new _WidgetInfo('Blog1', 'main', null, document.getElementById('Blog1'), {'cmtInteractionsEnabled': false, 'lightboxEnabled': true, 'lightboxModuleUrl': 'https://www.blogger.com/static/v1/jsbin/77049522-lbx__ru.js', 'lightboxCssUrl': 'https://www.blogger.com/static/v1/v-css/1185134592-lightbox_bundle.css'}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_AdSenseView', new _WidgetInfo('AdSense1', 'sidebar-right-1', null, document.getElementById('AdSense1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML2', 'sidebar-right-1', null, document.getElementById('HTML2'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_LabelView', new _WidgetInfo('Label1', 'sidebar-right-1', null, document.getElementById('Label1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_BlogArchiveView', new _WidgetInfo('BlogArchive1', 'sidebar-right-1', null, document.getElementById('BlogArchive1'), {'languageDirection': 'ltr', 'loadingMessage': 'Загрузка...'}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_ProfileView', new _WidgetInfo('Profile1', 'sidebar-right-1', null, document.getElementById('Profile1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML1', 'sidebar-right-1', null, document.getElementById('HTML1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_AttributionView', new _WidgetInfo('Attribution1', 'footer-3', null, document.getElementById('Attribution1'), {'attribution': 'Шаблон \42Simple\42. Технологии \74a href\75\47https://www.blogger.com\47 target\75\47_blank\47\76Blogger\74/a\76.'}, 'displayModeFull'));
+</script>
+
+<iframe name="oauth2relay386748795" id="oauth2relay386748795" src="./Посторонним В._ Работа с беспроводным трансивером nRF24L01_files/postmessageRelay.html" tabindex="-1" style="width: 1px; height: 1px; position: absolute; top: -100px;"></iframe><link type="text/css" rel="stylesheet" href="./Посторонним В._ Работа с беспроводным трансивером nRF24L01_files/1185134592-lightbox_bundle.css"><script type="text/javascript" src="./Посторонним В._ Работа с беспроводным трансивером nRF24L01_files/77049522-lbx__ru.js"></script></body></html>
