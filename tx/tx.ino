@@ -6,15 +6,17 @@
 #define CE_PIN 9
 #define CSN_PIN 10
 
-const uint64_t pipe0 = 0xDEADBEEF00LL;  //pipe0 is SYSTEM_pipe, no reading, no writing
-const uint64_t pipe1 = 0xDEADBEEF01LL;
-const uint64_t pipe2 = 0xDEADBEEF02LL;
-const uint64_t pipe3 = 0xDEADBEEF03LL;
-const uint64_t pipe4 = 0xDEADBEEF04LL;
-const uint64_t pipe5 = 0xDEADBEEF05LL;
+const uint8_t imSensorNum = 3; //1..5
 
-static int messageToBase = 11111;
-static uint32_t answerFromBase;
+//'static' - no need
+const uint64_t pipes[6] = {
+  0xDEADBEEF00LL,  //pipe0 is SYSTEM_pipe, avoid openReadingPipe(0, );
+  0xDEADBEEF01LL,
+  0xDEADBEEF02LL,
+  0xDEADBEEF03LL,
+  0xDEADBEEF04LL,
+  0xDEADBEEF05LL
+};
 
 RF24 radio(CE_PIN, CSN_PIN);
 
@@ -32,19 +34,24 @@ void setup() {
   radio.setCRCLength(RF24_CRC_8);
 
   radio.enableDynamicPayloads();//for ALL pipes, dynamic size of payload
-  //radio.setPayloadSize(32); //uint_32t 32 bytes
+  //radio.setPayloadSize(32); //32 bytes?
 
   radio.setAutoAck(true);//allow RX send answer(acknoledgement) to TX (for ALL pipes?)
-  radio.enableAckPayload(); //only for 0,1 pipes
-  //radio.enableDynamicAck(); //for ALL pipes?
+  radio.enableAckPayload(); //only for 0,1 pipes? 
+  //radio.enableDynamicAck(); //for ALL pipes? Чтобы можно было вкл\выкл получение ACK?
 
   radio.stopListening();// ?
-  radio.openWritingPipe(pipe1); //pipe0 is SYSTEM_pipe, no reading
+  radio.openWritingPipe(pipes[imSensorNum]); //pipe0 is SYSTEM_pipe, no reading
 }
 
 void loop()
 {
-  radio.stopListening();//?
+  int messageToBase = 11111;
+  uint32_t answerFromBase; 
+
+  //Stop listening for incoming messages, and switch to transmit mode. 
+  //Do this before calling write().
+  radio.stopListening(); 
   radio.write( &messageToBase, sizeof(messageToBase));
 
   Serial.print("Im Sensor. Send to Base: ");
@@ -60,3 +67,7 @@ void loop()
   }
   delay(1000);
 }
+
+
+
+
