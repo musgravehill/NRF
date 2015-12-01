@@ -46,8 +46,17 @@ void setup() {
 
 void loop()
 {
-  int messageToBase = 11111;
-  uint32_t answerFromBase; 
+  uint16_t messageToBase_batteryVoltage = random(0, 65535); //2^16 - 1 
+  uint16_t messageToBase_temperature = random(0, 65535); //2^16 - 1 
+  uint16_t messageToBase_humidity = random(0, 65535); //2^16 - 1 
+  
+  uint16_t messageToBase[3] = { 
+    messageToBase_batteryVoltage,
+    messageToBase_temperature,
+    messageToBase_humidity
+  };
+  
+  uint8_t answerFromBase; //2^8 - 1   [0,255]
 
   //Stop listening for incoming messages, and switch to transmit mode. 
   //Do this before calling write().
