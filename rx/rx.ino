@@ -47,8 +47,7 @@ void setup() {
    !  Dynamic payloads must be enabled.
    !  write an ack payload as soon as startListening() is called
    */
-
-  radio.enableDynamicPayloads();//for ALL pipes, dynamic size of payload
+  radio.enableDynamicPayloads();//for ALL pipes
   //radio.setPayloadSize(32); //32 bytes? Can corrupt "writeAckPayload"?
 
   radio.setAutoAck(true);//allow RX send answer(acknoledgement) to TX (for ALL pipes?)

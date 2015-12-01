@@ -27,7 +27,7 @@ void setup() {
   Serial.print("Im Sensor# ");
   Serial.print(imSensorNum);
   Serial.print("\r\n");  
-  
+
   radio.begin();
   delay(100);
   radio.powerUp();
@@ -38,8 +38,15 @@ void setup() {
   radio.setPALevel(RF24_PA_MIN);
   radio.setCRCLength(RF24_CRC_8);
 
-  radio.enableDynamicPayloads();//for ALL pipes, dynamic size of payload
-  //radio.setPayloadSize(32); //32 bytes?
+
+  /* 
+   ===writeAckPayload===enableDynamicPayloads=== 
+   !  Only three of these can be pending at any time as there are only 3 FIFO buffers.
+   !  Dynamic payloads must be enabled.
+   !  write an ack payload as soon as startListening() is called
+   */
+  radio.enableDynamicPayloads();//for ALL pipes
+  //radio.setPayloadSize(32); //32 bytes? Can corrupt "writeAckPayload"?
 
   radio.setAutoAck(true);//allow RX send answer(acknoledgement) to TX (for ALL pipes?)
   radio.enableAckPayload(); //only for 0,1 pipes? 
@@ -67,7 +74,7 @@ void loop()
   //Do this before calling write().
   radio.stopListening(); 
   radio.write( &messageToBase, sizeof(messageToBase));
-  
+
   Serial.print("V= ");
   Serial.print(messageToBase[0]);
   Serial.print("\r\n");
@@ -87,6 +94,7 @@ void loop()
   }
   delay(1000);
 }
+
 
 
 
