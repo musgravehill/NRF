@@ -88,7 +88,7 @@ void loop()
   if ( radio.isAckPayloadAvailable() ) {
     radio.read(&answerFromBase, sizeof(answerFromBase)); //приемник принял и ответил
 
-    Serial.print(F("___Received answer from Base: "));
+    Serial.print(F("__Received answer from Base: "));
     Serial.print(answerFromBase, DEC);  
     Serial.print(F("\r\n"));  
   }
