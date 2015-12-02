@@ -103,7 +103,9 @@ void loop(void)
   int i = 0;
   while ( i < num_channels )
   {
-    printf("%x",min(0xf,values[i]&0xf));
+    Serial.print(".");
+    Serial.print(values[i], DEC);
+    //printf("%x",min(0xf,values[i]&0xf));
     ++i;
   }
   Serial.println();
