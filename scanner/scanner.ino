@@ -12,8 +12,15 @@ RF24 radio(9, 10);
 const uint8_t num_channels = 128;
 uint8_t values[num_channels];
 
+const byte sdCS =  4; //SS
+
 void setup(void)
 {
+  delay(10);
+  pinMode(sdCS, OUTPUT);  
+  digitalWrite(sdCS, HIGH);  
+ 
+  
   delay(1500);
 
   Serial.begin(115200);
@@ -103,9 +110,9 @@ void loop(void)
   int i = 0;
   while ( i < num_channels )
   {
-    Serial.print(".");
-    Serial.print(values[i], DEC);
-    //printf("%x",min(0xf,values[i]&0xf));
+    //Serial.print(".");
+    //Serial.print(values[i], DEC);
+    printf("%x",min(0xf,values[i]&0xf));
     ++i;
   }
   Serial.println();

@@ -5,30 +5,45 @@
  ** CS - pin 4
 */
 
+#include <SD.h>
 #include <SPI.h>
 #include "nRF24L01.h"
 #include "RF24.h"
-#include <SD.h>
 
-File myFile;
+
+Sd2Card card;
+SdVolume volume;
 
 RF24 radio(9, 10); // Для Уно
-//RF24 radio(9,53);// Для Меги
 const uint8_t num_channels = 128;
 uint8_t values[num_channels];
 
 const byte sdCS =  4; //SS
-const byte nrfCS =  10;  //CSN, NOT CE
+const byte nrfCSn =  10;  //CSN, NOT CE
 
 void setup(void) {
   pinMode(sdCS, OUTPUT);
-  pinMode(nrfCS, OUTPUT);
-  digitalWrite(sdCS, 1);
-  digitalWrite(nrfCS, 1);
+  pinMode(nrfCSn, OUTPUT);
+
+  sdDisable();
+  nrfDisable();
 
   delay(3000);
-  Serial.begin(57600);
-  printf_begin();
+  Serial.begin(9600);  
+
+  if (!card.init(SPI_HALF_SPEED, sdCS)) {
+    Serial.println("initialization failed. Things to check:");
+  } else {
+    Serial.println("Wiring is correct and a card is present.");
+  }
+  uint32_t volumesize;
+  Serial.print("\nVolume type is FAT");
+  Serial.println(volume.fatType(), DEC);
+  Serial.println(" ");
+
+  sdDisable();
+  nrfDisable();  
+
   radio.begin();
   delay(50);
   radio.setChannel(0);
@@ -38,7 +53,11 @@ void setup(void) {
   radio.setDataRate(RF24_1MBPS);
   radio.setPALevel(RF24_PA_MAX);
   radio.setCRCLength(RF24_CRC_8);
+}
 
+
+void loop(void)
+{
   radio.startListening();
 
   radio.printDetails();  // Вот эта строка напечатает нам что-то, если все правильно соединили.
@@ -48,86 +67,31 @@ void setup(void) {
   } else {
     Serial.println("Im FAKE NRF");
   }
-  delay(5000);              // И посмотрим на это пять секунд.
-
   radio.stopListening();
-  int i = 0;    // А это напечатает нам заголовки всех 127 каналов
-  while ( i < num_channels )  {
-    printf("%x", i >> 4);
-    ++i;
-  }
-  printf("\n\r");
-  i = 0;
-  while ( i < num_channels ) {
-    printf("%x", i & 0xf);
-    ++i;
-  }
-  printf("\n\r");
-}
-const int num_reps = 100;
 
-void loop(void)
-{
-
-  digitalWrite(sdCS, 0); //disable
-  digitalWrite(nrfCS, 1); //enable
-
-  memset(values, 0, sizeof(values));
-  int rep_counter = num_reps;
-  while (rep_counter--) {
-    int i = num_channels;
-    while (i--) {
-      radio.setChannel(i);
-      radio.startListening();
-      delayMicroseconds(128);
-      radio.stopListening();
-      if ( radio.testCarrier() )
-        ++values[i];
-    }
-  }
-
-  radio.stopListening();
-  digitalWrite(nrfCS, 0); //disable
-  digitalWrite(sdCS, 1); //enable
-
-
-  if (!SD.begin(4)) {
-    Serial.println("initialization failed!");
-    return;
-  }
-  Serial.println("initialization SD done.");
-
-  // open the file. note that only one file can be open at a time,
-  // so you have to close this one before opening another.
-  myFile = SD.open("test.txt", FILE_WRITE);
-
-  // if the file opened okay, write to it:
-  if (myFile) {
-
-    int i = 0;
-    while ( i < num_channels ) {
-      printf("%x", min(0xf, values[i] & 0xf));
-      myFile.print(min(0xf, values[i] & 0xf));
-      myFile.print("\r\n");
-      ++i;
-    }
-
-    // close the file:
-    myFile.close();
-
-  } else {
-    Serial.println("error opening test.txt");
-  }
-
-
-
-  printf("\n\r");
-}
-int serial_putc( char c, FILE * ) {
-  Serial.write( c );
-  return c;
+  delay(3000);
 }
 
-void printf_begin(void) {
-  fdevopen( &serial_putc, 0 );
+void sdEnable() {
+  digitalWrite(sdCS, 0);
+}
+void sdDisable() {
+  digitalWrite(sdCS, 1);
+}
+void nrfEnable() {
+  digitalWrite(nrfCSn, 1);
+}
+void nrfDisable() {
+  digitalWrite(nrfCSn, 0);
+}
+
+
+
+int vserial_putc( char c, FILE * ) {
+  //Serial.write( c );
+  //return c;
+}
+
+void vprintf_begin(void) {
+  //  fdevopen( &serial_putc, 0 );
 }
