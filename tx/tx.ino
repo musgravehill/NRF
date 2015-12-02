@@ -24,9 +24,9 @@ void setup() {
   delay(2000);
   Serial.begin(9600);
   delay(100);
-  Serial.print("Im Sensor# ");
+  Serial.print(F("Im Sensor# "));
   Serial.print(imSensorNum);
-  Serial.print("\r\n");  
+  Serial.print(F("\r\n"));  
 
   radio.begin();
   delay(100);
@@ -75,22 +75,22 @@ void loop()
   radio.stopListening(); 
   radio.write( &messageToBase, sizeof(messageToBase));
 
-  Serial.print("V= ");
+  Serial.print(F("V= "));
   Serial.print(messageToBase[0]);
-  Serial.print("\r\n");
-  Serial.print("t= ");
+  Serial.print(F("\r\n"));
+  Serial.print(F("t= "));
   Serial.print(messageToBase[1]);
-  Serial.print("\r\n");
-  Serial.print("h= ");
+  Serial.print(F("\r\n"));
+  Serial.print(F("h= "));
   Serial.print(messageToBase[2]);
-  Serial.print("\r\n"); 
+  Serial.print(F("\r\n")); 
 
   if ( radio.isAckPayloadAvailable() ) {
     radio.read(&answerFromBase, sizeof(answerFromBase)); //приемник принял и ответил
 
-    Serial.print("___Received answer from Base: ");
+    Serial.print(F("___Received answer from Base: "));
     Serial.print(answerFromBase, DEC);  
-    Serial.print("\r\n");  
+    Serial.print(F("\r\n"));  
   }
   delay(1000);
 }

@@ -29,7 +29,7 @@ void setup() {
   delay(2000);
   Serial.begin(9600);
   delay(100);
-  Serial.println("Im Base with IRQ and AckPayload");
+  Serial.println(F("Im Base with IRQ and AckPayload"));
 
   radio.begin();
   delay(100);
@@ -72,19 +72,19 @@ void radioListen() {
     if (radio.getDynamicPayloadSize() > 1) { //размер полученного сообщения
       radio.read(&messageFromSensor, sizeof(messageFromSensor));
 
-      Serial.print("Sensor# ");
+      Serial.print(F("Sensor# "));
       Serial.print(currPipeNum);
-      Serial.print("\r\n");
-      Serial.print("V= ");
+      Serial.print(F("\r\n"));
+      Serial.print(F("V= "));
       Serial.print(messageFromSensor[0]);
-      Serial.print("\r\n");
-      Serial.print("t= ");
+      Serial.print(F("\r\n"));
+      Serial.print(F("t= "));
       Serial.print(messageFromSensor[1]);
-      Serial.print("\r\n");
-      Serial.print("h= ");
+      Serial.print(F("\r\n"));
+      Serial.print(F("h= "));
       Serial.print(messageFromSensor[2]);
-      Serial.print("\r\n");
-      Serial.print("\r\n");
+      Serial.print(F("\r\n"));
+      Serial.print(F("\r\n"));
     }
     else {
       // Corrupt payload has been flushed
