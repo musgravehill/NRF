@@ -7,20 +7,13 @@
 #include "RF24.h"
 #include "printf.h"
 
-RF24 radio(7,8);
+RF24 radio(9,10);
 
 const uint8_t num_channels = 128;
 uint8_t values[num_channels];
 
-const byte sdCS =  4; //SS
-
 void setup(void)
-{
-  delay(10);
-  pinMode(sdCS, OUTPUT);  
-  digitalWrite(sdCS, HIGH);  
- 
-  
+{  
   delay(1500);
 
   Serial.begin(115200);
@@ -65,7 +58,8 @@ void setup(void)
     printf("%x",i&0xf);
     ++i;
   }
-  Serial.println();
+  Serial.println();  
+  
 }
 
 const int num_reps = 100;
