@@ -7,7 +7,7 @@
 #include "RF24.h"
 #include "printf.h"
 
-RF24 radio(9, 10);
+RF24 radio(7,8);
 
 const uint8_t num_channels = 128;
 uint8_t values[num_channels];
