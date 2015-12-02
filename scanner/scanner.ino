@@ -1,75 +1,113 @@
+/* Inspired by cpixip.
+ * See http://arduino.cc/forum/index.php/topic,54795.0.html
+ */
+
 #include <SPI.h>
 #include "nRF24L01.h"
 #include "RF24.h"
+#include "printf.h"
 
-RF24 radio(9, 10); // Для Уно
-//RF24 radio(9,53);// Для Меги
+RF24 radio(9, 10);
+
 const uint8_t num_channels = 128;
 uint8_t values[num_channels];
 
 void setup(void)
 {
-  delay(3000);
-  Serial.begin(57600);
-  printf_begin();
+  delay(1500);
+
+  Serial.begin(115200);
+  printf_begin();  
+
   radio.begin();
-  delay(50);
-  radio.setChannel(0);
-  
-  radio.setRetries(15, 15);
   radio.setAutoAck(false);
+  //radio.setRetries(0, 0);  
   radio.setDataRate(RF24_1MBPS);
-  radio.setPALevel(RF24_PA_MAX);
-  radio.setCRCLength(RF24_CRC_8);
+  radio.setPALevel(RF24_PA_LOW);
+  radio.setCRCLength(RF24_CRC_16);
 
   radio.startListening();
+  radio.printDetails(); 
+  if(radio.isPVariant()){
+    Serial.println("Im real NRF24L01+ =) ");
+  }
+  else{
+    Serial.println("Im FAKE NRF24L01+  :( ");
+  }
 
-  radio.printDetails();  // Вот эта строка напечатает нам что-то, если все правильно соединили.
-  delay(5000);              // И посмотрим на это пять секунд.
+  if(radio.isValid()){
+    Serial.println("Im valid =) ");
+  }
+  else{
+    Serial.println("Im NOT valid  :( ");
+  }
 
   radio.stopListening();
-  int i = 0;    // А это напечатает нам заголовки всех 127 каналов
-  while ( i < num_channels )  {
-    printf("%x", i >> 4);
+
+  // Print out header, high then low digit
+  int i = 0;
+  while ( i < num_channels )
+  {
+    printf("%x",i>>4);
     ++i;
   }
-  printf("\n\r");
+  Serial.println();
   i = 0;
-  while ( i < num_channels ) {
-    printf("%x", i & 0xf);
+  while ( i < num_channels )
+  {
+    printf("%x",i&0xf);
     ++i;
   }
-  printf("\n\r");
+  Serial.println();
 }
+
 const int num_reps = 100;
 
 void loop(void)
 {
-  memset(values, 0, sizeof(values));
+  // Clear measurement values
+  memset(values,0,sizeof(values));
+
+  // Scan all channels num_reps times
   int rep_counter = num_reps;
-  while (rep_counter--) {
+  while (rep_counter--)  {
     int i = num_channels;
-    while (i--) {
+    while (i--)    {
+      // Select this channel
       radio.setChannel(i);
+
+      // Listen for a little
       radio.startListening();
       delayMicroseconds(128);
-      radio.stopListening();
-      if ( radio.testCarrier() )
+
+      /* 
+       ___radio.testRPD()
+       Test whether a signal (carrier or otherwise) 
+       greater than or equal to -64dBm is present on the channel
+       only for +
+       testRPD results are differ from testCarrier. Why?
+       
+       ___radio.testCarrier()
+       for all nrf`s
+       */
+
+      // Did we get a carrier?
+      if ( radio.testCarrier() ){ 
         ++values[i];
+      }
+      radio.stopListening();
     }
   }
+
+  // Print out channel measurements, clamped to a single hex digit
   int i = 0;
-  while ( i < num_channels ) {
-    printf("%x", min(0xf, values[i] & 0xf));
+  while ( i < num_channels )
+  {
+    printf("%x",min(0xf,values[i]&0xf));
     ++i;
   }
-  printf("\n\r");
-}
-int serial_putc( char c, FILE * ) {
-  Serial.write( c );
-  return c;
+  Serial.println();
 }
 
-void printf_begin(void) {
-  fdevopen( &serial_putc, 0 );
-}
+
+
