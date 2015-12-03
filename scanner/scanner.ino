@@ -10,8 +10,6 @@
 const byte NRF24_CE = 7;
 const byte NRF24_CSN = 8;
 
-const byte SD_CS = 4;
-
 RF24 radio(NRF24_CE, NRF24_CSN);
 
 const uint8_t num_channels = 128;
@@ -19,13 +17,15 @@ uint8_t values[num_channels];
 
 void setup(void)
 {
-  pinMode(SD_CS, OUTPUT);
-  digitalWrite(SD_CS, HIGH); //disable SD
+  pinMode(4, OUTPUT);
+  digitalWrite(4, HIGH);
 
   delay(1500);
 
   Serial.begin(115200);
   printf_begin();
+  
+  delay(500);
 
   radio.begin();
   radio.setAutoAck(false);
