@@ -15,12 +15,24 @@ RF24 radio(NRF24_CE, NRF24_CSN);
 const uint8_t num_channels = 128;
 uint8_t values[num_channels];
 
-void setup(void)
+void setup(void) 
 {
+  delay(1500);
   pinMode(4, OUTPUT);
+  digitalWrite(4, LOW);  
+  //SPI.begin();
+  //SPI.transfer(0xFF);
+  //SPI.transfer(0xFF);
+  //SPI.transfer(0xFF);
+  //SPI.transfer(0xFF);
+  //SPI.transfer(0xFF);
+  //SPI.transfer(0xFF);
+  //SPI.transfer(0xFF);
+  //SPI.transfer(0xFF);
+  //SPI.transfer(0xFF);
   digitalWrite(4, HIGH);
 
-  delay(1500);
+  
 
   Serial.begin(115200);
   printf_begin();
