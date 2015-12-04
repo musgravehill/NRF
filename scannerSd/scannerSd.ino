@@ -33,6 +33,9 @@ uint8_t NRF_collisionsOnChannelCount[NRF_channelsCount];
 const int NRF_testChannelRetries = 100; //listen selected channel *** times to get RF-collisions or not
 
 void setup(void) {
+  pinMode(SD_CS, OUTPUT);
+  pinMode(SD_LVC_OE, OUTPUT);
+  SD_disable();
   delay(1000);
   Serial.begin(9600);
   SD_init();
@@ -42,7 +45,8 @@ void setup(void) {
 
 
 void loop(void) {
-  NRF_scanChannels(); 
+  NRF_scanChannels();
+  SD_writeScanResults();
 }
 
 void SD_writeScanResults() {
@@ -51,25 +55,31 @@ void SD_writeScanResults() {
   if (SD_isEnable) {
     SD_fileNrfLog = SD.open("nrf.txt", FILE_WRITE);
     if (SD_fileNrfLog) {
+      SD_fileNrfLog.print("\r\n");
+      Serial.print("\r\n");
       // Print out header, high then low digit
       int i = 0;
       while ( i < NRF_channelsCount )  {
         SD_fileNrfLog.print((i >> 4), HEX);
         ++i;
       }
-      Serial.println();
+      SD_fileNrfLog.print("\r\n");
       i = 0;
       while ( i < NRF_channelsCount )  {
         SD_fileNrfLog.print((i & 0xf), HEX);
         ++i;
       }
+      SD_fileNrfLog.print("\r\n");
+
       //print results of scan
       while ( i < NRF_channelsCount )  {
         SD_fileNrfLog.print(min(0xf, NRF_collisionsOnChannelCount[i] & 0xf), HEX);
-        SD_fileNrfLog.print("\r\n");
+        Serial.print(min(0xf, NRF_collisionsOnChannelCount[i] & 0xf), HEX);
         ++i;
       }
+      SD_fileNrfLog.print("\r\n");
       SD_fileNrfLog.close();
+      Serial.print("\r\n");
     }
   }
   SD_disable();
@@ -112,13 +122,9 @@ void NRF_scanChannels() {
 }
 
 void SD_init() {
-  pinMode(SD_CS, OUTPUT);
-  pinMode(SD_LVC_OE, OUTPUT);
-  SD_disable();
-  delay(50);
   SD_enable();
   if (card.init(SPI_HALF_SPEED, SD_CS)) {
-    SD_isEnable = false;
+    SD_isEnable = true;
     Serial.println("SD init OK");
   } else {
     SD_isEnable = false;
