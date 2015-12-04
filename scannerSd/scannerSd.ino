@@ -37,7 +37,8 @@ void setup(void) {
   pinMode(SD_LVC_OE, OUTPUT);
   SD_disable();
   delay(1000);
-  Serial.begin(9600);  
+  Serial.begin(9600);
+  SD_init();
   delay(1000);
   NRF_init();
 }
@@ -49,12 +50,13 @@ void loop(void) {
 }
 
 void SD_writeScanResults() {
-  SD_init();  
+  SD_enable();
+  delay(10);
   if (SD_isEnable) {
     SD_fileNrfLog = SD.open("nrf.txt", FILE_WRITE);
     if (SD_fileNrfLog) {
       SD_fileNrfLog.print("\r\n");
-      Serial.print("\r\n nrf.txt open OK \r\n");
+      Serial.print("\r\n");
       // Print out header, high then low digit
       int i = 0;
       while ( i < NRF_channelsCount )  {
@@ -79,10 +81,7 @@ void SD_writeScanResults() {
       SD_fileNrfLog.close();
       Serial.print("\r\n");
     }
-    else {
-      Serial.print("\r\n nrf.txt open ERROR \r\n");
-    }
-  }  
+  }
   SD_disable();
 }
 
@@ -124,7 +123,6 @@ void NRF_scanChannels() {
 
 void SD_init() {
   SD_enable();
-  delay(20);
   if (card.init(SPI_HALF_SPEED, SD_CS)) {
     SD_isEnable = true;
     Serial.println("SD init OK");
@@ -133,7 +131,6 @@ void SD_init() {
     Serial.println("SD init ERROR");
   }
   SD_disable();
-  delay(20);
 }
 
 void NRF_init() {
