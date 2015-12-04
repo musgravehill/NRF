@@ -49,15 +49,16 @@ void loop(void) {
 }
 
 void SD_writeScanResults() {
+  int i = 0;
   SD_enable();
   delay(10);
   if (SD_isEnable) {
     SD_fileNrfLog = SD.open("nrf.txt", FILE_WRITE);
     if (SD_fileNrfLog) {
       SD_fileNrfLog.print("\r\n");
-      Serial.print("\r\n");
+      Serial.println("OK open file");
       // Print out header, high then low digit
-      int i = 0;
+      i = 0;
       while ( i < NRF_channelsCount )  {
         SD_fileNrfLog.print((i >> 4), HEX);
         ++i;
@@ -71,6 +72,7 @@ void SD_writeScanResults() {
       SD_fileNrfLog.print("\r\n");
 
       //print results of scan
+      i = 0;
       while ( i < NRF_channelsCount )  {
         SD_fileNrfLog.print(min(0xf, NRF_collisionsOnChannelCount[i] & 0xf), HEX);
         Serial.print(min(0xf, NRF_collisionsOnChannelCount[i] & 0xf), HEX);
@@ -80,9 +82,9 @@ void SD_writeScanResults() {
       SD_fileNrfLog.close();
       Serial.print("\r\n");
     }
-    else{
+    else {
       Serial.println("ERROR open file");
-      }
+    }
   }
   SD_disable();
 }
