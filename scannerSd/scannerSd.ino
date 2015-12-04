@@ -21,7 +21,6 @@
 
 const byte SD_CS =  4; //SS
 const byte SD_LVC_OE = 2;
-Sd2Card card;
 File SD_fileNrfLog;
 bool SD_isEnable = false;
 
@@ -81,6 +80,9 @@ void SD_writeScanResults() {
       SD_fileNrfLog.close();
       Serial.print("\r\n");
     }
+    else{
+      Serial.println("ERROR open file");
+      }
   }
   SD_disable();
 }
@@ -123,7 +125,7 @@ void NRF_scanChannels() {
 
 void SD_init() {
   SD_enable();
-  if (card.init(SPI_HALF_SPEED, SD_CS)) {
+  if (SD.begin(SD_CS)) {
     SD_isEnable = true;
     Serial.println("SD init OK");
   } else {
