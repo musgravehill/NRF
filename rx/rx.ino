@@ -3,8 +3,8 @@
 #include <RF24.h>
 #include <stdint.h>
 
-#define CE_PIN 9
-#define CSN_PIN 10
+#define CE_PIN 7
+#define CSN_PIN 8
 
 //'static' - no need
 const uint64_t pipes[6] = {

@@ -3,10 +3,10 @@
 #include <RF24.h>
 #include <stdint.h>
 
-#define CE_PIN 9
-#define CSN_PIN 10
+#define CE_PIN 7
+#define CSN_PIN 8
 
-const uint8_t imSensorNum = 1; //1..5
+const uint8_t imSensorNum = 3; //1..5
 
 //'static' - no need
 const uint64_t pipes[6] = {
@@ -92,7 +92,7 @@ void loop()
     Serial.print(answerFromBase, DEC);  
     Serial.print(F("\r\n"));  
   }
-  delay(1000);
+  delay(8000);
 }
 
 
