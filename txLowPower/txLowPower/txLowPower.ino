@@ -10,8 +10,6 @@
 uint16_t counterSleep_8s = 0;
 
 void setup() {
-  DS18B20_init();
-
   delay(2000);
   Serial.begin(9600);
   delay(100);
@@ -31,7 +29,7 @@ void loop() {
 
 void sendDataToBase() {
   uint16_t arrayToBase_batteryVoltage = random(0, 65535); //2^16 - 1
-  uint16_t arrayToBase_temperature = 88; // getTemperatureNormalized(); // random(0, 65535); //2^16 - 1
+  uint16_t arrayToBase_temperature = random(0, 65535); //2^16 - 1
   uint16_t arrayToBase_humidity = random(0, 65535); //2^16 - 1
 
   uint16_t arrayToBase[3] = {
