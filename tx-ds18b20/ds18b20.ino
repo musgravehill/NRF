@@ -1,8 +1,15 @@
 //for DS18B20 -55°C to +125°C
 #define DS18B20_PIN 2
-void OneWireReset(int Pin);
-void OneWireOutByte(int Pin, byte d);
-byte OneWireInByte(int Pin);
+//void OneWireReset(int Pin);
+//void OneWireOutByte(int Pin, byte d);
+//byte OneWireInByte(int Pin);
+//void DS18B20_init();
+
+
+void DS18B20_init() {
+  digitalWrite(DS18B20_PIN, LOW);
+  pinMode(DS18B20_PIN, INPUT);
+}
 
 uint16_t getTemperatureNormalized() {
   int HighByte, LowByte, TReading, SignBit, Tc_100, Whole, Fract;

@@ -21,8 +21,7 @@ const uint64_t pipes[6] = {
 RF24 radio(CE_PIN, CSN_PIN);
 
 void setup() {
-  digitalWrite(DS18B20_PIN, LOW);
-  pinMode(DS18B20_PIN, INPUT);
+  DS18B20_init();
 
   delay(2000);
   Serial.begin(9600);
