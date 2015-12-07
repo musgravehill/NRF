@@ -16,16 +16,17 @@ void NRF_init() {
   Serial.print(F("Im Sensor# "));
   Serial.print(imSensorNum);
   Serial.print(F("\r\n"));
-
+  
+  delay(50);
   NRF_radio.begin();
   delay(100);
   NRF_radio.powerUp();
   delay(50);
-  radio.setChannel(0x6D);
-  radio.setRetries(15, 15);
-  radio.setDataRate(RF24_1MBPS);
-  radio.setPALevel(RF24_PA_LOW);
-  radio.setCRCLength(RF24_CRC_16);
+  NRF_radio.setChannel(0x6D);
+  NRF_radio.setRetries(15, 15);
+  NRF_radio.setDataRate(RF24_1MBPS);
+  NRF_radio.setPALevel(RF24_PA_LOW);
+  NRF_radio.setCRCLength(RF24_CRC_16);
 
   /*
     ===writeAckPayload===enableDynamicPayloads===
@@ -43,12 +44,21 @@ void NRF_init() {
   NRF_radio.stopListening();// ?
   NRF_radio.openWritingPipe(pipes[imSensorNum]); //pipe0 is SYSTEM_pipe, no reading
 
+  delay(50);
   NRF_radio.powerDown();
+  delay(50);
 }
 
-void NRF_sendData(uint16_t *arrayToBase) {
-  uint8_t answerFromBase; //2^8 - 1   [0,255]
+void NRF_sendData(uint16_t batteryVoltage, uint16_t temperature, uint16_t humidity) {
+  uint16_t arrayToBase[3] = {
+    batteryVoltage,
+    temperature,
+    humidity
+  };
 
+  uint8_t answerFromBase; //2^8 - 1   [0,255]
+  
+  delay(50);
   NRF_radio.powerUp();
   delay(50);
 
@@ -77,4 +87,5 @@ void NRF_sendData(uint16_t *arrayToBase) {
 
   delay(50);
   NRF_radio.powerDown();
+  delay(50);
 }
