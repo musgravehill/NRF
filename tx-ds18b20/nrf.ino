@@ -45,10 +45,14 @@ void NRF_init() {
 
   NRF_radio.stopListening();// ?
   NRF_radio.openWritingPipe(pipes[imSensorNum]); //pipe0 is SYSTEM_pipe, no reading
+
+  NRF_radio.powerDown();
 }
 
 void NRF_sendData(uint16_t *arrayToBase) {
   uint8_t answerFromBase; //2^8 - 1   [0,255]
+
+  NRF_radio.powerUp();
 
   //Stop listening for incoming messages, and switch to transmit mode.
   //Do this before calling write().
@@ -73,4 +77,5 @@ void NRF_sendData(uint16_t *arrayToBase) {
     Serial.print(F("\r\n"));
   }
 
+  NRF_radio.powerDown();
 }

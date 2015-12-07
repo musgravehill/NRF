@@ -35,7 +35,7 @@ uint16_t getTemperatureNormalized() {
   if (SignBit) { // If its negative
     Whole *= -1;
   }
-  Serial.print(Whole);
+  Serial.println(Whole);
   /*
     Fract = Tc_100 % 100;
     Serial.print(".");
@@ -45,7 +45,7 @@ uint16_t getTemperatureNormalized() {
     }
     Serial.println(Fract);
   */
-  return 888;
+  return Whole + 100; // -55C => 45; 28C => 128
 }
 
 void OneWireReset(int Pin) // reset.  Should improve to act as a presence pulse

@@ -15,7 +15,7 @@ void setup() {
 
 void loop() {
   uint16_t arrayToBase_batteryVoltage = random(0, 65535); //2^16 - 1
-  uint16_t arrayToBase_temperature = getTemperatureNormalized(); // random(0, 65535); //2^16 - 1
+  uint16_t arrayToBase_temperature = 88; // getTemperatureNormalized(); // random(0, 65535); //2^16 - 1
   uint16_t arrayToBase_humidity = random(0, 65535); //2^16 - 1
 
   uint16_t arrayToBase[3] = {
@@ -24,8 +24,8 @@ void loop() {
     arrayToBase_humidity
   };
 
-  //NRF_sendData(arrayToBase);
-  delay(1000);
+  NRF_sendData(arrayToBase);
+  delay(4000);
 }
 
 
