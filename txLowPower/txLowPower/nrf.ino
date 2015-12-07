@@ -21,11 +21,11 @@ void NRF_init() {
   delay(100);
   NRF_radio.powerUp();
   delay(50);
-  NRF_radio.setChannel(5);
-  NRF_radio.setRetries(15, 15);
-  NRF_radio.setDataRate(RF24_1MBPS);
-  NRF_radio.setPALevel(RF24_PA_MIN);
-  NRF_radio.setCRCLength(RF24_CRC_8);
+  radio.setChannel(0x6D);
+  radio.setRetries(15, 15);
+  radio.setDataRate(RF24_1MBPS);
+  radio.setPALevel(RF24_PA_LOW);
+  radio.setCRCLength(RF24_CRC_16);
 
   /*
     ===writeAckPayload===enableDynamicPayloads===

@@ -35,11 +35,11 @@ void setup() {
   delay(100);
   radio.powerUp();
   delay(100);
-  radio.setChannel(5);
+  radio.setChannel(0x6D);
   radio.setRetries(15, 15);
   radio.setDataRate(RF24_1MBPS);
-  radio.setPALevel(RF24_PA_MIN);
-  radio.setCRCLength(RF24_CRC_8);
+  radio.setPALevel(RF24_PA_LOW);
+  radio.setCRCLength(RF24_CRC_16);
 
   /*
     ===writeAckPayload===enableDynamicPayloads===

@@ -7,7 +7,7 @@
 #define NRF_CE_PIN 7
 #define NRF_CSN_PIN 8
 
-uint16_t counterSleep_8s = 0;
+uint16_t counterSleep_1s = 0;
 
 void setup() {
   delay(2000);
@@ -18,18 +18,18 @@ void setup() {
 }
 
 void loop() {
-  LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF);
-  counterSleep_8s++;
+  LowPower.powerDown(SLEEP_1S, ADC_OFF, BOD_OFF);
+  counterSleep_1s++;
 
-  if (counterSleep_8s > 2) { //16 seconds
-    counterSleep_8s = 0;
+  if (counterSleep_1s > 1) { //16 seconds
+    counterSleep_1s = 0;
     sendDataToBase();
   }
 }
 
 void sendDataToBase() {
   uint16_t arrayToBase_batteryVoltage = random(0, 65535); //2^16 - 1
-  uint16_t arrayToBase_temperature = random(0, 65535); //2^16 - 1
+  uint16_t arrayToBase_temperature = 32; //2^16 - 1
   uint16_t arrayToBase_humidity = random(0, 65535); //2^16 - 1
 
   uint16_t arrayToBase[3] = {

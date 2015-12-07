@@ -32,11 +32,11 @@ void setup() {
   delay(100);
   radio.powerUp();
   delay(100);
-  radio.setChannel(5);
+  radio.setChannel(0x6D);
   radio.setRetries(15, 15);
   radio.setDataRate(RF24_1MBPS);
-  radio.setPALevel(RF24_PA_MIN);
-  radio.setCRCLength(RF24_CRC_8);
+  radio.setPALevel(RF24_PA_LOW);
+  radio.setCRCLength(RF24_CRC_16);
 
 
   /* 
@@ -59,7 +59,7 @@ void setup() {
 void loop()
 {
   uint16_t messageToBase_batteryVoltage = random(0, 65535); //2^16 - 1 
-  uint16_t messageToBase_temperature = random(0, 65535); //2^16 - 1 
+  uint16_t messageToBase_temperature = 777; //random(0, 65535); //2^16 - 1 
   uint16_t messageToBase_humidity = random(0, 65535); //2^16 - 1 
 
   uint16_t messageToBase[3] = { 
