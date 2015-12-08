@@ -29,7 +29,7 @@ void setup(void) {
   pinMode(NRF_CSN, OUTPUT);
   
   delay(1000);
-  Serial.begin(9600);
+  Serial.begin(115200);
   SD_init();
   delay(1000);
   NRF_init();
@@ -129,7 +129,7 @@ void SD_init() {
 void NRF_init() {
   radio.begin();
   delay(50);
-  //radio.setChannel(5);
+  radio.setChannel(5);
   radio.setRetries(0, 0);
   radio.setAutoAck(false);
   radio.setDataRate(RF24_250KBPS);

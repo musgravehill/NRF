@@ -7,8 +7,8 @@
 #include "RF24.h"
 #include "printf.h"
 
-const byte NRF24_CE = 7;
-const byte NRF24_CSN = 8;
+const byte NRF24_CE = 8;
+const byte NRF24_CSN = 10;
 
 RF24 radio(NRF24_CE, NRF24_CSN);
 
